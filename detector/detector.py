@@ -167,9 +167,9 @@ class YOLOv8:
             3: 'white'
         }
 
-        classes = {
-            0: 'pig'
-        }
+        # classes = {
+        #     0: 'pig'
+        # }
 
         class_names = list(classes.values())
         # class_names = ['person']
@@ -185,9 +185,27 @@ class YOLOv8:
             # Прямоугольник
             cv2.rectangle(image, (x_1, y_1), (x_2, y_2), color, 2)
 
-            # Отображение лейблов
+            # Отображение лейблов V1
+            # label = class_names[class_id]
+            # caption = f'{label} {int(score * 100)}%'
+
+            # # font
+            # font = cv2.FONT_HERSHEY_SIMPLEX
+
+            # # fontScale
+            # fontScale = 1
+
+            # # Line thickness of 2 px
+            # thickness = 2
+
+            # # Using cv2.putText() method
+            # cv2.putText(image, caption, (x_1, y_1 - 4 * thickness),
+            #             font, fontScale, color, thickness, cv2.LINE_AA)
+
+            # Отображение лейблов V2
             label = class_names[class_id]
-            caption = f'{label} {int(score * 100)}%'
+            # caption = f'{label} {int(score * 100)}%'
+            caption = f'{int(score * 100)}%'
 
             # font
             font = cv2.FONT_HERSHEY_SIMPLEX
@@ -198,9 +216,18 @@ class YOLOv8:
             # Line thickness of 2 px
             thickness = 2
 
+            background_color = (254, 254, 254)
+            (_, text_height), baseline = cv2.getTextSize(
+                caption, font, fontScale, thickness)
+            # cv2.rectangle(image, (x_1, y_1-32), (x_2, y_1),
+            #               (254, 254, 254), -1)
+            x, y = x_1, y_1 - 4 * thickness
+            cv2.rectangle(image, (x, y - text_height), (x_2, y + int(baseline/2)),
+                          background_color, thickness=cv2.FILLED)
+
             # Using cv2.putText() method
-            cv2.putText(image, caption, (x_1, y_1 - 4 * thickness),
-                        font, fontScale, color, thickness, cv2.LINE_AA)
+            cv2.putText(image, caption, (x, y), font,
+                        fontScale, color, thickness, cv2.LINE_AA)
 
         return image
 
