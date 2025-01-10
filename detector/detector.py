@@ -161,10 +161,7 @@ class YOLOv8:
         Нанесение прямоугольников
         """
         classes = {
-            0: 'door',
-            1: 'person',
-            2: 'pig',
-            3: 'white'
+            0: 'pig'
         }
 
         # classes = {
