@@ -210,7 +210,7 @@ class YOLOv8:
         """
         Нанесение прямоугольников
         """
-        class_names = ['pig']
+        class_names = ['pig', 'human']
         rng = np.random.default_rng(3)
         colors = rng.uniform(0, 255, size=(len(class_names), 3))
 
