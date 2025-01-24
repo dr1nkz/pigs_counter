@@ -1,0 +1,16 @@
+rtsp:
+  enabled: yes
+  address: :8554  # Порт RTSP
+
+protocols: [tcp, udp]  # Поддерживаем TCP и UDP
+
+readTimeout: 10s  # Таймаут чтения
+writeTimeout: 10s  # Таймаут записи
+
+# Секция для публикации потоков
+paths:
+  all:
+    publish:
+      allowedOrigins: []  # Разрешить публикацию от любого источника
+    read:
+      all: yes  # Разрешить чтение всем

@@ -1,21 +1,37 @@
 services:
 
-  # pigs_counter:
-  #   container_name: pigs_counter
-  #   restart: unless-stopped
-  #   build: ./mqtt
-  #   environment:
-  #     - PYTHONPATH=""
-  #   command: [ "python3", ".py" ]
-  #   volumes:
-  #     - /etc/localtime:/etc/localtime
-  #   deploy:
-  #     resources:
-  #       reservations:
-  #         devices:
-  #           - driver: nvidia
-  #             count: 1
-  #             capabilities: [ gpu ]
+  pigs_counter:
+    container_name: pigs_counter
+    restart: unless-stopped
+    build: ./detector
+    # environment:
+    #   - PYTHONPATH=""
+    command: [ "python3", "detector/test.py" ]
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./detector:/app/detector
+      - ./videos:/app/videos
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+  mediamtx:
+    platform: linux/amd64
+    container_name: mediamtx-server
+    image: bluenviron/mediamtx:latest-ffmpeg
+    environment:
+      - RTSP_PROTOCOLS=tcp
+    # volumes:
+    #   - ./mediamtx/mediamtx.yml:/mediamtx.yml
+    ports:
+      - 8189:8189
+      - 8889:8889
+      - 8554:8554
+    restart: unless-stopped
 
   postgres:
     image: postgres:latest
