@@ -1,23 +1,26 @@
 services:
 
-  pigs_counter:
-    container_name: pigs_counter
-    restart: unless-stopped
-    build: ./detector
-    # environment:
-    #   - PYTHONPATH=""
-    command: [ "python3", "detector/test.py" ]
-    volumes:
-      - /etc/localtime:/etc/localtime
-      - ./detector:/app/detector
-      - ./videos:/app/videos
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [ gpu ]
+  # pigs_counter:
+  #   container_name: pigs_counter
+  #   restart: unless-stopped
+  #   build: ./pigs_counter
+  #   # environment:
+  #   #   - PYTHONPATH=""
+  #   command: [ "python3", "pigs_counter.py" ]
+  #   volumes:
+  #     - /etc/localtime:/etc/localtime
+  #     - ./pigs_counter:/pigs_counter
+  #     - ./videos:/videos
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: 1
+  #             capabilities: [ gpu ]
+  #   networks:
+  #     network_pigs_counter:
+  #       ipv4_address: 172.26.0.1
 
   mediamtx:
     platform: linux/amd64
@@ -32,19 +35,39 @@ services:
       - 8889:8889
       - 8554:8554
     restart: unless-stopped
+    networks:
+      network_pigs_counter:
+        ipv4_address: 172.26.0.2
+
+  nodered_pigs:
+    container_name: nodered_pigs
+    build: nodered
+    ports:
+      - "1855:1880"
+    volumes:
+      - nodered:/data
+    environment:
+      TZ: "Europe/Moscow"
+      FLOWS: "/data/lib/flows/piggy.json"
+    user: "root:root"
+    restart: unless-stopped
+    networks:
+      network_pigs_counter:
+        ipv4_address: 172.26.0.3
 
   postgres:
     image: postgres:latest
     container_name: postgres_host
     environment:
+      POSTGRES_DB: postgres_db
       POSTGRES_USER: postgres_user
       POSTGRES_PASSWORD: postgres_password
-      POSTGRES_DB: postgres_db
       PGDATA: /var/lib/postgresql/data
     # ports:
     #   - 5432:5432
     volumes:
-      - ./pgdata:/var/lib/postgresql/data/:rw
+      - pgdata:/var/lib/postgresql/data/:rw
+      - ./pg_init/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 5432:5432
     command: >
@@ -63,3 +86,18 @@ services:
     restart: unless-stopped
     tty: true
     stdin_open: true
+    networks:
+      network_pigs_counter:
+        ipv4_address: 172.26.0.4
+
+volumes:
+  nodered: {}
+  pgdata: {}
+
+networks:
+  network_pigs_counter:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.26.0.0/24
+          gateway: 172.26.0.1
