@@ -1,26 +1,26 @@
 services:
 
-  # pigs_counter:
-  #   container_name: pigs_counter
-  #   restart: unless-stopped
-  #   build: ./pigs_counter
-  #   # environment:
-  #   #   - PYTHONPATH=""
-  #   command: [ "python3", "pigs_counter.py" ]
-  #   volumes:
-  #     - /etc/localtime:/etc/localtime
-  #     - ./pigs_counter:/pigs_counter
-  #     - ./videos:/videos
-  #   deploy:
-  #     resources:
-  #       reservations:
-  #         devices:
-  #           - driver: nvidia
-  #             count: 1
-  #             capabilities: [ gpu ]
-  #   networks:
-  #     network_pigs_counter:
-  #       ipv4_address: 172.26.0.1
+  pigs_counter:
+    container_name: pigs_counter
+    restart: unless-stopped
+    build: ./pigs_counter
+    # environment:
+    #   - PYTHONPATH=""
+    command: [ "python3", "pigs_counter.py" ]
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./pigs_counter:/pigs_counter
+      - ./videos:/videos
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    networks:
+      network_pigs_counter:
+        ipv4_address: 172.26.0.1
 
   mediamtx:
     platform: linux/amd64
@@ -100,4 +100,4 @@ networks:
     ipam:
       config:
         - subnet: 172.26.0.0/24
-          gateway: 172.26.0.1
+          gateway: 172.26.0.100

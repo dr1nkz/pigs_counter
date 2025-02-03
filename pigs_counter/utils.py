@@ -1,8 +1,10 @@
 import numpy as np
 from shapely.geometry import Polygon
 import os
+from dotenv import load_dotenv
 
 
+load_dotenv()
 LABELMAP_PATH = os.getenv('LABELMAP_PATH')
 
 

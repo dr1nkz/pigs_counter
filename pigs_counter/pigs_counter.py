@@ -7,6 +7,7 @@ import subprocess
 import supervision as sv
 import cv2
 import numpy as np
+import torch
 
 from detector import YOLOv8, Detections
 from db_utils import insert_event_data, update_event_data
@@ -14,7 +15,7 @@ from utils import is_cross_of_line
 
 
 load_dotenv()
-MODEL = os.getenv('MODEL')
+MODEL_PATH = os.getenv('MODEL_PATH')
 CAM_ADDRESS = os.getenv('CAM_ADDRESS')
 PIGS_COUNTER_ADDRESS = os.getenv('PIGS_COUNTER_ADDRESS')
 
@@ -23,12 +24,12 @@ def count_pigs(address):
     """
     Запуск модели
     """
-    yolov8_detector = YOLOv8(path=MODEL,
+    yolov8_detector = YOLOv8(path=MODEL_PATH,
                              conf_thres=0.3,
                              iou_thres=0.5)
 
     while (True):
-        cv2.namedWindow('stream', cv2.WINDOW_NORMAL)
+        # cv2.namedWindow('stream', cv2.WINDOW_NORMAL) # %1%
         cap = cv2.VideoCapture(address)
         fps = int(cap.get(cv2.CAP_PROP_FPS))
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
@@ -221,7 +222,7 @@ def count_pigs(address):
             if detected_img is None:
                 continue
 
-            cv2.imshow('stream', detected_img)
+            # cv2.imshow('stream', detected_img) # %1%
             try:
                 if out.isOpened():
                     out.write(detected_img)
@@ -230,15 +231,15 @@ def count_pigs(address):
                 pass
 
             ffmpeg_process.stdin.write(detected_img.tobytes())
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                out.release()
-                out = None
-                print(f'Общее количество поросят: {pigs_counter}')
-                end_time = datetime.now()
-                end_time_str = end_time.strftime(r'%Y-%m-%d %H:%M:%S')
-                update_event_data(
-                    pigs_counter, 0, start_time_str, end_time_str)
-                break
+            # if cv2.waitKey(1) & 0xFF == ord('q'): # %1%
+            #     out.release()
+            #     out = None
+            #     print(f'Общее количество поросят: {pigs_counter}')
+            #     end_time = datetime.now()
+            #     end_time_str = end_time.strftime(r'%Y-%m-%d %H:%M:%S')
+            #     update_event_data(
+            #         pigs_counter, 0, start_time_str, end_time_str)
+            #     break
 
         cv2.destroyAllWindows()
         cap.release()
