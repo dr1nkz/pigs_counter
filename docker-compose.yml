@@ -1,0 +1,103 @@
+services:
+
+  pigs_counter:
+    container_name: pigs_counter
+    restart: unless-stopped
+    build: ./pigs_counter
+    # environment:
+    #   - PYTHONPATH=""
+    command: [ "python3", "pigs_counter.py" ]
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./pigs_counter:/pigs_counter
+      - ./videos:/videos
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    networks:
+      network_pigs_counter:
+        ipv4_address: 172.26.0.1
+
+  mediamtx:
+    platform: linux/amd64
+    container_name: mediamtx-server
+    image: bluenviron/mediamtx:latest-ffmpeg
+    environment:
+      - RTSP_PROTOCOLS=tcp
+    # volumes:
+    #   - ./mediamtx/mediamtx.yml:/mediamtx.yml
+    ports:
+      - 8189:8189
+      - 8889:8889
+      - 8554:8554
+    restart: unless-stopped
+    networks:
+      network_pigs_counter:
+        ipv4_address: 172.26.0.2
+
+  nodered_pigs:
+    container_name: nodered_pigs
+    build: nodered
+    ports:
+      - "1855:1880"
+    volumes:
+      - nodered:/data
+    environment:
+      TZ: "Europe/Moscow"
+      FLOWS: "/data/lib/flows/piggy.json"
+    user: "root:root"
+    restart: unless-stopped
+    networks:
+      network_pigs_counter:
+        ipv4_address: 172.26.0.3
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_host
+    environment:
+      POSTGRES_DB: postgres_db
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_password
+      PGDATA: /var/lib/postgresql/data
+    # ports:
+    #   - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data/:rw
+      - ./pg_init/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
+    command: >
+      postgres -c max_connections=1000
+               -c shared_buffers=256MB
+               -c effective_cache_size=768MB
+               -c maintenance_work_mem=64MB
+               -c checkpoint_completion_target=0.7
+               -c wal_buffers=16MB
+               -c default_statistics_target=100
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres_user -d postgres_db" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    networks:
+      network_pigs_counter:
+        ipv4_address: 172.26.0.4
+
+volumes:
+  nodered: {}
+  pgdata: {}
+
+networks:
+  network_pigs_counter:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.26.0.0/24
+          gateway: 172.26.0.100

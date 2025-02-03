@@ -1,0 +1,6 @@
+*/__pycache__
+*.mp4
+*.avi
+nodered/.npm/_cacache
+nodered/.npm/_logs
+nodered/.DS_Store
