@@ -28,8 +28,8 @@ services:
     image: bluenviron/mediamtx:latest-ffmpeg
     environment:
       - RTSP_PROTOCOLS=tcp
-    # volumes:
-    #   - ./mediamtx/mediamtx.yml:/mediamtx.yml
+    volumes:
+      - ./mediamtx/mediamtx.yml:/mediamtx.yml
     ports:
       - 8189:8189
       - 8889:8889
