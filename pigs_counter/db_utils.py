@@ -68,46 +68,46 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str, end
     :pigs_defect: int - quantity of defect pigs
     """
 
-    # try:
-    # Установить соединение
-    connection = psycopg2.connect(
-        host=HOST,
-        port=PORT,
-        dbname=DB_NAME,
-        user=DB_USER,
-        password=DB_PASSWORD
-    )
+    try:
+        # Установить соединение
+        connection = psycopg2.connect(
+            host=HOST,
+            port=PORT,
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
+        )
 
-    cursor = connection.cursor()
-    # Вставка данных
-    event_id = 0
-    if end_time == 'NULL':
-        query = """
-            UPDATE events
-            SET pigs_quantity = %s, pigs_defect = %s
-            WHERE start_time = %s;
-        """
+        cursor = connection.cursor()
+        # Вставка данных
+        event_id = 0
+        if end_time == 'NULL':
+            query = """
+                UPDATE events
+                SET pigs_quantity = %s, pigs_defect = %s
+                WHERE start_time = %s;
+            """
 
-        cursor.execute(
-            query, (pigs_quantity, pigs_defect, start_time))
-    else:
-        query = """
-            UPDATE events
-            SET end_time = %s, pigs_quantity = %s, pigs_defect = %s
-            WHERE start_time = %s;
-        """
+            cursor.execute(
+                query, (pigs_quantity, pigs_defect, start_time))
+        else:
+            query = """
+                UPDATE events
+                SET end_time = %s, pigs_quantity = %s, pigs_defect = %s
+                WHERE start_time = %s;
+            """
 
-        cursor.execute(
-            query, (end_time, pigs_quantity, pigs_defect, start_time))
+            cursor.execute(
+                query, (end_time, pigs_quantity, pigs_defect, start_time))
 
-    # Сохранить изменения и закрыть соединение
-    connection.commit()
-    cursor.close()
-    print(f"Данные события {event_id} успешно обновлены")
+        # Сохранить изменения и закрыть соединение
+        connection.commit()
+        cursor.close()
+        # print(f"Данные события {event_id} успешно обновлены")
 
-    # except Exception as e:
-    #     print(f"Ошибка подключения: {event_id}")
+    except Exception as e:
+        print(f"Ошибка подключения: {event_id}")
 
-    # finally:
-    #     if 'connection' in locals() and connection:
-    #         connection.close()
+    finally:
+        if 'connection' in locals() and connection:
+            connection.close()
