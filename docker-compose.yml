@@ -10,7 +10,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime
       - ./pigs_counter:/pigs_counter
-      - ./videos:/videos
+      - /data/videos:/videos
     deploy:
       resources:
         reservations:
@@ -89,6 +89,15 @@ services:
     networks:
       network_pigs_counter:
         ipv4_address: 172.26.0.4
+  cron:
+    container_name: cron
+    image: 'justb4/cron:latest'
+    environment:
+      - 'CRON_STRINGS=0 * * * * /cron_scripts/delete_old_files.sh'
+    volumes:
+      - ./cron_scripts:/cron_scripts
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
 
 volumes:
   nodered: {}

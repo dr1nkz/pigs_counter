@@ -1,0 +1,1 @@
+docker exec pigs_counter python3 /pigs_counter/file_utils.py
