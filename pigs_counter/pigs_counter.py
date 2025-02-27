@@ -18,6 +18,8 @@ load_dotenv()
 MODEL_PATH = os.getenv('MODEL_PATH')
 CAM_ADDRESS = os.getenv('CAM_ADDRESS')
 PIGS_COUNTER_ADDRESS = os.getenv('PIGS_COUNTER_ADDRESS')
+START_DELAY = int(os.getenv('START_DELAY'))
+END_DELAY = int(os.getenv('END_DELAY'))
 
 
 def count_pigs(address):
@@ -70,11 +72,13 @@ def count_pigs(address):
         pigs_counter = 0
 
         # Consecutive frames to start event
-        consecutive_start = 1 * fps
-        consecutive_end = 20 * fps
+        consecutive_start = START_DELAY * fps
+        consecutive_end = END_DELAY * fps
         start_flag = False
         before_event_delay = 0
-        after_event_delay = 0
+        # after_event_delay = 0
+        after_event_delay = deque(maxlen=consecutive_end)
+        after_event_delay.append(0)
 
         print(cap)
         print(cap.isOpened())
@@ -100,8 +104,9 @@ def count_pigs(address):
                 if before_event_delay == consecutive_start:
                     start_flag = True
                     before_event_delay = 0
+                after_event_delay.append(0)
             elif start_flag:
-                after_event_delay += 1
+                after_event_delay.append(1)
 
             detected_img = yolov8_detector.draw_detections(detected_img)
 
@@ -151,10 +156,10 @@ def count_pigs(address):
                         # print(f'current_cross {current_cross}  previous_cross {previous_cross}')
 
                         if previous_cross and not current_cross:  # Слева направо
-                            pigs_states[tracker_id] = None
+                            pigs_states[tracker_id] = 'undefined'
                         elif not previous_cross and current_cross:  # Справа налево
-                            pigs_states[tracker_id] = None
-                        elif pigs_states.get(tracker_id) is None:
+                            pigs_states[tracker_id] = 'undefined'
+                        elif pigs_states.get(tracker_id) == 'undefined':
                             if previous_cross and current_cross:
                                 pigs_states[tracker_id] = True
                             elif not previous_cross and not current_cross:
@@ -162,7 +167,11 @@ def count_pigs(address):
 
                 count_true = sum(
                     value is True for value in pigs_states.values())  # Сумма True
-                pigs_counter = count_true
+                count_false = sum(
+                    value is False for value in pigs_states.values())  # Сумма False
+                pigs_counter = count_true - count_false
+                pigs_counter = pigs_counter if pigs_counter >= 0 else 0
+                update_event_data(pigs_counter, 0, start_time_str)
 
                 # Visual
                 line_color = (0, 0, 255)
@@ -199,14 +208,25 @@ def count_pigs(address):
                     cv2.putText(detected_img, f'{pigs_counter}', (50, 150), font,
                                 fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
-            if after_event_delay == consecutive_end:
-                out.release()
-                out = None
+                empty_rate = after_event_delay.count(
+                    1) / len(after_event_delay)
+
+            if start_flag is True and empty_rate >= 0.9 and len(after_event_delay) == after_event_delay.maxlen:
                 print(f'Общее количество поросят: {pigs_counter}')
                 end_time = datetime.now()
                 end_time_str = end_time.strftime(r'%Y-%m-%d %H:%M:%S')
                 update_event_data(
                     pigs_counter, 0, start_time_str, end_time_str)
+                # Release videowriter
+                out.release()
+                out = None
+                # Reset variables
+                pigs_counter = 0
+                byte_track.reset()
+                coordinates.clear()
+                pigs_states.clear()
+                after_event_delay.clear()
+                start_flag = False
             else:
                 font = cv2.FONT_HERSHEY_SIMPLEX  # font
                 fontScale = 1  # fontScale
@@ -222,24 +242,14 @@ def count_pigs(address):
             if detected_img is None:
                 continue
 
-            # cv2.imshow('stream', detected_img) # %1%
             try:
                 if out.isOpened():
                     out.write(detected_img)
-                    update_event_data(pigs_counter, 0, start_time_str)
+                    # update_event_data(pigs_counter, 0, start_time_str)
             except:
                 pass
 
             ffmpeg_process.stdin.write(detected_img.tobytes())
-            # if cv2.waitKey(1) & 0xFF == ord('q'): # %1%
-            #     out.release()
-            #     out = None
-            #     print(f'Общее количество поросят: {pigs_counter}')
-            #     end_time = datetime.now()
-            #     end_time_str = end_time.strftime(r'%Y-%m-%d %H:%M:%S')
-            #     update_event_data(
-            #         pigs_counter, 0, start_time_str, end_time_str)
-            #     break
 
         cv2.destroyAllWindows()
         cap.release()
