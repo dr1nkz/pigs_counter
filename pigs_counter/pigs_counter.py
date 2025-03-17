@@ -18,21 +18,28 @@ load_dotenv()
 MODEL_PATH = os.getenv('MODEL_PATH')
 CAM_ADDRESS = os.getenv('CAM_ADDRESS')
 PIGS_COUNTER_ADDRESS = os.getenv('PIGS_COUNTER_ADDRESS')
+LADDER_CAM_ADDRESS = os.getenv('LADDER_CAM_ADDRESS')
+LADDER_MODEL_PATH = os.getenv('LADDER_MODEL_PATH')
 START_DELAY = int(os.getenv('START_DELAY'))
 END_DELAY = int(os.getenv('END_DELAY'))
+ALLOWED_ZONE = np.array([[1378, 704], [1931, 760], [1934, 1186], [1048, 1102]])
 
 
 def count_pigs(address):
     """
     Запуск модели
     """
-    yolov8_detector = YOLOv8(path=MODEL_PATH,
+    pigs_detector = YOLOv8(path=MODEL_PATH,
+                           conf_thres=0.3,
+                           iou_thres=0.5)
+    ladder_detector = YOLOv8(path=MODEL_PATH,
                              conf_thres=0.3,
                              iou_thres=0.5)
 
     while (True):
         # cv2.namedWindow('stream', cv2.WINDOW_NORMAL) # %1%
         cap = cv2.VideoCapture(address)
+        cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS)
         fps = int(cap.get(cv2.CAP_PROP_FPS))
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -72,43 +79,70 @@ def count_pigs(address):
         pigs_counter = 0
 
         # Consecutive frames to start event
-        consecutive_start = START_DELAY * fps
-        consecutive_end = END_DELAY * fps
+        consecutive_start_ladder = START_DELAY * fps
+        consecutive_end_pigs = END_DELAY * fps
+        consecutive_end_ladder = END_DELAY * fps
         start_flag = False
-        before_event_delay = 0
-        # after_event_delay = 0
-        after_event_delay = deque(maxlen=consecutive_end)
-        after_event_delay.append(0)
+        before_event_delay_ladder = 0
+        after_event_delay_pigs = deque(maxlen=consecutive_end_pigs)
+        after_event_delay_pigs.append(0)
+        after_event_delay_ladder = deque(maxlen=consecutive_end_ladder)
+        after_event_delay_ladder.append(0)
 
         print(cap)
         print(cap.isOpened())
-        while cap.isOpened():  # and end_time is None:
+        while cap.isOpened() and cap_ladder.isOpened():
             # Кадр с камеры
             ret, frame = cap.read()
-            if not ret:
+            ret_ladder, frame_ladder = cap_ladder.read()
+            if not ret or not ret_ladder:
                 break
 
             # Детектирование
             detected_img = frame.copy()
-            bounding_boxes, scores, class_ids = yolov8_detector(detected_img)
-
+            bounding_boxes_pigs, scores, class_ids = pigs_detector(
+                detected_img)
             class_id_filter = 0
-            bounding_boxes = np.array(bounding_boxes)[
+            bounding_boxes_pigs = np.array(bounding_boxes_pigs)[
                 class_ids == class_id_filter]
             scores = np.array(scores)[class_ids == class_id_filter]
             class_ids = np.array(class_ids)[class_ids == class_id_filter]
 
-            if len(bounding_boxes) != 0:  # objects detected
-                if not start_flag:
-                    before_event_delay += 1
-                if before_event_delay == consecutive_start:
-                    start_flag = True
-                    before_event_delay = 0
-                after_event_delay.append(0)
-            elif start_flag:
-                after_event_delay.append(1)
+            # Get coords od detected ladders and check if it in area
+            bounding_boxes_ladder, _, _ = ladder_detector(frame_ladder)
 
-            detected_img = yolov8_detector.draw_detections(detected_img)
+            if len(bounding_boxes_ladder) != 0 and ALLOWED_ZONE is not None:
+                # Calculate the center points of the bounding boxes
+                points = np.array([[(x_1 + x_2) / 2, (y_1 + y_2) / 2]
+                                   for [x_1, y_1, x_2, y_2] in bounding_boxes_ladder]).astype('int')
+
+                # Initialize an array to store whether points are within allowed zones
+                point_in_zone = np.zeros(len(points), dtype=bool)
+
+                # Update the boolean mask for points within the current allowed zone
+                point_in_zone = np.array(list(
+                    map(lambda x: cv2.pointPolygonTest(ALLOWED_ZONE, x.tolist(), False) >= 0, points)))
+
+                # Use this mask to filter or index your points or bounding boxes
+                bounding_boxes_ladder = np.array(
+                    [box for index, box in enumerate(bounding_boxes_ladder) if point_in_zone[index]])
+
+            if len(bounding_boxes_pigs) != 0:  # objects detected
+                after_event_delay_pigs.append(0)
+            elif start_flag:
+                after_event_delay_pigs.append(1)
+
+            if len(bounding_boxes_ladder) != 0:
+                after_event_delay_ladder.append(0)
+                if not start_flag:
+                    before_event_delay_ladder += 1
+                if before_event_delay_ladder == consecutive_start_ladder:
+                    start_flag = True
+                    before_event_delay_ladder = 0
+            elif start_flag:
+                after_event_delay_ladder.append(1)
+
+            detected_img = pigs_detector.draw_detections(detected_img)
 
             if start_flag:
                 try:
@@ -128,8 +162,8 @@ def count_pigs(address):
                     insert_event_data('A123BC13', 'Пандус 1',
                                       start_time_str, pigs_counter, 0)
 
-                detections = Detections(xyxy=bounding_boxes, confidence=scores,
-                                        class_id=class_ids, tracker_id=[None] * len(bounding_boxes))
+                detections = Detections(xyxy=bounding_boxes_pigs, confidence=scores,
+                                        class_id=class_ids, tracker_id=[None] * len(bounding_boxes_pigs))
                 if len(detections.xyxy) != 0:
                     detections = byte_track.update_with_detections(
                         detections=detections)
@@ -179,7 +213,7 @@ def count_pigs(address):
                 detected_img = cv2.line(detected_img, line_coordinates[0], line_coordinates[1],
                                         line_color, line_thickness, lineType=0)  # Draw line
 
-                for tracker_id, bounding_box in zip(detections.tracker_id, bounding_boxes):
+                for tracker_id, bounding_box in zip(detections.tracker_id, bounding_boxes_pigs):
                     caption = f'#{tracker_id}'  # caption
                     font = cv2.FONT_HERSHEY_SIMPLEX  # font
                     fontScale = 1  # fontScale
@@ -208,10 +242,16 @@ def count_pigs(address):
                     cv2.putText(detected_img, f'{pigs_counter}', (50, 150), font,
                                 fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
-                empty_rate = after_event_delay.count(
-                    1) / len(after_event_delay)
+                empty_rate_pigs = after_event_delay_pigs.count(
+                    1) / len(after_event_delay_pigs)
+                after_event_delay_pigs_is_full = len(
+                    after_event_delay_pigs) == after_event_delay_pigs.maxlen
+                empty_rate_ladder = after_event_delay_ladder.count(
+                    1) / len(after_event_delay_ladder)
+                after_event_delay_ladder_is_full = len(
+                    after_event_delay_ladder) == after_event_delay_ladder.maxlen
 
-            if start_flag is True and empty_rate >= 0.9 and len(after_event_delay) == after_event_delay.maxlen:
+            if start_flag is True and empty_rate_pigs >= 0.9 and after_event_delay_pigs_is_full and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full:
                 print(f'Общее количество поросят: {pigs_counter}')
                 end_time = datetime.now()
                 end_time_str = end_time.strftime(r'%Y-%m-%d %H:%M:%S')
@@ -225,7 +265,8 @@ def count_pigs(address):
                 byte_track.reset()
                 coordinates.clear()
                 pigs_states.clear()
-                after_event_delay.clear()
+                after_event_delay_pigs.clear()
+                after_event_delay_ladder.clear()
                 start_flag = False
             else:
                 font = cv2.FONT_HERSHEY_SIMPLEX  # font
@@ -236,7 +277,7 @@ def count_pigs(address):
                 # consecutive and counter on the frame
                 cv2.rectangle(detected_img, (width - 270, 70), (width - 50, 170),
                               background_color, thickness=cv2.FILLED)
-                cv2.putText(detected_img, f'{(consecutive_end / fps):.1f}s', (width - 270, 150), font,
+                cv2.putText(detected_img, f'{(consecutive_end_pigs / fps):.1f}s', (width - 270, 150), font,
                             fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
             if detected_img is None:
