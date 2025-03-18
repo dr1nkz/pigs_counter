@@ -108,6 +108,9 @@ services:
       - ./filebrowser/filebrowser.db:/database.db
     ports:
       - 80:80
+    networks:
+      network_pigs_counter:
+        ipv4_address: 172.26.0.5
 
 volumes:
   nodered: {}
