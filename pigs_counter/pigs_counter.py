@@ -39,11 +39,15 @@ def count_pigs(address):
     while (True):
         # cv2.namedWindow('stream', cv2.WINDOW_NORMAL) # %1%
         cap = cv2.VideoCapture(address)
-        cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS)
         fps = int(cap.get(cv2.CAP_PROP_FPS))
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        width1 = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        height1 = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+        cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS)
+        width2 = int(cap_ladder.get(cv2.CAP_PROP_FRAME_WIDTH))
+        height2 = int(cap_ladder.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
         out = None
 
         # Команда FFmpeg для стриминга
@@ -53,7 +57,7 @@ def count_pigs(address):
             "-f", "rawvideo",  # Формат входного видео
             "-vcodec", "rawvideo",
             "-pix_fmt", "bgr24",  # Формат пикселей
-            "-s", f"{width}x{height}",  # Размер кадра
+            "-s", f"{width1}x{height1}",  # Размер кадра
             "-r", str(fps),  # Частота кадров
             "-i", "-",  # Вход из stdin
             "-c:v", "libx264",  # Кодек для видео
@@ -109,7 +113,10 @@ def count_pigs(address):
             class_ids = np.array(class_ids)[class_ids == class_id_filter]
 
             # Get coords od detected ladders and check if it in area
-            bounding_boxes_ladder, _, _ = ladder_detector(frame_ladder)
+            detected_img_ladder = frame_ladder.copy()
+            bounding_boxes_ladder, _, _ = ladder_detector(detected_img_ladder)
+            detected_img_ladder = ladder_detector.draw_detections(
+                detected_img_ladder)
 
             if len(bounding_boxes_ladder) != 0 and ALLOWED_ZONE is not None:
                 # Calculate the center points of the bounding boxes
@@ -156,9 +163,13 @@ def count_pigs(address):
                         os.mkdir(directory)
 
                     start_time_hms = start_time.strftime(r'%H.%M.%S')
-                    filepath = (f'{directory}/{start_time_hms}.mp4')
+                    filepath = (f'{directory}/.{start_time_hms}.mp4')
+                    target_width = min(width1, width2)  # min width
+                    target_height1 = int((height1 / width1) * target_width)
+                    target_height2 = int((height2 / width2) * target_width)
+                    target_height = target_height1 + target_height2
                     out = cv2.VideoWriter(
-                        filepath, fourcc, fps, (width, height))
+                        filepath, fourcc, fps, (target_width, target_height))
                     insert_event_data('A123BC13', 'Пандус 1',
                                       start_time_str, pigs_counter, 0)
 
@@ -275,9 +286,9 @@ def count_pigs(address):
                 background_color = (254, 254, 254)
 
                 # consecutive and counter on the frame
-                cv2.rectangle(detected_img, (width - 270, 70), (width - 50, 170),
+                cv2.rectangle(detected_img, (width1 - 270, 70), (width1 - 50, 170),
                               background_color, thickness=cv2.FILLED)
-                cv2.putText(detected_img, f'{(consecutive_end_pigs / fps):.1f}s', (width - 270, 150), font,
+                cv2.putText(detected_img, f'{(consecutive_end_pigs / fps):.1f}s', (width1 - 270, 150), font,
                             fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
             if detected_img is None:
@@ -285,7 +296,9 @@ def count_pigs(address):
 
             try:
                 if out.isOpened():
-                    out.write(detected_img)
+                    combined_frame = np.vstack(
+                        (detected_img, detected_img_ladder))
+                    out.write(combined_frame)
                     # update_event_data(pigs_counter, 0, start_time_str)
             except:
                 pass
