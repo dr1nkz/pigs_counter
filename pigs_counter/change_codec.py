@@ -42,5 +42,5 @@ def check_dotfiles(directory):
 
 if __name__ == "__main__":
     # Укажите путь к нужной директории, если не текущая
-    directory_to_watch = "/data/videos"
+    directory_to_watch = "/videos"
     check_dotfiles(directory_to_watch)
