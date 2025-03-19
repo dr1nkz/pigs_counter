@@ -111,3 +111,41 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str, end
     finally:
         if 'connection' in locals() and connection:
             connection.close()
+
+
+def delete_event_data(start_time: str):
+    """
+    Delete event data
+
+    :start_time: float - start time of event
+    """
+
+    try:
+        # Установить соединение
+        connection = psycopg2.connect(
+            host=HOST,
+            port=PORT,
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
+        )
+
+        cursor = connection.cursor()
+        # Удаление данных
+        query = """
+            DELETE FROM events WHERE start_time = %s;
+        """
+
+        cursor.execute(query, (start_time))
+
+        # Сохранить изменения и закрыть соединение
+        connection.commit()
+        cursor.close()
+        # print(f"Данные события {event_id} успешно обновлены")
+
+    except Exception as e:
+        print(f"Ошибка подключения")
+
+    finally:
+        if 'connection' in locals() and connection:
+            connection.close()
