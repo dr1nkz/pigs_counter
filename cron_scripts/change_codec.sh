@@ -1,1 +1,1 @@
-docker exec pigs_counter python3 /pigs_counter/change_codec.py
+python3 /opt/pigs_counter/pigs_counter/change_codec.py

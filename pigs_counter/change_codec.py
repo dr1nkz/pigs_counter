@@ -2,6 +2,9 @@ import os
 import time
 import subprocess
 
+env = os.environ.copy()
+env["CUDA_VISIBLE_DEVICES"] = "1"
+
 
 def get_file_size(filepath):
     """Возвращает размер файла в байтах."""
@@ -13,8 +16,10 @@ def change_codec(filepath):
     new_filename = os.path.join(os.path.dirname(filepath), os.path.basename(
         filepath).lstrip('.'))  # Убираем точку из имени файла
     try:
-        command = ["ffmpeg", "-i", filepath, new_filename]
-        subprocess.run(command, check=True)
+        # command = ["ffmpeg", "-i", filepath, new_filename]
+        command = ['ffmpeg', '-hwaccel', 'cuda', '-i', filepath,
+                   '-c:v', 'h264_nvenc', '-b:v', '2M', new_filename]
+        subprocess.run(command, env=env, check=True)
         os.remove(filepath)  # Удаляем старый файл после успешной конвертации
         print(
             f"Файл {filepath} успешно конвертирован и сохранен как {new_filename}")
@@ -42,5 +47,5 @@ def check_dotfiles(directory):
 
 if __name__ == "__main__":
     # Укажите путь к нужной директории, если не текущая
-    directory_to_watch = "/videos"
+    directory_to_watch = "/data/videos"
     check_dotfiles(directory_to_watch)
