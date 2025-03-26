@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 from datetime import datetime
 import subprocess
+import time
 
 import supervision as sv
 import cv2
@@ -10,7 +11,7 @@ import numpy as np
 import torch
 
 from detector import YOLOv8, Detections
-from db_utils import insert_event_data, update_event_data
+from db_utils import insert_event_data, update_event_data, delete_event_data
 from utils import is_cross_of_line
 
 
@@ -22,7 +23,15 @@ LADDER_CAM_ADDRESS = os.getenv('LADDER_CAM_ADDRESS')
 LADDER_MODEL_PATH = os.getenv('LADDER_MODEL_PATH')
 START_DELAY = int(os.getenv('START_DELAY'))
 END_DELAY = int(os.getenv('END_DELAY'))
-ALLOWED_ZONE = np.array([[1378, 704], [1931, 760], [1934, 1186], [1048, 1102]])
+ALLOWED_ZONE = np.array([[985, 500], [1378, 540], [1380, 842], [749, 783]])
+# ALLOWED_ZONE = np.array([[1378, 704], [1931, 760], [1934, 1186], [1048, 1102]])
+LINE_COORDINATES = ((1443, 0), (1322, 1440))
+
+
+def print_log(log_string: str):
+    with open('/pigs_counter/log.log', 'a+') as log:
+        time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
+        log.write(f'{time_str} - {log_string}\n')
 
 
 def count_pigs(address):
@@ -32,8 +41,8 @@ def count_pigs(address):
     pigs_detector = YOLOv8(path=MODEL_PATH,
                            conf_thres=0.3,
                            iou_thres=0.5)
-    ladder_detector = YOLOv8(path=MODEL_PATH,
-                             conf_thres=0.3,
+    ladder_detector = YOLOv8(path=LADDER_MODEL_PATH,
+                             conf_thres=0.7,
                              iou_thres=0.5)
 
     while (True):
@@ -51,25 +60,25 @@ def count_pigs(address):
         out = None
 
         # Команда FFmpeg для стриминга
-        ffmpeg_cmd = [
-            "ffmpeg",
-            "-y",  # Перезаписывать выходные файлы
-            "-f", "rawvideo",  # Формат входного видео
-            "-vcodec", "rawvideo",
-            "-pix_fmt", "bgr24",  # Формат пикселей
-            "-s", f"{width1}x{height1}",  # Размер кадра
-            "-r", str(fps),  # Частота кадров
-            "-i", "-",  # Вход из stdin
-            "-c:v", "libx264",  # Кодек для видео
-            "-preset", "ultrafast",  # Предустановка для скорости кодирования
-            "-pix_fmt", "yuv420p",  # Формат пикселей в выходном потоке
-            "-f", "rtsp",  # Формат для RTSP
-            PIGS_COUNTER_ADDRESS
-        ]
+        # ffmpeg_cmd = [
+        #     "ffmpeg",
+        #     "-y",  # Перезаписывать выходные файлы
+        #     "-f", "rawvideo",  # Формат входного видео
+        #     "-vcodec", "rawvideo",
+        #     "-pix_fmt", "bgr24",  # Формат пикселей
+        #     "-s", f"{width1}x{height1}",  # Размер кадра
+        #     "-r", str(fps),  # Частота кадров
+        #     "-i", "-",  # Вход из stdin
+        #     "-c:v", "libx264",  # Кодек для видео
+        #     "-preset", "ultrafast",  # Предустановка для скорости кодирования
+        #     "-pix_fmt", "yuv420p",  # Формат пикселей в выходном потоке
+        #     "-f", "rtsp",  # Формат для RTSP
+        #     PIGS_COUNTER_ADDRESS
+        # ]
 
         # Открытие FFmpeg процесса
-        ffmpeg_process = subprocess.Popen(ffmpeg_cmd, stdin=subprocess.PIPE)
-        line_coordinates = ((1443, 0), (1322, 1440))
+        # ffmpeg_process = subprocess.Popen(
+        #     ffmpeg_cmd, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
         start_time_milliseconds = 0  # 10 секунд
         cap.set(cv2.CAP_PROP_POS_MSEC, start_time_milliseconds)
@@ -93,12 +102,72 @@ def count_pigs(address):
         after_event_delay_ladder = deque(maxlen=consecutive_end_ladder)
         after_event_delay_ladder.append(0)
 
-        print(cap)
-        print(cap.isOpened())
-        while cap.isOpened() and cap_ladder.isOpened():
+        while True:
+            # Захват картинки
+            if not cap.isOpened():
+                for i in range(1, 11):
+                    cap = None
+                    time.sleep(1)
+                    cap = cv2.VideoCapture(address)
+                    if cap.isOpened():
+                        print(
+                            f'Connection estabilished {i} cap: {cap.isOpened()}')
+                        print_log(
+                            f'Connection estabilished {i} cap: {cap.isOpened()}')
+                        break
+                    else:
+                        print(f'Try to open capture {i} cap: {cap.isOpened()}')
+                        print_log(
+                            f'Try to open capture {i} cap: {cap.isOpened()}')
+
+            if not cap_ladder.isOpened():
+                for i in range(1, 11):
+                    cap_ladder = None
+                    time.sleep(1)
+                    cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS)
+                    if cap_ladder.isOpened():
+                        print(
+                            f'Connection estabilished {i} cap_ladder: {cap_ladder.isOpened()}')
+                        print_log(
+                            f'Connection estabilished {i} cap_ladder: {cap_ladder.isOpened()}')
+                        break
+                    else:
+                        print(
+                            f'Try to open capture {i} cap_ladder: {cap_ladder.isOpened()}')
+                        print_log(
+                            f'Try to open capture {i} cap_ladder: {cap_ladder.isOpened()}')
+
+            if not cap.isOpened() or not cap_ladder.isOpened():
+                break
+
             # Кадр с камеры
             ret, frame = cap.read()
             ret_ladder, frame_ladder = cap_ladder.read()
+            if not ret or not ret_ladder:
+                for i in range(1, 11):
+                    time.sleep(1)
+                    ret, frame = cap.read()
+                    ret_ladder, frame_ladder = cap_ladder.read()
+                    if ret and ret_ladder:
+                        print(
+                            f'Frame returned {i} ret: {ret}   ret_ladder: {ret_ladder}')
+                        print_log(
+                            f'Frame returned {i} ret: {ret}   ret_ladder: {ret_ladder}')
+                        break
+                    else:
+                        print(
+                            f'Try to get frame {i} ret: {ret}   ret_ladder: {ret_ladder}')
+                        print_log(
+                            f'Try to get frame {i} ret: {ret}   ret_ladder: {ret_ladder}')
+                        if not ret:
+                            cap = None
+                            time.sleep(1)
+                            cap = cv2.VideoCapture(address)
+                        if not ret_ladder:
+                            cap_ladder = None
+                            time.sleep(1)
+                            cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS)
+
             if not ret or not ret_ladder:
                 break
 
@@ -195,9 +264,9 @@ def count_pigs(address):
                         # print(tracker_id)
                         # print(coordinates[tracker_id])
                         previous_cross = is_cross_of_line(
-                            coordinates[tracker_id][0], line_coordinates)
+                            coordinates[tracker_id][0], LINE_COORDINATES)
                         current_cross = is_cross_of_line(
-                            coordinates[tracker_id][-1], line_coordinates)
+                            coordinates[tracker_id][-1], LINE_COORDINATES)
                         # print(f'current_cross {current_cross}  previous_cross {previous_cross}')
 
                         if previous_cross and not current_cross:  # Слева направо
@@ -221,7 +290,7 @@ def count_pigs(address):
                 # Visual
                 line_color = (0, 0, 255)
                 line_thickness = 5
-                detected_img = cv2.line(detected_img, line_coordinates[0], line_coordinates[1],
+                detected_img = cv2.line(detected_img, LINE_COORDINATES[0], LINE_COORDINATES[1],
                                         line_color, line_thickness, lineType=0)  # Draw line
 
                 for tracker_id, bounding_box in zip(detections.tracker_id, bounding_boxes_pigs):
@@ -264,10 +333,14 @@ def count_pigs(address):
 
             if start_flag is True and empty_rate_pigs >= 0.9 and after_event_delay_pigs_is_full and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full:
                 print(f'Общее количество поросят: {pigs_counter}')
+                print_log(f'Общее количество поросят: {pigs_counter}')
                 end_time = datetime.now()
                 end_time_str = end_time.strftime(r'%Y-%m-%d %H:%M:%S')
-                update_event_data(
-                    pigs_counter, 0, start_time_str, end_time_str)
+                if pigs_counter == 0:
+                    delete_event_data(start_time)
+                else:
+                    update_event_data(
+                        pigs_counter, 0, start_time_str, end_time_str)
                 # Release videowriter
                 out.release()
                 out = None
@@ -277,7 +350,9 @@ def count_pigs(address):
                 coordinates.clear()
                 pigs_states.clear()
                 after_event_delay_pigs.clear()
+                after_event_delay_pigs.append(0)
                 after_event_delay_ladder.clear()
+                after_event_delay_ladder.append(0)
                 start_flag = False
             else:
                 font = cv2.FONT_HERSHEY_SIMPLEX  # font
@@ -291,11 +366,19 @@ def count_pigs(address):
                 cv2.putText(detected_img, f'{(consecutive_end_pigs / fps):.1f}s', (width1 - 270, 150), font,
                             fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
-            if detected_img is None:
+            if detected_img is None or detected_img_ladder is None:
+                print(
+                    f'detected_img: {detected_img is None}  detected_img_ladder: {detected_img_ladder is None}')
+                print_log(
+                    f'detected_img: {detected_img is None}  detected_img_ladder: {detected_img_ladder is None}')
                 continue
 
             try:
                 if out.isOpened():
+                    detected_img = cv2.resize(
+                        detected_img, (target_width, target_height1))
+                    detected_img_ladder = cv2.resize(
+                        detected_img_ladder, (target_width, target_height2))
                     combined_frame = np.vstack(
                         (detected_img, detected_img_ladder))
                     out.write(combined_frame)
@@ -303,12 +386,16 @@ def count_pigs(address):
             except:
                 pass
 
-            ffmpeg_process.stdin.write(detected_img.tobytes())
+            # ffmpeg_process.stdin.write(detected_img.tobytes())
 
+        print(f'cap: {cap.isOpened()}   cap_ladder: {cap_ladder.isOpened()}')
+        print_log(
+            f'cap: {cap.isOpened()}   cap_ladder: {cap_ladder.isOpened()}')
         cv2.destroyAllWindows()
         cap.release()
-        ffmpeg_process.stdin.close()
-        ffmpeg_process.wait()
+        cap_ladder.release()
+        # ffmpeg_process.stdin.close()
+        # ffmpeg_process.wait()
 
 
 if __name__ == '__main__':
