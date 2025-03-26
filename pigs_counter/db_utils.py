@@ -1,4 +1,5 @@
 import psycopg2
+from datetime import datetime
 import json
 
 
@@ -99,6 +100,10 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str, end
 
             cursor.execute(
                 query, (end_time, pigs_quantity, pigs_defect, start_time))
+            print(f"Данные события {event_id} успешно обновлены")
+            with open('/pigs_counter/log.log', 'a+') as log:
+                time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
+                log.write(f'{time_str} - Данные события {event_id} успешно обновлены\n')
 
         # Сохранить изменения и закрыть соединение
         connection.commit()
@@ -107,6 +112,44 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str, end
 
     except Exception as e:
         print(f"Ошибка подключения: {event_id}")
+
+    finally:
+        if 'connection' in locals() and connection:
+            connection.close()
+
+
+def delete_event_data(start_time: str):
+    """
+    Delete event data
+
+    :start_time: float - start time of event
+    """
+
+    try:
+        # Установить соединение
+        connection = psycopg2.connect(
+            host=HOST,
+            port=PORT,
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
+        )
+
+        cursor = connection.cursor()
+        # Удаление данных
+        query = """
+            DELETE FROM events WHERE start_time = %s;
+        """
+
+        cursor.execute(query, (start_time))
+
+        # Сохранить изменения и закрыть соединение
+        connection.commit()
+        cursor.close()
+        # print(f"Данные события {event_id} успешно обновлены")
+
+    except Exception as e:
+        print(f"Ошибка подключения")
 
     finally:
         if 'connection' in locals() and connection:

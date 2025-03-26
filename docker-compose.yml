@@ -30,14 +30,16 @@ services:
       - RTSP_PROTOCOLS=tcp
     volumes:
       - ./mediamtx/mediamtx.yml:/mediamtx.yml
-    ports:
-      - 8189:8189
-      - 8889:8889
-      - 8554:8554
+    #ports:
+    #  - 8189:8189
+    #  - 8889:8889/udp
+    #  - 8889:8889/tcp
+    #  - 8554:8554
     restart: unless-stopped
-    networks:
-      network_pigs_counter:
-        ipv4_address: 172.26.0.2
+    network_mode: "host"
+    #networks:
+    #  network_pigs_counter:
+    #    ipv4_address: 172.26.0.2
 
   nodered_pigs:
     container_name: nodered_pigs
@@ -92,12 +94,25 @@ services:
   cron:
     container_name: cron
     image: 'justb4/cron:latest'
-    environment:
-      - 'CRON_STRINGS=0 * * * * /cron_scripts/delete_old_files.sh'
+    #environment:
+    #  - 'CRON_STRINGS=0 * * * * /cron_scripts/delete_old_files.sh'
     volumes:
       - ./cron_scripts:/cron_scripts
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
+
+  filebrowser:
+    container_name: filebrowser
+    restart: unless-stopped
+    image: filebrowser/filebrowser
+    volumes:
+      - /data/videos:/srv
+      - ./filebrowser/filebrowser.db:/database.db
+    ports:
+      - 80:80
+    networks:
+      network_pigs_counter:
+        ipv4_address: 172.26.0.5
 
 volumes:
   nodered: {}
