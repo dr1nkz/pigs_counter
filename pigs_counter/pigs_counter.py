@@ -25,13 +25,26 @@ START_DELAY = int(os.getenv('START_DELAY'))
 END_DELAY = int(os.getenv('END_DELAY'))
 ALLOWED_ZONE = np.array([[985, 500], [1378, 540], [1380, 842], [749, 783]])
 # ALLOWED_ZONE = np.array([[1378, 704], [1931, 760], [1934, 1186], [1048, 1102]])
-LINE_COORDINATES = ((1443, 0), (1322, 1440))
+LINE_COORDINATES = (((888, 0), (750, 1440)), ((1163, 0),
+                    (1045, 1440)), ((1443, 0), (1364, 1440)))
 
 
 def print_log(log_string: str):
     with open('/pigs_counter/log.log', 'a+') as log:
         time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
         log.write(f'{time_str} - {log_string}\n')
+
+
+def count_states(states, check_value):
+    count = 0
+    # print(states.values())
+    for state in states.values():
+        bool_values = [x for x in state if isinstance(
+            x, bool)]  # Оставляем только True / False
+        # print(bool_values)
+        if bool_values.count(check_value) >= 2:
+            count += 1
+    return count
 
 
 def count_pigs(address):
@@ -86,7 +99,7 @@ def count_pigs(address):
         byte_track = sv.ByteTrack(frame_rate=fps,
                                   track_activation_threshold=0.25)
         coordinates = defaultdict(lambda: deque(maxlen=2))
-        pigs_states = defaultdict()
+        pigs_states = defaultdict(list)
 
         # Counter of all pigs crossed the line
         pigs_counter = 0
@@ -261,28 +274,30 @@ def count_pigs(address):
                 # Check if pig crossed the line left or right
                 for tracker_id in coordinates.keys():
                     if len(coordinates[tracker_id]) == coordinates[tracker_id].maxlen:
-                        # print(tracker_id)
-                        # print(coordinates[tracker_id])
-                        previous_cross = is_cross_of_line(
-                            coordinates[tracker_id][0], LINE_COORDINATES)
-                        current_cross = is_cross_of_line(
-                            coordinates[tracker_id][-1], LINE_COORDINATES)
-                        # print(f'current_cross {current_cross}  previous_cross {previous_cross}')
+                        if pigs_states.get(tracker_id) is None:
+                            pigs_states[tracker_id] = [None] * 3
+                        for id, line_coordinate in enumerate(LINE_COORDINATES):
+                            previous_cross = is_cross_of_line(
+                                coordinates[tracker_id][0], line_coordinate)
+                            current_cross = is_cross_of_line(
+                                coordinates[tracker_id][-1], line_coordinate)
 
-                        if previous_cross and not current_cross:  # Слева направо
-                            pigs_states[tracker_id] = 'undefined'
-                        elif not previous_cross and current_cross:  # Справа налево
-                            pigs_states[tracker_id] = 'undefined'
-                        elif pigs_states.get(tracker_id) == 'undefined':
-                            if previous_cross and current_cross:
-                                pigs_states[tracker_id] = True
-                            elif not previous_cross and not current_cross:
-                                pigs_states[tracker_id] = False
+                            if previous_cross and not current_cross:  # Слева направо
+                                pigs_states[tracker_id][id] = 'undefined'
+                            elif not previous_cross and current_cross:  # Справа налево
+                                pigs_states[tracker_id][id] = 'undefined'
+                            elif pigs_states.get(tracker_id)[id] == 'undefined':
+                                if previous_cross and current_cross:
+                                    pigs_states[tracker_id][id] = True
+                                elif not previous_cross and not current_cross:
+                                    pigs_states[tracker_id][id] = False
 
-                count_true = sum(
-                    value is True for value in pigs_states.values())  # Сумма True
-                count_false = sum(
-                    value is False for value in pigs_states.values())  # Сумма False
+                # count_true = sum(
+                #     value is True for value in pigs_states.values())  # Сумма True
+                # count_false = sum(
+                #     value is False for value in pigs_states.values())  # Сумма False
+                count_true = count_states(pigs_states, True)
+                count_false = count_states(pigs_states, False)
                 pigs_counter = count_true - count_false
                 pigs_counter = pigs_counter if pigs_counter >= 0 else 0
                 update_event_data(pigs_counter, 0, start_time_str)
@@ -290,8 +305,9 @@ def count_pigs(address):
                 # Visual
                 line_color = (0, 0, 255)
                 line_thickness = 5
-                detected_img = cv2.line(detected_img, LINE_COORDINATES[0], LINE_COORDINATES[1],
-                                        line_color, line_thickness, lineType=0)  # Draw line
+                for line_coordinate in LINE_COORDINATES:
+                    detected_img = cv2.line(detected_img, line_coordinate[0], line_coordinate[1],
+                                            line_color, line_thickness, lineType=0)  # Draw line
 
                 for tracker_id, bounding_box in zip(detections.tracker_id, bounding_boxes_pigs):
                     caption = f'#{tracker_id}'  # caption
@@ -363,8 +379,8 @@ def count_pigs(address):
                 # consecutive and counter on the frame
                 cv2.rectangle(detected_img, (width1 - 270, 70), (width1 - 50, 170),
                               background_color, thickness=cv2.FILLED)
-                cv2.putText(detected_img, f'{(consecutive_end_pigs / fps):.1f}s', (width1 - 270, 150), font,
-                            fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
+                # cv2.putText(detected_img, f'{(consecutive_end_pigs / fps):.1f}s', (width1 - 270, 150), font,
+                #             fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
             if detected_img is None or detected_img_ladder is None:
                 print(
