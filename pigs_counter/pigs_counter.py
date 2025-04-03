@@ -360,6 +360,11 @@ def count_pigs(address):
                 # Release videowriter
                 out.release()
                 out = None
+                end_time_hms = end_time.strftime(r'%H.%M.%S')
+                filepath_end = (
+                    f'{directory}/.{start_time_hms}-{end_time_hms}.mp4')
+                if os.path.isfile(filepath):
+                    os.rename(filepath, filepath_end)
                 # Reset variables
                 pigs_counter = 0
                 byte_track.reset()
