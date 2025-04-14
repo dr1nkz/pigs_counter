@@ -25,8 +25,13 @@ START_DELAY = int(os.getenv('START_DELAY'))
 END_DELAY = int(os.getenv('END_DELAY'))
 ALLOWED_ZONE = np.array([[985, 500], [1378, 540], [1380, 842], [749, 783]])
 # ALLOWED_ZONE = np.array([[1378, 704], [1931, 760], [1934, 1186], [1048, 1102]])
-LINE_COORDINATES = (((888, 0), (750, 1440)), ((1163, 0),
-                    (1045, 1440)), ((1443, 0), (1364, 1440)))
+LINE_COORDINATES = (
+    ((666, 0), (562, 1080)),
+    ((872, 0), (783, 1080)),
+    ((1082, 0), (1023, 1080))
+)
+# LINE_COORDINATES = (((888, 0), (750, 1440)), ((1163, 0),
+#                     (1045, 1440)), ((1443, 0), (1364, 1440)))
 
 
 def print_log(log_string: str):
@@ -55,18 +60,18 @@ def count_pigs(address):
                            conf_thres=0.3,
                            iou_thres=0.5)
     ladder_detector = YOLOv8(path=LADDER_MODEL_PATH,
-                             conf_thres=0.7,
+                             conf_thres=0.3,
                              iou_thres=0.5)
 
     while (True):
         # cv2.namedWindow('stream', cv2.WINDOW_NORMAL) # %1%
-        cap = cv2.VideoCapture(address)
+        cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
         fps = int(cap.get(cv2.CAP_PROP_FPS))
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         width1 = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         height1 = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-        cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS)
+        cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
         width2 = int(cap_ladder.get(cv2.CAP_PROP_FRAME_WIDTH))
         height2 = int(cap_ladder.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
@@ -108,12 +113,16 @@ def count_pigs(address):
         consecutive_start_ladder = START_DELAY * fps
         consecutive_end_pigs = END_DELAY * fps
         consecutive_end_ladder = END_DELAY * fps
+        consecutive_end_pig_human_from_ladder = 10 * fps
         start_flag = False
         before_event_delay_ladder = 0
         after_event_delay_pigs = deque(maxlen=consecutive_end_pigs)
         after_event_delay_pigs.append(0)
         after_event_delay_ladder = deque(maxlen=consecutive_end_ladder)
         after_event_delay_ladder.append(0)
+        after_event_delay_pig_human_from_ladder = deque(
+            maxlen=consecutive_end_pig_human_from_ladder)
+        after_event_delay_pig_human_from_ladder.append(0)
 
         while True:
             # Захват картинки
@@ -121,7 +130,7 @@ def count_pigs(address):
                 for i in range(1, 11):
                     cap = None
                     time.sleep(1)
-                    cap = cv2.VideoCapture(address)
+                    cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
                     if cap.isOpened():
                         print(
                             f'Connection estabilished {i} cap: {cap.isOpened()}')
@@ -137,7 +146,8 @@ def count_pigs(address):
                 for i in range(1, 11):
                     cap_ladder = None
                     time.sleep(1)
-                    cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS)
+                    cap_ladder = cv2.VideoCapture(
+                        LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
                     if cap_ladder.isOpened():
                         print(
                             f'Connection estabilished {i} cap_ladder: {cap_ladder.isOpened()}')
@@ -172,14 +182,12 @@ def count_pigs(address):
                             f'Try to get frame {i} ret: {ret}   ret_ladder: {ret_ladder}')
                         print_log(
                             f'Try to get frame {i} ret: {ret}   ret_ladder: {ret_ladder}')
-                        if not ret:
-                            cap = None
-                            time.sleep(1)
-                            cap = cv2.VideoCapture(address)
-                        if not ret_ladder:
-                            cap_ladder = None
-                            time.sleep(1)
-                            cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS)
+                        cap = None
+                        cap_ladder = None
+                        time.sleep(1)
+                        cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
+                        cap_ladder = cv2.VideoCapture(
+                            LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
 
             if not ret or not ret_ladder:
                 break
@@ -196,14 +204,15 @@ def count_pigs(address):
 
             # Get coords od detected ladders and check if it in area
             detected_img_ladder = frame_ladder.copy()
-            bounding_boxes_ladder, _, _ = ladder_detector(detected_img_ladder)
+            bounding_boxes_ladder_pig_human, _, class_ids_ladder = ladder_detector(
+                detected_img_ladder)
             detected_img_ladder = ladder_detector.draw_detections(
                 detected_img_ladder)
 
-            if len(bounding_boxes_ladder) != 0 and ALLOWED_ZONE is not None:
+            if len(bounding_boxes_ladder_pig_human) != 0 and ALLOWED_ZONE is not None:
                 # Calculate the center points of the bounding boxes
                 points = np.array([[(x_1 + x_2) / 2, (y_1 + y_2) / 2]
-                                   for [x_1, y_1, x_2, y_2] in bounding_boxes_ladder]).astype('int')
+                                   for [x_1, y_1, x_2, y_2] in bounding_boxes_ladder_pig_human]).astype('int')
 
                 # Initialize an array to store whether points are within allowed zones
                 point_in_zone = np.zeros(len(points), dtype=bool)
@@ -213,13 +222,27 @@ def count_pigs(address):
                     map(lambda x: cv2.pointPolygonTest(ALLOWED_ZONE, x.tolist(), False) >= 0, points)))
 
                 # Use this mask to filter or index your points or bounding boxes
-                bounding_boxes_ladder = np.array(
-                    [box for index, box in enumerate(bounding_boxes_ladder) if point_in_zone[index]])
+                bounding_boxes_ladder_pig_human = np.array(
+                    [box for index, box in enumerate(bounding_boxes_ladder_pig_human) if point_in_zone[index]])
+                class_ids_ladder = np.array(
+                    [class_id for index, class_id in enumerate(class_ids_ladder) if point_in_zone[index]])
+
+            mask = np.isin(class_ids_ladder, [0])
+            bounding_boxes_ladder = np.array(
+                bounding_boxes_ladder_pig_human)[mask]
+            mask = np.isin(class_ids_ladder, [1, 2])
+            bounding_boxes_pig_human_from_ladder = np.array(
+                bounding_boxes_ladder_pig_human)[mask]
 
             if len(bounding_boxes_pigs) != 0:  # objects detected
                 after_event_delay_pigs.append(0)
             elif start_flag:
                 after_event_delay_pigs.append(1)
+
+            if len(bounding_boxes_pig_human_from_ladder) != 0:  # objects detected
+                after_event_delay_pig_human_from_ladder.append(0)
+            elif start_flag:
+                after_event_delay_pig_human_from_ladder.append(1)
 
             if len(bounding_boxes_ladder) != 0:
                 after_event_delay_ladder.append(0)
@@ -346,8 +369,15 @@ def count_pigs(address):
                     1) / len(after_event_delay_ladder)
                 after_event_delay_ladder_is_full = len(
                     after_event_delay_ladder) == after_event_delay_ladder.maxlen
+                empty_rate_pig_human_from_ladder = after_event_delay_pig_human_from_ladder.count(
+                    1) / len(after_event_delay_pig_human_from_ladder)
+                after_event_delay_human_from_ladder_is_full = len(
+                    after_event_delay_pig_human_from_ladder) == after_event_delay_pig_human_from_ladder.maxlen
 
-            if start_flag is True and empty_rate_pigs >= 0.9 and after_event_delay_pigs_is_full and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full:
+            if (start_flag is True
+                    # and empty_rate_pigs >= 0.9 and after_event_delay_pigs_is_full
+                    and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full
+                    and empty_rate_pig_human_from_ladder >= 0.9 and after_event_delay_human_from_ladder_is_full):
                 print(f'Общее количество поросят: {pigs_counter}')
                 print_log(f'Общее количество поросят: {pigs_counter}')
                 end_time = datetime.now()
@@ -374,6 +404,8 @@ def count_pigs(address):
                 after_event_delay_pigs.append(0)
                 after_event_delay_ladder.clear()
                 after_event_delay_ladder.append(0)
+                after_event_delay_pig_human_from_ladder.clear()
+                after_event_delay_pig_human_from_ladder.append(0)
                 start_flag = False
             else:
                 font = cv2.FONT_HERSHEY_SIMPLEX  # font
