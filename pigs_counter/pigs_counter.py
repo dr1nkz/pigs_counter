@@ -66,12 +66,14 @@ def count_pigs(address):
     while (True):
         # cv2.namedWindow('stream', cv2.WINDOW_NORMAL) # %1%
         cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
+        cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
         fps = int(cap.get(cv2.CAP_PROP_FPS))
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         width1 = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         height1 = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
         cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
+        cap_ladder.set(cv2.CAP_PROP_BUFFERSIZE, 1)
         width2 = int(cap_ladder.get(cv2.CAP_PROP_FRAME_WIDTH))
         height2 = int(cap_ladder.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
@@ -97,9 +99,6 @@ def count_pigs(address):
         # Открытие FFmpeg процесса
         # ffmpeg_process = subprocess.Popen(
         #     ffmpeg_cmd, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-        start_time_milliseconds = 0  # 10 секунд
-        cap.set(cv2.CAP_PROP_POS_MSEC, start_time_milliseconds)
 
         byte_track = sv.ByteTrack(frame_rate=fps,
                                   track_activation_threshold=0.25)
@@ -131,6 +130,7 @@ def count_pigs(address):
                     cap = None
                     time.sleep(1)
                     cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
+                    cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
                     if cap.isOpened():
                         print(
                             f'Connection estabilished {i} cap: {cap.isOpened()}')
@@ -148,6 +148,7 @@ def count_pigs(address):
                     time.sleep(1)
                     cap_ladder = cv2.VideoCapture(
                         LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
+                    cap_ladder.set(cv2.CAP_PROP_BUFFERSIZE, 1)
                     if cap_ladder.isOpened():
                         print(
                             f'Connection estabilished {i} cap_ladder: {cap_ladder.isOpened()}')
@@ -164,12 +165,16 @@ def count_pigs(address):
                 break
 
             # Кадр с камеры
+            cap.grab()
             ret, frame = cap.read()
+            cap_ladder.grab()
             ret_ladder, frame_ladder = cap_ladder.read()
             if not ret or not ret_ladder:
                 for i in range(1, 11):
                     time.sleep(1)
+                    cap.grab()
                     ret, frame = cap.read()
+                    cap_ladder.grab()
                     ret_ladder, frame_ladder = cap_ladder.read()
                     if ret and ret_ladder:
                         print(
@@ -186,8 +191,10 @@ def count_pigs(address):
                         cap_ladder = None
                         time.sleep(1)
                         cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
+                        cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
                         cap_ladder = cv2.VideoCapture(
                             LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
+                        cap_ladder.set(cv2.CAP_PROP_BUFFERSIZE, 1)
 
             if not ret or not ret_ladder:
                 break
