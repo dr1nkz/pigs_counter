@@ -12,7 +12,8 @@ import torch
 
 from detector import YOLOv8, Detections
 from db_utils import insert_event_data, update_event_data, delete_event_data
-from utils import is_cross_of_line
+from utils import is_cross_of_line, print_log, count_states
+from camera_thread import CameraThread
 
 
 load_dotenv()
@@ -34,24 +35,6 @@ LINE_COORDINATES = (
 #                     (1045, 1440)), ((1443, 0), (1364, 1440)))
 
 
-def print_log(log_string: str):
-    with open('/pigs_counter/log.log', 'a+') as log:
-        time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
-        log.write(f'{time_str} - {log_string}\n')
-
-
-def count_states(states, check_value):
-    count = 0
-    # print(states.values())
-    for state in states.values():
-        bool_values = [x for x in state if isinstance(
-            x, bool)]  # Оставляем только True / False
-        # print(bool_values)
-        if bool_values.count(check_value) >= 2:
-            count += 1
-    return count
-
-
 def count_pigs(address):
     """
     Запуск модели
@@ -64,18 +47,32 @@ def count_pigs(address):
                              iou_thres=0.5)
 
     while (True):
-        # cv2.namedWindow('stream', cv2.WINDOW_NORMAL) # %1%
-        cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
-        cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-        fps = int(cap.get(cv2.CAP_PROP_FPS))
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        width1 = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        height1 = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        # cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
+        # cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+        # fps = int(cap.get(cv2.CAP_PROP_FPS))
+        # fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        # width1 = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        # height1 = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-        cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
-        cap_ladder.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-        width2 = int(cap_ladder.get(cv2.CAP_PROP_FRAME_WIDTH))
-        height2 = int(cap_ladder.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        cam = CameraThread(address)
+        cam.start()
+        time.sleep(5)
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        fps, width1, height1 = cam.get_properties()
+        print(f'fps: {fps} width1: {width1} height1: {height1}')
+        print_log(f'fps: {fps} width1: {width1} height1: {height1}')
+
+        # cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
+        # cap_ladder.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+        # width2 = int(cap_ladder.get(cv2.CAP_PROP_FRAME_WIDTH))
+        # height2 = int(cap_ladder.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+        cam_ladder = CameraThread(LADDER_CAM_ADDRESS)
+        cam_ladder.start()
+        time.sleep(5)
+        fps2, width2, height2 = cam_ladder.get_properties()
+        print(f'fps2: {fps2} width2: {width2} height2: {height2}')
+        print_log(f'fps2: {fps2} width2: {width2} height2: {height2}')
 
         out = None
 
@@ -124,79 +121,99 @@ def count_pigs(address):
         after_event_delay_pig_human_from_ladder.append(0)
 
         while True:
-            # Захват картинки
-            if not cap.isOpened():
+            # # Захват картинки
+            # if not cap.isOpened():
+            #     for i in range(1, 11):
+            #         cap = None
+            #         time.sleep(1)
+            #         cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
+            #         cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+            #         if cap.isOpened():
+            #             print(
+            #                 f'Connection estabilished {i} cap: {cap.isOpened()}')
+            #             print_log(
+            #                 f'Connection estabilished {i} cap: {cap.isOpened()}')
+            #             break
+            #         else:
+            #             print(f'Try to open capture {i} cap: {cap.isOpened()}')
+            #             print_log(
+            #                 f'Try to open capture {i} cap: {cap.isOpened()}')
+
+            # if not cap_ladder.isOpened():
+            #     for i in range(1, 11):
+            #         cap_ladder = None
+            #         time.sleep(1)
+            #         cap_ladder = cv2.VideoCapture(
+            #             LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
+            #         cap_ladder.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+            #         if cap_ladder.isOpened():
+            #             print(
+            #                 f'Connection estabilished {i} cap_ladder: {cap_ladder.isOpened()}')
+            #             print_log(
+            #                 f'Connection estabilished {i} cap_ladder: {cap_ladder.isOpened()}')
+            #             break
+            #         else:
+            #             print(
+            #                 f'Try to open capture {i} cap_ladder: {cap_ladder.isOpened()}')
+            #             print_log(
+            #                 f'Try to open capture {i} cap_ladder: {cap_ladder.isOpened()}')
+
+            # if not cap.isOpened() or not cap_ladder.isOpened():
+            #     break
+
+            # # Кадр с камеры
+            # cap.grab()
+            # ret, frame = cap.read()
+            # cap_ladder.grab()
+            # ret_ladder, frame_ladder = cap_ladder.read()
+            # if not ret or not ret_ladder:
+            #     for i in range(1, 11):
+            #         time.sleep(1)
+            #         cap.grab()
+            #         ret, frame = cap.read()
+            #         cap_ladder.grab()
+            #         ret_ladder, frame_ladder = cap_ladder.read()
+            #         if ret and ret_ladder:
+            #             print(
+            #                 f'Frame returned {i} ret: {ret}   ret_ladder: {ret_ladder}')
+            #             print_log(
+            #                 f'Frame returned {i} ret: {ret}   ret_ladder: {ret_ladder}')
+            #             break
+            #         else:
+            #             print(
+            #                 f'Try to get frame {i} ret: {ret}   ret_ladder: {ret_ladder}')
+            #             print_log(
+            #                 f'Try to get frame {i} ret: {ret}   ret_ladder: {ret_ladder}')
+            #             cap = None
+            #             cap_ladder = None
+            #             time.sleep(1)
+            #             cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
+            #             cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+            #             cap_ladder = cv2.VideoCapture(
+            #                 LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
+            #             cap_ladder.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+
+            # if not ret or not ret_ladder:
+            #     break
+
+            frame = cam.get_frame()
+            frame_ladder = cam_ladder.get_frame()
+            if frame is None or frame_ladder is None:
                 for i in range(1, 11):
-                    cap = None
                     time.sleep(1)
-                    cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
-                    cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-                    if cap.isOpened():
-                        print(
-                            f'Connection estabilished {i} cap: {cap.isOpened()}')
-                        print_log(
-                            f'Connection estabilished {i} cap: {cap.isOpened()}')
+                    frame = cam.get_frame()
+                    frame_ladder = cam_ladder.get_frame()
+                    if frame is not None or frame_ladder is not None:
+                        print(f'frame is ok  frame_ladder is ok')
+                        print_log(f'frame is ok  frame_ladder is ok')
                         break
                     else:
-                        print(f'Try to open capture {i} cap: {cap.isOpened()}')
-                        print_log(
-                            f'Try to open capture {i} cap: {cap.isOpened()}')
-
-            if not cap_ladder.isOpened():
-                for i in range(1, 11):
-                    cap_ladder = None
-                    time.sleep(1)
-                    cap_ladder = cv2.VideoCapture(
-                        LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
-                    cap_ladder.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-                    if cap_ladder.isOpened():
                         print(
-                            f'Connection estabilished {i} cap_ladder: {cap_ladder.isOpened()}')
+                            f'Try to get frame {i} frame is None: {frame is None}   frame_ladder is None: {frame_ladder is None}')
                         print_log(
-                            f'Connection estabilished {i} cap_ladder: {cap_ladder.isOpened()}')
-                        break
-                    else:
-                        print(
-                            f'Try to open capture {i} cap_ladder: {cap_ladder.isOpened()}')
-                        print_log(
-                            f'Try to open capture {i} cap_ladder: {cap_ladder.isOpened()}')
+                            f'Try to get frame {i} frame is None: {frame is None}   frame_ladder is None: {frame_ladder is None}')
 
-            if not cap.isOpened() or not cap_ladder.isOpened():
-                break
-
-            # Кадр с камеры
-            cap.grab()
-            ret, frame = cap.read()
-            cap_ladder.grab()
-            ret_ladder, frame_ladder = cap_ladder.read()
-            if not ret or not ret_ladder:
-                for i in range(1, 11):
-                    time.sleep(1)
-                    cap.grab()
-                    ret, frame = cap.read()
-                    cap_ladder.grab()
-                    ret_ladder, frame_ladder = cap_ladder.read()
-                    if ret and ret_ladder:
-                        print(
-                            f'Frame returned {i} ret: {ret}   ret_ladder: {ret_ladder}')
-                        print_log(
-                            f'Frame returned {i} ret: {ret}   ret_ladder: {ret_ladder}')
-                        break
-                    else:
-                        print(
-                            f'Try to get frame {i} ret: {ret}   ret_ladder: {ret_ladder}')
-                        print_log(
-                            f'Try to get frame {i} ret: {ret}   ret_ladder: {ret_ladder}')
-                        cap = None
-                        cap_ladder = None
-                        time.sleep(1)
-                        cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
-                        cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-                        cap_ladder = cv2.VideoCapture(
-                            LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
-                        cap_ladder.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-
-            if not ret or not ret_ladder:
+            if frame is None or frame_ladder is None:
                 break
 
             # Детектирование
@@ -322,10 +339,6 @@ def count_pigs(address):
                                 elif not previous_cross and not current_cross:
                                     pigs_states[tracker_id][id] = False
 
-                # count_true = sum(
-                #     value is True for value in pigs_states.values())  # Сумма True
-                # count_false = sum(
-                #     value is False for value in pigs_states.values())  # Сумма False
                 count_true = count_states(pigs_states, True)
                 count_false = count_states(pigs_states, False)
                 pigs_counter = count_true - count_false
@@ -448,12 +461,10 @@ def count_pigs(address):
 
             # ffmpeg_process.stdin.write(detected_img.tobytes())
 
-        print(f'cap: {cap.isOpened()}   cap_ladder: {cap_ladder.isOpened()}')
-        print_log(
-            f'cap: {cap.isOpened()}   cap_ladder: {cap_ladder.isOpened()}')
-        cv2.destroyAllWindows()
-        cap.release()
-        cap_ladder.release()
+        # cap.release()
+        # cap_ladder.release()
+        cam.stop()
+        cam_ladder.stop()
         # ffmpeg_process.stdin.close()
         # ffmpeg_process.wait()
 
