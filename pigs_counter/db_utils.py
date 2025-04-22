@@ -3,6 +3,9 @@ from datetime import datetime
 import json
 
 
+from utils import print_log
+
+
 # Параметры подключения
 HOST = "172.26.0.4"              # Имя сервиса PostgreSQL
 PORT = 5432                      # Порт PostgreSQL
@@ -103,7 +106,8 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str, end
             print(f"Данные события {event_id} успешно обновлены")
             with open('/pigs_counter/log.log', 'a+') as log:
                 time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
-                log.write(f'{time_str} - Данные события {event_id} успешно обновлены\n')
+                log.write(
+                    f'{time_str} - Данные события {event_id} успешно обновлены\n')
 
         # Сохранить изменения и закрыть соединение
         connection.commit()
@@ -150,6 +154,7 @@ def delete_event_data(start_time: str):
 
     except Exception as e:
         print(f"Ошибка подключения")
+        print_log(f'Ошибка подключения \'{start_time}\'')
 
     finally:
         if 'connection' in locals() and connection:
