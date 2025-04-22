@@ -27,10 +27,15 @@ END_DELAY = int(os.getenv('END_DELAY'))
 ALLOWED_ZONE = np.array([[985, 500], [1378, 540], [1380, 842], [749, 783]])
 # ALLOWED_ZONE = np.array([[1378, 704], [1931, 760], [1934, 1186], [1048, 1102]])
 LINE_COORDINATES = (
-    ((666, 0), (562, 1080)),
-    ((872, 0), (783, 1080)),
-    ((1082, 0), (1023, 1080))
+    ((1166, 0), (1062, 1080)),
+    ((1372, 0), (1283, 1080)),
+    ((1582, 0), (1523, 1080))
 )
+# LINE_COORDINATES = (
+#     ((666, 0), (562, 1080)),
+#     ((872, 0), (783, 1080)),
+#     ((1082, 0), (1023, 1080))
+# )
 # LINE_COORDINATES = (((888, 0), (750, 1440)), ((1163, 0),
 #                     (1045, 1440)), ((1443, 0), (1364, 1440)))
 
@@ -403,7 +408,7 @@ def count_pigs(address):
                 end_time = datetime.now()
                 end_time_str = end_time.strftime(r'%Y-%m-%d %H:%M:%S')
                 if pigs_counter == 0:
-                    delete_event_data(start_time)
+                    delete_event_data(start_time_str)
                 else:
                     update_event_data(
                         pigs_counter, 0, start_time_str, end_time_str)
