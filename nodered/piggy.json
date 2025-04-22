@@ -1,0 +1,2279 @@
+[
+    {
+        "id": "92226df4e340c706",
+        "type": "tab",
+        "label": "Поток 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cebe0263a986f9c3",
+        "type": "tab",
+        "label": "Поток 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b5ccc75c0e8c4463",
+        "type": "ui_group",
+        "name": "Отчет",
+        "tab": "894abbe699040ef2",
+        "order": 1,
+        "disp": false,
+        "width": "23",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "894abbe699040ef2",
+        "type": "ui_tab",
+        "name": "Отчет",
+        "icon": "dashboard",
+        "order": 7,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "7c4b3f9d286db509",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-custom",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#6791a2",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#7083d2",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#62749d",
+                    "value": "#7083d2",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#7083d2",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#e6e6e6",
+                    "edited": true
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": true
+                },
+                "group-textColor": {
+                    "value": "#aab5e4",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#e6e6e6",
+                    "edited": true
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#6b8ad1",
+                    "edited": true
+                },
+                "widget-borderColor": {
+                    "value": "#e6e6e6",
+                    "edited": true
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Подсчет количества животных при приемке на ООО \"МПК Атяшевский\"",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "true",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "22c802fe2e9fb766",
+        "type": "ui_tab",
+        "name": "Камеры",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "b609199da19ad8a0",
+        "type": "ui_group",
+        "name": "Камеры",
+        "tab": "22c802fe2e9fb766",
+        "order": 1,
+        "disp": false,
+        "width": "26",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "184e08d38ff3c438",
+        "type": "postgresdb",
+        "cfgname": "",
+        "hostname": "172.26.0.4",
+        "port": "5432",
+        "db": "postgres_db",
+        "ssl": false
+    },
+    {
+        "id": "a1e3e927f5ee6573",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 8,
+        "width": 23,
+        "height": 1
+    },
+    {
+        "id": "82d669119ad59c9e",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 9,
+        "width": 23,
+        "height": 1
+    },
+    {
+        "id": "fe2a0918b7516cc0",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 10,
+        "width": 23,
+        "height": 1
+    },
+    {
+        "id": "d5f1b4b5ca195a32",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 11,
+        "width": 23,
+        "height": 1
+    },
+    {
+        "id": "690f51f8f1d415d2",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 12,
+        "width": 23,
+        "height": 1
+    },
+    {
+        "id": "8837a3673d365e0f",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 13,
+        "width": 23,
+        "height": 1
+    },
+    {
+        "id": "c5a86273ec2b076b",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 14,
+        "width": 23,
+        "height": 1
+    },
+    {
+        "id": "5094c1b70371ab30",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 15,
+        "width": 23,
+        "height": 1
+    },
+    {
+        "id": "c6205d60d8a4ff1f",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 17,
+        "width": 23,
+        "height": 1
+    },
+    {
+        "id": "42b802f2e0c1931b",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 20,
+        "width": 23,
+        "height": 1
+    },
+    {
+        "id": "7c72d17eb2dac384",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 21,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "47344076f92ef4d9",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 24,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "c2ca6833761777ae",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 25,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "89523d49a37f4594",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 26,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "86b7c0cb6bb01cfc",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 27,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "fb108a572fad0e52",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 29,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "5b906ce963dbab26",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 30,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "351581eb1d1261a1",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 31,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "1701e8a4b6f70876",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 32,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "b151c0dafa279eea",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 33,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "7caf509a546c5c2e",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 34,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "ebdd838c3aec8e63",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 35,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "f0315ff8562c8c36",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 36,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "6b9e89512f4e377b",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 37,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "fa7a0e8313814bfa",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 38,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "f9b8fd9185a80cb0",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 39,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "70d182d45601be43",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 40,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "24decc5a604a534f",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 41,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "779d29a12b95c293",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 42,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "f3fea911cc17f5c5",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 43,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "db722017cc616be6",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 44,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "aaf8dc1154688a56",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 5,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "dcae8e0b66a12bba",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 8,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "53a19dbeda9b756c",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 9,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "f6692f466bc04f29",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 10,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "e1a92fde34cba74b",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 11,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "783ca4dbb0b4d885",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 12,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "e1f5a3a2190fc704",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 13,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "813dbb497e3dbfe9",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 14,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "056383b54538b35a",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 20,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "095d550246b62a7b",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 21,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "3272b4f9fd6c8a90",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 22,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "fbf310c2417f5988",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 23,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "7bcb4bbf2e726a46",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 24,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "126351cddff8bc27",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 25,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "19ab2a143b6998ef",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 26,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "a73a2993263e10db",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 27,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "314d40a7d22468f6",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 28,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "4fc4a06a20acb61c",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 29,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "e4fecd54e0d9796c",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 30,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "4b23f54b7c0893ab",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 33,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "cb95c8f032abe18b",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 35,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "ab64a3ce52993c3f",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 36,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "854e9d7a1d63f68f",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 37,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "a43975363c0551e4",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 38,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "00e3d6b31a913c12",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 39,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "8f950d5306df5115",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 40,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "31289b6b4fa18820",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 41,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "f7c1dc0329bc6eac",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 42,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "d6a9b67d02654ddc",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 43,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "fd9a217e80b21bd0",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 44,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "2035277a755dc744",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 45,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "627ee59c8c9c98d6",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 46,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "d46aa91a2e4de929",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 47,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "4eef3e2fcb7abf73",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 48,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "568c8408a34baa2c",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 49,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "9a170958e1a6ed15",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 50,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "9b8d9a146104c3b0",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 51,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "0011a7f6e1e7c428",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 52,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "9a4117e720324e79",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 53,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "0eb331e500ca8e5a",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 54,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "e80ef517b6cf2929",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 56,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "5e201c2b31884e65",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 57,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "f60fc7ab124b6b19",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 58,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "d3a07b053db12153",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 59,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "652aa42b98a0fde5",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 60,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "2e752c9a94c55e20",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 61,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "2a65c3ad3e9b78bd",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 62,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "71954375594745e4",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 63,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "99c0e51fb94c600e",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 64,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "66866edd7755bfd8",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 65,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "2696ccae9d87765a",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 66,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "9db14490c7e1ba68",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 67,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "f629426f0d775ecc",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 68,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "043d21c3664dd765",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 69,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "6a36ff4ce68baf1b",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 70,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "28406383c455346e",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 71,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "95973922c3574562",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 72,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "69bc749bbec9078c",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 73,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "b5a8815c267830a7",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 74,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "bb072f4f9556b8a3",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 75,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "3fefbe946e1d702c",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 76,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "0a43701109bfb648",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 77,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "63f6f6e9764f39db",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 78,
+        "width": 12,
+        "height": 1
+    },
+    {
+        "id": "8a15b7a886d3d701",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 79,
+        "width": 26,
+        "height": 1
+    },
+    {
+        "id": "6c19f7b2304b37bb",
+        "type": "ui_button",
+        "z": "92226df4e340c706",
+        "name": "",
+        "group": "b5ccc75c0e8c4463",
+        "order": 5,
+        "width": 4,
+        "height": 1,
+        "passthru": true,
+        "label": "Сформировать",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 180,
+        "y": 200,
+        "wires": [
+            [
+                "f55fb693d7c16adb"
+            ]
+        ]
+    },
+    {
+        "id": "11c335f9b3db6c0c",
+        "type": "ui_template",
+        "z": "92226df4e340c706",
+        "d": true,
+        "group": "b5ccc75c0e8c4463",
+        "name": "Подсчет заголовок",
+        "order": 1,
+        "width": 23,
+        "height": 1,
+        "format": "<table id=\"table1\" height=\"100%\" style=\"border-bottom: 1px solid;\">\n    <tbody>\n        <tr>\n            <th style=\"font-family:'Courier New', monospace; font-size: 23px; text-align: left;  \"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\"\n            </th>\n        </tr>\n    </tbody>\n</table>\n<!-- <div style=\"\"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\" </div> -->",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 130,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "69bb46803e2ac180",
+        "type": "debug",
+        "z": "92226df4e340c706",
+        "name": "debug 392",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload.url",
+        "targetType": "msg",
+        "statusVal": "path",
+        "statusType": "msg",
+        "x": 550,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "af8f71bd43d513c2",
+        "type": "ui_text_input",
+        "z": "92226df4e340c706",
+        "name": "",
+        "label": "C",
+        "tooltip": "",
+        "group": "b5ccc75c0e8c4463",
+        "order": 3,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "mode": "datetime-local",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 1010,
+        "y": 20,
+        "wires": [
+            [
+                "cd448ce96f9f5935"
+            ]
+        ]
+    },
+    {
+        "id": "237362f3198ff57d",
+        "type": "ui_text_input",
+        "z": "92226df4e340c706",
+        "name": "",
+        "label": "По",
+        "tooltip": "",
+        "group": "b5ccc75c0e8c4463",
+        "order": 4,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "mode": "datetime-local",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": false,
+        "className": "",
+        "topicType": "msg",
+        "x": 1010,
+        "y": 60,
+        "wires": [
+            [
+                "3b8574b55e09ca6c"
+            ]
+        ]
+    },
+    {
+        "id": "ed8ec862ccce0a59",
+        "type": "ui_template",
+        "z": "92226df4e340c706",
+        "group": "b5ccc75c0e8c4463",
+        "name": "ReportTable",
+        "order": 7,
+        "width": 23,
+        "height": 11,
+        "format": "\n<style>\n    #table2, #table2 td{\n        font-family:'Courier New', monospace;\n        height: 40px;\n        font-size: 16px;\n        padding-left: 10px;\n        border: 1px solid black;\n        border-collapse: collapse;\n    }\n    .scroll-table-body {\n        font-family:'Courier New', monospace;\n        height: 400px; \n        overflow-x: auto;\n        overflow-y: auto;\n        table-layout: fixed;\n        /* margin-top: 0px;\n        margin-bottom: 20px;\n        border-bottom: 1px solid #eee; --> */\n    }\n    ::-webkit-scrollbar {\n        display: none;\n        /* width: 11px; */\n    }\n    ::-webkit-scrollbar-track {\n        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n    }\n    ::-webkit-scrollbar-thumb {\n        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n    }\n    .scroll-table-head table {\n        font-family:'Courier New', monospace;\n        width:100%;\n        table-layout: fixed;\n        border: none;\n    }\n    .scroll-table thead th {\n        font-family:'Courier New', monospace;\n        font-weight: bold;  \n        text-align: left;\n        border: none;\n        padding: 10px 15px;\n        background: #d8d8d8;\n        font-size: 14px;\n        border-left: 1px solid #ddd;\n        border-right: 1px solid #ddd;\n    }\n    .scroll-table tbody td {\n        font-family:'Courier New', monospace;\n        width:101%;\n        text-align: left;\n        border-left: 1px solid #ddd;\n        border-right: 1px solid #ddd;\n        padding: 10px 15px;\n        font-size: 14px;\n        vertical-align: top;\n        \n    }\n    th, td{      \n        font-size: 14px;\n        heigth: 48px;\n        /* width: 170px; */\n        font-weight: normal;\n    }\n</style>\n\n<div class=\"scroll-table-head\">\n    <table id=\"table\" style=\"border: 1px solid black; border-collapse: collapse;\">\n        <thead>\n            <tr style=\"border: 1px solid black; border-collapse: collapse;\">\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Номер разгрузки</th>\n                <!-- <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Фото госномера прицепа а/м</th> -->\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Место разгрузки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Дата/время начала приемки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Дата/время окончания приемки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Количество принятых животных</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Cанитарный брак</th>\n            </tr>\n        </thead>\n    </table>\n    <div class=\"scroll-table-body\"> \n        <table id=\"table2\" style=\"border: 1px solid black; border-collapse: collapse;\">\n            <!-- <tbody style=\"\">\n                <tr ng-repeat=\"row in msg.payload[0]\" style=\"height:48px; border: 1px solid black; border-collapse: collapse;\">\n                    <td ng-repeat=\"item in row\" style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px;\">{{item}}</td>\n                </tr>\n            </tbody> -->\n            <!-- <tbody>\n                <tr ng-repeat=\"row in msg.payload\" style=\"height:48px; border: 3px solid gray; border-collapse: collapse;\">\n                    <td ng-repeat=\"item in row\" style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px;\">\n                        {{item}}</td>\n                </tr>\n            </tbody> -->\n            <tbody></tbody>\n        </table>\n        <script>\n            (function(scope) {\n                scope.$watch('msg.payload[0]', function(newVal){\n                    if (newVal && Array.isArray(newVal)) {\n                        createTableFromArray(newVal);\n                    }\n                });\n                function createTableFromArray(data) {\n                    const tableBody = document.getElementById(\"table2\").getElementsByTagName('tbody')[0];\n                    \n                    // Очищаем таблицу перед добавлением новых данных (если нужно)\n                    tableBody.innerHTML = \"\";\n                    \n                    // Проходим по каждому элементу массива и создаем строки таблицы\n                    data.forEach(item => {\n                        const newRow = tableBody.insertRow();\n                        \n                        const cell1 = newRow.insertCell(0);\n                        const cell2 = newRow.insertCell(1);\n                        const cell3 = newRow.insertCell(2);\n                        const cell4 = newRow.insertCell(3);\n                        const cell5 = newRow.insertCell(4);\n                        const cell6 = newRow.insertCell(5);\n                        // const cell7 = newRow.insertCell(6);\n                        \n                        cell1.textContent = item.event_id;\n                        cell2.textContent = item.place;\n                        cell3.textContent = item.start_time;\n                        cell4.textContent = item.end_time;\n                        cell5.textContent = item.pigs_quantity;\n                        cell6.textContent = item.pigs_defect;\n                        \n                                                // cell1.textContent = item.event_id;\n                                                // // cell2.textContent = item.platenumber;\n                                                // cell3.textContent = item.place;\n                                                // cell4.textContent = item.start_time;\n                                                // cell5.textContent = item.end_time;\n                                                // cell6.textContent = item.pigs_quantity;\n                                                // cell7.textContent = item.pigs_defect;\n                    });\n                }\n            })(scope);\n        \n        \n            // Функция для создания таблицы из массива данных\n            // function createTableFromArray(data) {\n            //     const tableBody = document.getElementById(\"dynamicTable\").getElementsByTagName('tbody')[0];\n        \n            //     // Очищаем таблицу перед добавлением новых данных (если нужно)\n            //     tableBody.innerHTML = \"\";\n        \n            //     // Проходим по каждому элементу массива и создаем строки таблицы\n            //     data.forEach(item => {\n            //         const newRow = tableBody.insertRow();\n        \n            //         const cell1 = newRow.insertCell(0);\n            //         const cell2 = newRow.insertCell(1);\n            //         const cell3 = newRow.insertCell(2);\n            //         const cell4 = newRow.insertCell(3);\n            //         const cell5 = newRow.insertCell(4);\n            //         const cell6 = newRow.insertCell(5);\n            //         const cell7 = newRow.insertCell(6);\n        \n            //         cell1.textContent = item.event_id;\n            //         cell2.textContent = item.platenumber;\n            //         cell3.textContent = item.place;\n            //         cell4.textContent = item.start_time;\n            //         cell5.textContent = item.end_time;\n            //         cell6.textContent = item.pigs_quantity;\n            //         cell7.textContent = item.pigs_defect;\n            //     });\n            // }\n        \n            // // Вызываем функцию для создания таблицы\n            // createTableFromArray({{msg.payload[0]}});\n        </script>\n    </div>\n    <div class=\"scroll-table-head\">\n        <table id=\"table\" style=\"border: 1px solid black; border-collapse: collapse;\">\n            <tr>\n                \n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Общее время\n                    разгрузки</th>\n                <!-- <th style=\"#d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\"> </th> -->\n                <th colspan=\"3\" style=\"border: 1px solid black; border-collapse: collapse; height:48px; width: 400px;\">{{msg.payload[1].correctDiffTime}}</th>\n                <!-- <th style=\"border: 1px solid black; border-collapse: collapse; height:48px;\"> </th> -->\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Общее\n                    количество</th>\n                <th style=\"1px solid black; border-collapse: collapse; text-align: left; padding-left: 10px; height:48px;\">{{msg.payload[1].sumPigsQuantity}}</th>\n                <th style=\"border: 1px solid black; border-collapse: collapse; text-align: left; padding-left: 10px; height:48px;\">{{msg.payload[1].sumPigsDefect}}\n                </th>\n            </tr>\n        </table>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 810,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "79d010a509c919f5",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "setDataNow",
+        "func": "// msg.payload = new Date(Date.now()).toLocaleString('ru-RU', { timeZone: 'UTC' })\nlet timeSetNow = new Date(Date.now())\n\nmsg.payload = timeSetNow\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 40,
+        "wires": [
+            [
+                "6152c97bad6b2fb1"
+            ]
+        ]
+    },
+    {
+        "id": "e5a7a1ab86452ded",
+        "type": "ui_template",
+        "z": "92226df4e340c706",
+        "d": true,
+        "group": "b5ccc75c0e8c4463",
+        "name": "Пояснение",
+        "order": 16,
+        "width": 23,
+        "height": 1,
+        "format": "<table id=\"table1\" height=\"100%\" style=\"border-bottom: 1px solid;\">\n    <tbody>\n        <tr>\n            <th style=\"font-size: 12px; text-align: left;  \"> *К отчету принимаются только цельные разгрузки.\n            </th>\n        </tr>\n        <tr>\n            <th style=\"font-size: 12px; text-align: left;  \"> В случае наложения времени начала, либо окончания на середину разгрузки машина к отчету не принимается\n            </th>\n        </tr>\n    </tbody>\n</table>\n<!-- <div style=\"\"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\" </div> -->",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 170,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bf0c56cf80db4e24",
+        "type": "ui_template",
+        "z": "92226df4e340c706",
+        "d": true,
+        "group": "b5ccc75c0e8c4463",
+        "name": "Быстрый просмотр",
+        "order": 18,
+        "width": 23,
+        "height": 1,
+        "format": "<table id=\"table1\" height=\"100%\" style=\"\">\n    <tbody>\n        <tr>\n            <th style=\"font-size: 23px; text-align: left;  \"> Быстрый просмотр информации по выбранной разгрузке\n            </th>\n        </tr>\n    </tbody>\n</table>\n<!-- <div style=\"\"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\" </div> -->",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 200,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "97fb2cfaf0320959",
+        "type": "ui_template",
+        "z": "92226df4e340c706",
+        "d": true,
+        "group": "b5ccc75c0e8c4463",
+        "name": "FastReportTable",
+        "order": 19,
+        "width": 23,
+        "height": 5,
+        "format": "<style>\n    th, td{      \n        font-size: 14px;\n        heigth: 48px;\n        font-weight: normal;\n    }\n</style>\n\n<table id=\"table\" style=\"border: 1px solid black; border-collapse: collapse;\">\n    <tr style=\"border: 1px solid black; border-collapse: collapse;\">\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">А/М Номер разгрузки</th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Фото госномера прицепа а/м</th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Место разгрузки</th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Дата/время начала приемки</th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Дата/время окончания приемки</th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Количество принятых животных</th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">В том числе санитарный брак</th>\n    </tr>\n    <tbody>\n        <tr style=\"height:48px; border: 1px solid black; border-collapse: collapse;\">\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px; \">№1 7306 АМ13</td>\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px; \">1</td>\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px; \">Пандус 1</td>\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px; \">22.10.24 10:05</td>\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px; \">22.10.24 10:42</td>\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px;\">50</td>\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px; \">2</td>\n        </tr>\n    </tbody>\n    <tr>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Общее время разгрузки</th>\n        <th style=\"#d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\"> </th>\n        <th style=\"border: 1px solid black; border-collapse: collapse; height:48px;\">0 д 0 ч 37 м</th>\n        <th style=\"border: 1px solid black; border-collapse: collapse; height:48px;\"> </th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Общее количество</th>\n        <th style=\"1px solid black; border-collapse: collapse; text-align: left; padding-left: 10px; height:48px;\">50</th>\n        <th style=\"border: 1px solid black; border-collapse: collapse; text-align: left; padding-left: 10px; height:48px;\">2</th>\n    </tr>\n</table>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 180,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "52a3e8cdc35b54f1",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "makeCorrectData",
+        "func": "var data = msg.payload\n\nvar event_id = [];\nvar start_time = [];\nvar end_time = [];\nvar pigs_quantity = [];\nvar pigs_defect = [];\nvar platenumber = [];\nvar place = [];\n\nfunction addHours(hours, date = new Date()) {\n    if (typeof hours !== 'number') {\n        throw new Error('Invalid \"hours\" argument')\n    }\n    if (!(date instanceof Date)) {\n        throw new Error('Invalid \"date\" argument')\n    }\n    date.setHours(date.getHours() + hours)\n    return date\n}\n\n\n\nvar lgth_data = data.length\nfor(var i = 0; i < lgth_data;i++){\n    event_id.push(data[i]['event_id']);\n    start_time.push(new Date(addHours(3, data[i]['start_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));\n    if (data[i]['end_time'] === null || isNaN(data[i]['end_time'])) { end_time.push(\"Не расчитано\")}\n    else end_time.push(new Date(addHours(3, data[i]['end_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));\n    pigs_quantity.push(data[i]['pigs_quantity']);\n    pigs_defect.push(data[i]['pigs_defect']);\n    // platenumber.push(data[i]['platenumber']);\n    place.push(data[i]['place']);   \n}\n\n\nconst sumPigsQuantity = pigs_quantity.reduce((acc, num) => acc + num, 0);\nconst sumPigsDefect = pigs_defect.reduce((acc, num) => acc + num, 0);\nvar diffTime = 0;\n\nfor (let i = 0; i < lgth_data; i++) {\n    // let tempArr = []\n    if (data[i]['end_time']===null){\n        data[i]['end_time'] = data[i]['start_time'];\n        let endTimeVal = new Date(data[i]['end_time']);\n        let startTimeVal = new Date( data[i]['start_time']);\n        diffTime += ((endTimeVal.valueOf() - startTimeVal.valueOf()) / 1000);\n    }\n    else{\n        let endTimeVal = new Date( data[i]['end_time']);\n        let startTimeVal = new Date( data[i]['start_time']);\n        diffTime += ((endTimeVal.valueOf()+2000 - startTimeVal.valueOf()) / 1000);\n    }\n    // let endTimeVal = new Date(addHours(3, data[i]['end_time']));\n    // let startTimeVal = new Date(addHours(3, data[i]['start_time']));\n    // diffTime += ((endTimeVal.valueOf() - startTimeVal.valueOf()) / 1000);\n}\n\n\nvar getCorrectTime = (value) => (String(Math.trunc((value / 3600)) % 24)) + \"ч \" + String(Math.trunc((value / 60) % 60)) + \"м \" //+ String(Math.floor(value % 60)) + \"с\";\nvar correctDiffTime = getCorrectTime(diffTime);\n// var k = new Date(end_time[0] - start_time[0])\n\nvar table1_data = []\nfor(var i = 0; i < lgth_data;i++){\n    \n    // for (var j = 0; j < 1; j++) {\n        // tab.push(event_id[i].toString(), platenumber[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString(), pigs_defect[i].toString())\n    var tab = { \n        event_id: event_id[i].toString(),\n        // platenumber: platenumber[i].toString(),\n        place: place[i].toString(),\n        start_time: start_time[i].toString(),\n        end_time: end_time[i].toString(),\n        pigs_quantity: pigs_quantity[i].toString(),\n        pigs_defect: pigs_defect[i].toString()\n    }\n        // (event_id[i].toString(), platenumber[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString(), pigs_defect[i].toString())\n    // }\n    table1_data.push(tab)\n}\n\n// msg.payload = table1_data\n// return msg\nvar total_data = {}\n\nmsg.payload = [\n    table1_data, \n    total_data = {\n        correctDiffTime: correctDiffTime,\n        sumPigsQuantity: sumPigsQuantity,\n        sumPigsDefect: sumPigsDefect\n    },\n    data\n]\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 200,
+        "wires": [
+            [
+                "ed8ec862ccce0a59",
+                "072c7a1f0320f2f8"
+            ]
+        ]
+    },
+    {
+        "id": "de6c3f8c4c9465f8",
+        "type": "postgres",
+        "z": "92226df4e340c706",
+        "postgresdb": "184e08d38ff3c438",
+        "name": "",
+        "output": true,
+        "perrow": false,
+        "rowspermsg": "1",
+        "return_on_error": true,
+        "limit_queries": "0",
+        "limit_by": "payload",
+        "limit_value": "1",
+        "limit_drop_intermediate": false,
+        "limit_drop_if_in_queue": false,
+        "outputs": true,
+        "x": 460,
+        "y": 200,
+        "wires": [
+            [
+                "52a3e8cdc35b54f1"
+            ]
+        ]
+    },
+    {
+        "id": "cd448ce96f9f5935",
+        "type": "change",
+        "z": "92226df4e340c706",
+        "name": "start_ts_input",
+        "rules": [
+            {
+                "t": "set",
+                "p": "start_ts_input",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1160,
+        "y": 20,
+        "wires": [
+            [
+                "abc1fec045c3fcfb"
+            ]
+        ]
+    },
+    {
+        "id": "3b8574b55e09ca6c",
+        "type": "change",
+        "z": "92226df4e340c706",
+        "name": "end_ts_input",
+        "rules": [
+            {
+                "t": "set",
+                "p": "end_ts_input",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1150,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f55fb693d7c16adb",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "query",
+        "func": "var start_datetime = new Date(flow.get(\"start_ts_input\"));\nvar end_datetime = new Date(flow.get(\"end_ts_input\"));\n\nfunction addHours(hours,  date = new Date()) {   \n  if (typeof hours !== 'number') { \n    throw new Error('Invalid \"hours\" argument') \n  } \n  if (!(date instanceof Date)) { \n    throw new Error('Invalid \"date\" argument') \n  } \n  date.setHours(date.getHours() + hours) \n  return date \n}\n// addHours(-3, start_datetime);\n// addHours(-3, end_datetime);\n// msg.payload = start_datetime;\n// return msg;\n// function normalDate(date){\n//     const formattedDate = date.toLocaleString('us-US', {\n//         year: 'numeric',\n//         month: '2-digit',\n//         day: '2-digit',\n//         hour: '2-digit',\n//         minute: '2-digit',\n//         second: '2-digit',\n//     });\n    \n//     return formattedDate.replace(',', '').replace(/\\./g, '/')\n// }\n\n// var start_query_time = \"'\" + normalDate(start_datetime) + \"'\"\n// var end_query_time = \"'\" + normalDate(end_datetime) + \"'\"\n\n\nvar start_query_time = \"'\" + start_datetime.toLocaleDateString(\"us-US\") + \" \" + start_datetime.toLocaleTimeString(\"us-US\") + \"'\"\nvar end_query_time = \"'\" + end_datetime.toLocaleDateString(\"us-US\") + \" \" + end_datetime.toLocaleTimeString(\"us-US\") + \"'\"\nvar query = \"SELECT event_id, platenumber, place, start_time, end_time, pigs_quantity, pigs_defect from events WHERE start_time >= \" + start_query_time + \" AND start_time <= \" + end_query_time + \" ORDER BY event_id;\"\n// var query = \"SELECT event_id, platenumber, place, start_time, end_time, pigs_quantity, pigs_defect from events WHERE end_time IS NOT NULL AND start_time >= \" + start_query_time + \" AND start_time <= \" + end_query_time + \" ORDER BY event_id;\"\n// let query = \"SELECT event_id, platenumber, place, start_time, end_time, pigs_quantity, pigs_defect from events WHERE end_time IS NOT NULL AND start_time >= '2025-02-25 21:00:00' AND start_time <= '2025-02-26 21:00:00' ORDER BY event_id;\"\n// var query = \"SELECT date_trunc('second', dd)::timestamp ts, COALESCE(sum(speed_vtg_13mo0821.skmh), 0) skmh FROM generate_series(\" + start_query_time + \",\" + end_query_time + \", '1 second':: interval) dd LEFT JOIN speed_vtg_13mo0821 ON(speed_vtg_13mo0821.ts = date_trunc('second', dd)::timestamp) GROUP BY date_trunc('second', dd)::timestamp ORDER BY ts ASC\";\n// var query = \"SELECT ts, sum(skmh) skmh FROM (SELECT date_trunc('minute', main.ts)::timestamptz ts, CASE WHEN (date_trunc('minute', main.ts)::timestamptz = date_trunc('minute', net.time)::timestamptz) THEN COALESCE(sum(skmh)/60, 5) ELSE COALESCE(sum(skmh)/60, 0) END AS skmh FROM (SELECT date_trunc('second', dd)::timestamptz ts, speed_vtg_13mo0821.skmh skmh FROM generate_series( \" + start_query_time + \"::timestamptz, \" + end_query_time + \"::timestamptz, '1 second':: interval) dd LEFT JOIN speed_vtg_13mo0821 ON(speed_vtg_13mo0821.ts = date_trunc('second', dd)::timestamptz) ORDER BY ts ASC) main LEFT JOIN (SELECT DATE_TRUNC('second',time) AS time FROM netdata_13mo0821 GROUP BY time) net ON(main.ts = net.time) GROUP BY date_trunc('minute', main.ts)::timestamptz, date_trunc('minute', net.time)::timestamptz) GROUP BY ts\"\n// var query = \"SELECT ts, sum(skmh) skmh FROM (SELECT date_trunc('minute', main.ts)::timestamptz ts, CASE WHEN (date_trunc('minute', main.ts)::timestamptz = date_trunc('minute', net.time)::timestamptz) THEN COALESCE(sum(skmh)/60, 5) ELSE COALESCE(sum(skmh)/60, 0) END AS skmh FROM (SELECT date_trunc('second', dd)::timestamptz ts, short_speed_vtg_13mo0821.skmh skmh FROM generate_series( \" + start_query_time + \"::timestamptz, \" + end_query_time + \"::timestamptz, '1 second':: interval) dd LEFT JOIN (SELECT * FROM speed_vtg_13mo0821 WHERE ts BETWEEN \" + start_query_time + \"::timestamptz AND \" + end_query_time + \"::timestamptz) short_speed_vtg_13mo0821 ON (short_speed_vtg_13mo0821.ts = date_trunc('second', dd)::timestamptz) ORDER BY ts ASC) main LEFT JOIN (SELECT DATE_TRUNC('second',time) AS time FROM (SELECT * FROM netdata_13mo0821 WHERE time BETWEEN \" + start_query_time + \"::timestamptz AND \" + end_query_time + \"::timestamptz) GROUP BY time) net ON(main.ts = net.time) GROUP BY date_trunc('minute', main.ts)::timestamptz, date_trunc('minute', net.time)::timestamptz) GROUP BY ts\"// var coord_gga_13mo0821 = \"SELECT * FROM coord_gga_13mo0821 WHERE ts BETWEEN '\" + start_datetime + \"' AND '\" + end_datetime + \"'\" + \" ORDER BY ts ASC\";\nmsg.payload = query;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 200,
+        "wires": [
+            [
+                "de6c3f8c4c9465f8"
+            ]
+        ]
+    },
+    {
+        "id": "072c7a1f0320f2f8",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "makeCorrectDataForCsv",
+        "func": "\nvar arr = msg.payload[2]\n\nfunction addHours(hours, date = new Date()) {\n    if (typeof hours !== 'number') {\n        throw new Error('Invalid \"hours\" argument')\n    }\n    if (!(date instanceof Date)) {\n        throw new Error('Invalid \"date\" argument')\n    }\n    date.setHours(date.getHours() + hours)\n    return date\n}\n\nvar table = []\nfor (let i=0; i<arr.length;i++){\n    if (arr[i]['end_time'] === null) { arr[i]['end_time'] = arr[i]['start_time'] }\n    table.push({\n        'Номер разгрузки':arr[i]['event_id'],\n        // 'Фото госномера прицепа а/м': arr[i]['platenumber'],\n        'Место разгрузки': arr[i]['place'],\n        'Дата/время начала приемки': new Date( arr[i]['start_time']).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16), \n        'Дата/время окончания приемки': new Date( arr[i]['end_time']).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16),\n        'Количество принятых животных': arr[i]['pigs_quantity'],\n        'Cанитарный брак': arr[i]['pigs_defect']\n    })\n    if(i==arr.length-1) {\n        table.push({\n            'Номер разгрузки': 'Общее время разгрузки',\n            // 'Фото госномера прицепа а/м': '',\n            'Место разгрузки': msg.payload[1].correctDiffTime,\n            'Дата/время начала приемки': '',\n            'Дата/время окончания приемки': 'Общее количество',\n            'Количество принятых животных': msg.payload[1].sumPigsQuantity,\n            'Cанитарный брак': msg.payload[1].sumPigsDefect\n        })\n    }\n}\n\nmsg.payload = table\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 260,
+        "wires": [
+            [
+                "941127626ebde61b"
+            ]
+        ]
+    },
+    {
+        "id": "941127626ebde61b",
+        "type": "csv",
+        "z": "92226df4e340c706",
+        "name": "",
+        "spec": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "all",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 850,
+        "y": 260,
+        "wires": [
+            [
+                "e08516445ada40fa"
+            ]
+        ]
+    },
+    {
+        "id": "894581c1f90885f2",
+        "type": "file",
+        "z": "92226df4e340c706",
+        "name": "",
+        "filename": "path",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 760,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a642720c39d8993d",
+        "type": "ui_button",
+        "z": "92226df4e340c706",
+        "name": "",
+        "group": "b5ccc75c0e8c4463",
+        "order": 6,
+        "width": 4,
+        "height": 1,
+        "passthru": false,
+        "label": "Выгрузить в Excel",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "file_name",
+        "payloadType": "flow",
+        "topic": "open_link",
+        "topicType": "str",
+        "x": 810,
+        "y": 380,
+        "wires": [
+            [
+                "8bbae74e2f7e574b"
+            ]
+        ]
+    },
+    {
+        "id": "e1d8664a2ff8a723",
+        "type": "ui_template",
+        "z": "92226df4e340c706",
+        "group": "b5ccc75c0e8c4463",
+        "name": "Выберите период отчета",
+        "order": 2,
+        "width": 5,
+        "height": 1,
+        "format": "<div style=\"font-family:'Courier New', monospace; font-size: 15px; text-align: center; padding-top: 15px\"> Выберите период отчета </div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 150,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6508cd6b136ab437",
+        "type": "ui_template",
+        "z": "92226df4e340c706",
+        "group": "b5ccc75c0e8c4463",
+        "name": "",
+        "order": 28,
+        "width": 10,
+        "height": 1,
+        "format": "<script>\n    (function(scope) {\n        scope.$watch('msg', function(msg) {\n            // if (msg && msg.payload && msg.payload.url) {\n            //     window.open(msg.payload.url, '_blank');\n            // }\n            if (msg && msg.payload && msg.payload.url && \n                typeof msg.payload.url === 'string' &&\n                msg.payload.url.startsWith('http')) {\n                // Только для явных HTTP/HTTPS ссылок\n                window.open(msg.payload.url, '_blank');\n            }            \n        });\n    })(scope);\n</script>\n\n<!-- <script>\n(function(scope) {\n    var lastUrl = null;\n    \n    scope.$watch('msg', function(msg) {\n        if (msg && msg.payload && msg.payload.url && \n            msg.payload.url !== lastUrl &&\n            /^http?:\\/\\//.test(msg.payload.url)) {\n            \n            lastUrl = msg.payload.url;\n            \n            // Альтернатива 1: перенаправление в текущем окне\n            // window.location.href = msg.payload.url;\n            \n            // Альтернатива 2: открытие в новом окне по таймеру (может быть заблокировано)\n            setTimeout(function() {\n                var newWindow = window.open('', '_blank');\n                if (newWindow) {\n                    newWindow.location.href = msg.payload.url;\n                }\n            }, 100);\n        }\n    });\n})(scope);\n</script> -->",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1180,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "448bac8fa4d7fa11",
+        "type": "ui_template",
+        "z": "92226df4e340c706",
+        "group": "",
+        "name": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    md-input-container {\n        font-family:'Courier New', monospace;\n    }\n    nr-dashboard-button{\n        font-family:'Courier New', monospace;\n    }\n    /* md-list-item._md-button-wrap {\n        text-transform: uppercase;\n        color: black;\n    } */\n    .md-toolbar-tools{\n        margin-left: auto;\n        margin-right: auto;\n        font-family:'Courier New', monospace;\n        font-size: 23px;\n        /* padding: auto; */\n    }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 1060,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e08516445ada40fa",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "path_URL",
+        "func": "var start_datetime = new Date(flow.get(\"start_ts_input\"));\nvar end_datetime = new Date(flow.get(\"end_ts_input\"));\n\nfunction addHours(hours,  date = new Date()) {   \n  if (typeof hours !== 'number') { \n    throw new Error('Invalid \"hours\" argument') \n  } \n  if (!(date instanceof Date)) { \n    throw new Error('Invalid \"date\" argument') \n  } \n  date.setHours(date.getHours() + hours) \n  return date \n}\naddHours(-3, start_datetime);\naddHours(-3, end_datetime);\n\nvar start_query_time = start_datetime.toLocaleDateString(\"ru-RU\") + \" \" + start_datetime.toLocaleTimeString(\"ru-RU\") \nvar end_query_time = end_datetime.toLocaleDateString(\"ru-RU\") + \" \" + end_datetime.toLocaleTimeString(\"ru-RU\") \n\n// var start_query_time = \"'\" + start_datetime.toLocaleDateString(\"ru-RU\") + \" \" + start_datetime.toLocaleTimeString(\"ru-RU\") + \"'\"\n// var end_query_time = \"'\" + end_datetime.toLocaleDateString(\"ru-RU\") + \" \" + end_datetime.toLocaleTimeString(\"ru-RU\") + \"'\"\n\n// msg.path = \"/data/static/Отчет \" + getCorrectDatetime(new Date(addHours(-3, new Date(dateReportStart)))) + \" - \" + getCorrectDatetime(new Date(addHours(-3, new Date(dateReportEnd)))) + \".csv\"\nlet correctFileName = \"Отчет c \" + start_query_time + \" по \" + end_query_time +\".csv\";\nmsg.path = \"/data/static/reports/\" + correctFileName;\nlet file_name = \"http://192.168.1.116:1855/static/reports/\" + correctFileName;\nflow.set(\"file_name\", file_name);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 320,
+        "wires": [
+            [
+                "894581c1f90885f2"
+            ]
+        ]
+    },
+    {
+        "id": "8bbae74e2f7e574b",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "function 88",
+        "func": "let url = flow.get(\"file_name\");\nmsg.payload = {\n    url : url\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 380,
+        "wires": [
+            [
+                "6508cd6b136ab437",
+                "69bb46803e2ac180"
+            ]
+        ]
+    },
+    {
+        "id": "6152c97bad6b2fb1",
+        "type": "switch",
+        "z": "92226df4e340c706",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 40,
+        "wires": [
+            [
+                "5440bb77222cdcb5"
+            ],
+            [
+                "a278828f455ed753"
+            ]
+        ]
+    },
+    {
+        "id": "5440bb77222cdcb5",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "setCTime",
+        "func": "let timeSetNow = msg.payload;\ntimeSetNow.setHours(3);\ntimeSetNow.setMinutes(0);\ntimeSetNow.setSeconds(0);\nmsg.payload = timeSetNow;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 20,
+        "wires": [
+            [
+                "af8f71bd43d513c2"
+            ]
+        ]
+    },
+    {
+        "id": "a278828f455ed753",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "setPoTime",
+        "func": "let timeSetNow = msg.payload;\ntimeSetNow.setHours(2);\ntimeSetNow.setMinutes(59);\ntimeSetNow.setSeconds(59);\ntimeSetNow.setDate(timeSetNow.getDate()+1)\nmsg.payload = timeSetNow;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 60,
+        "wires": [
+            [
+                "237362f3198ff57d"
+            ]
+        ]
+    },
+    {
+        "id": "eb8d3b5c77124e4a",
+        "type": "debug",
+        "z": "92226df4e340c706",
+        "name": "debug 394",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "95b6afc90bb72c30",
+        "type": "ui_ui_control",
+        "z": "92226df4e340c706",
+        "name": "",
+        "events": "all",
+        "x": 380,
+        "y": 80,
+        "wires": [
+            [
+                "79d010a509c919f5"
+            ]
+        ]
+    },
+    {
+        "id": "abc1fec045c3fcfb",
+        "type": "delay",
+        "z": "92226df4e340c706",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "0.5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 560,
+        "y": 140,
+        "wires": [
+            [
+                "6c19f7b2304b37bb"
+            ]
+        ]
+    },
+    {
+        "id": "efab2bb1e283440a",
+        "type": "ui_ui_control",
+        "z": "92226df4e340c706",
+        "d": true,
+        "name": "",
+        "events": "all",
+        "x": 600,
+        "y": 380,
+        "wires": [
+            [
+                "a642720c39d8993d"
+            ]
+        ]
+    },
+    {
+        "id": "cd2c6ef3c97cadae",
+        "type": "ui_template",
+        "z": "cebe0263a986f9c3",
+        "group": "b609199da19ad8a0",
+        "name": "cam1",
+        "order": 4,
+        "width": 11,
+        "height": 8,
+        "format": "<!-- \n<div style=\"text-align:  center; width:95%; height:100%;\nborder: 10px groove lightblue;\">\n    <p style=\"margin-top:114px; margin-bottom:114px;\">IP CAMERA Не подключена</p> -->\n<!-- <p style=\"margin-top:114px; margin-bottom:114px;\">IP CAMERA Не подключена</p> -->\n <!-- </div> <p style=\"margin-top: auto; margin-bottom: auto; margin-left: auto; margin-right: auto;\">IP camera</p></div>border: 10px groove lightblue; -->\n<iframe style=\"text-align:  center; width:95%; height:100%;\" src=\"http://192.168.1.116:8889/cam_2ndFlow\" scrolling=\"no\"></iframe>\n<!-- <head>\n    <meta charset=\"utf-8\">\n    <title>Unreal Media Server WebRTC player</title>\n\n    <script src=\"/webrtcadapter.js\"></script>\n    <script src=\"/unrealwebrtcplayer.js\"></script>\n\n    <script type=\"text/javascript\">\n        var webrtcPlayer = null;\n    </script>\n</head> -->\n<!-- \n<body>\n    <!-- <div id=\"container\" align=\"center\">\n    <video style=\"background: black url(loader.gif) center no-repeat;\" id=\"remoteVideo\" class=\"ttx_ws1_1\" width=\"426\"\n      height=\"255\" autoplay muted controls></video>\n  </div> -->\n    <!-- <iframe id='fp_embed_player' src='http://localhost:8089/publish/mf' marginwidth='0' marginheight='0'\n        frameborder='0' width='100%' height='100%' scrolling='no' allowfullscreen='allowfullscreen'></iframe> -->\n\n     <!-- <script type=\"text/javascript\">\n    webrtcPlayer = new UnrealWebRTCPlayer(\"mf\", \"publish\", \"\", \"localhost\", \"8089\", false, true, \"tcp\");\n       webrtcPlayer.Play();\n  </script>\n</body> --> \n\n\n<!-- <head>\n    <meta charset=\"utf-8\">\n    <title>Unreal Media Server WebRTC player</title>\n  \n    <script src=\"http://www.umediaserver.net/umediaserver/webrtcadapter.js\"></script>\n    <script src=\"http://www.umediaserver.net/umediaserver/unrealwebrtcplayer.js\"></script>\n    \n    \n    <!-- <script type=\"text/javascript\">\n      var webrtcPlayer = null;\n    </script> -->\n<!--</head> -->\n<!-- \n<body>\n    <div id=\"container\" align=\"center\">\n        <video style=\"background-color:black\" id=\"remoteVideo\" width=\"426\" height=\"255\" autoplay playsinline controls muted></video>\n\n        <script type=\"text/javascript\">\n            webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \"mf\", \"\", \"localhost\", \"8089\", true, true, \"tcp\");\n            //webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \"livedemocam1\", \"\", \"unrealstreaming.net\", \"444\", true, true, \"tcp\");\n            //webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \".docs\", \"\", \"192.168.6.10\", \"5119\", true, true, \"tcp\");\n            webrtcPlayer.Play();\n        </script>\n\n    </div>\n</body> -->",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 290,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ad0a30f3f2d43617",
+        "type": "ui_template",
+        "z": "cebe0263a986f9c3",
+        "group": "b609199da19ad8a0",
+        "name": "spacer2",
+        "order": 7,
+        "width": 1,
+        "height": 19,
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 160,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "884063dac638f4d9",
+        "type": "ui_template",
+        "z": "cebe0263a986f9c3",
+        "group": "b609199da19ad8a0",
+        "name": "spacer4",
+        "order": 3,
+        "width": 1,
+        "height": 18,
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 820,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0b872060d547bebb",
+        "type": "ui_template",
+        "z": "cebe0263a986f9c3",
+        "group": "b609199da19ad8a0",
+        "name": "cam2",
+        "order": 6,
+        "width": 11,
+        "height": 8,
+        "format": "<!-- \n<div style=\"text-align:  center; width:95%; height:100%;\nborder: 10px groove lightblue;\">\n    <p style=\"margin-top:114px; margin-bottom:114px;\">IP CAMERA Не подключена</p> -->\n<!-- <p style=\"margin-top:114px; margin-bottom:114px;\">IP CAMERA Не подключена</p> -->\n</div> <!-- border: 10px groove lightblue; -->\n<iframe style=\"text-align:  center; width:95%; height:100%;\" src=\"http://192.168.1.116:8889/ladder_cam_2ndFlow/\" scrolling=\"no\"></iframe>\n<!-- <head>\n    <meta charset=\"utf-8\">\n    <title>Unreal Media Server WebRTC player</title>\n\n    <script src=\"/webrtcadapter.js\"></script>\n    <script src=\"/unrealwebrtcplayer.js\"></script>\n\n    <script type=\"text/javascript\">\n        var webrtcPlayer = null;\n    </script>\n</head> -->\n<!-- \n<body>\n    <!-- <div id=\"container\" align=\"center\">\n    <video style=\"background: black url(loader.gif) center no-repeat;\" id=\"remoteVideo\" class=\"ttx_ws1_1\" width=\"426\"\n      height=\"255\" autoplay muted controls></video>\n  </div> -->\n<!-- <iframe id='fp_embed_player' src='http://localhost:8089/publish/mf' marginwidth='0' marginheight='0'\n        frameborder='0' width='100%' height='100%' scrolling='no' allowfullscreen='allowfullscreen'></iframe> -->\n\n<!-- <script type=\"text/javascript\">\n    webrtcPlayer = new UnrealWebRTCPlayer(\"mf\", \"publish\", \"\", \"localhost\", \"8089\", false, true, \"tcp\");\n       webrtcPlayer.Play();\n  </script>\n</body> -->\n\n\n<!-- <head>\n    <meta charset=\"utf-8\">\n    <title>Unreal Media Server WebRTC player</title>\n  \n    <script src=\"http://www.umediaserver.net/umediaserver/webrtcadapter.js\"></script>\n    <script src=\"http://www.umediaserver.net/umediaserver/unrealwebrtcplayer.js\"></script>\n    \n    \n    <!-- <script type=\"text/javascript\">\n      var webrtcPlayer = null;\n    </script> -->\n<!--</head> -->\n<!-- \n<body>\n    <div id=\"container\" align=\"center\">\n        <video style=\"background-color:black\" id=\"remoteVideo\" width=\"426\" height=\"255\" autoplay playsinline controls muted></video>\n\n        <script type=\"text/javascript\">\n            webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \"mf\", \"\", \"localhost\", \"8089\", true, true, \"tcp\");\n            //webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \"livedemocam1\", \"\", \"unrealstreaming.net\", \"444\", true, true, \"tcp\");\n            //webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \".docs\", \"\", \"192.168.6.10\", \"5119\", true, true, \"tcp\");\n            webrtcPlayer.Play();\n        </script>\n\n    </div>\n</body> -->",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 670,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a560087702331e34",
+        "type": "ui_template",
+        "z": "cebe0263a986f9c3",
+        "group": "b609199da19ad8a0",
+        "name": "Таблица подсчета в реальном времени",
+        "order": 15,
+        "width": 24,
+        "height": 1,
+        "format": "<div style=\"font-family:'Courier New', monospace; font-size: 25px; text-align: center; padding-top: 5px; \"> Таблица подсчета в реальном времени </div>\n<!-- font-family:'Courier New', monospace; -->",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 480,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a971a95634773f36",
+        "type": "ui_template",
+        "z": "cebe0263a986f9c3",
+        "group": "b609199da19ad8a0",
+        "name": "Подсчет количества",
+        "order": 1,
+        "width": 13,
+        "height": 1,
+        "format": "<div style=\"font-family:'Courier New', monospace; font-size: 25px; text-align: center; padding-top: 5px; \"> Подсчет количества принятых животных</div>\n<!-- font-family:'Courier New', monospace; -->",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 120,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f7bc321ed0b76dd",
+        "type": "ui_template",
+        "z": "cebe0263a986f9c3",
+        "group": "b609199da19ad8a0",
+        "name": "Контроль разгрузки",
+        "order": 2,
+        "width": 13,
+        "height": 1,
+        "format": "<div style=\"font-family:'Courier New', monospace; font-size: 25px; text-align: center; padding-top: 5px; \"> Контроль разгрузки </div>\n<!-- font-family:'Courier New', monospace; -->",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 860,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "68ba83dee933f0b5",
+        "type": "ui_button",
+        "z": "cebe0263a986f9c3",
+        "d": true,
+        "name": "",
+        "group": "b609199da19ad8a0",
+        "order": 31,
+        "width": 4,
+        "height": 1,
+        "passthru": false,
+        "label": "Сформировать",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 100,
+        "y": 300,
+        "wires": [
+            [
+                "60c2d2288ec6c75c"
+            ]
+        ]
+    },
+    {
+        "id": "6846d602d411c6fc",
+        "type": "postgres",
+        "z": "cebe0263a986f9c3",
+        "postgresdb": "184e08d38ff3c438",
+        "name": "",
+        "output": true,
+        "perrow": false,
+        "rowspermsg": "1",
+        "return_on_error": true,
+        "limit_queries": "0",
+        "limit_by": "payload",
+        "limit_value": "1",
+        "limit_drop_intermediate": false,
+        "limit_drop_if_in_queue": false,
+        "outputs": true,
+        "x": 420,
+        "y": 300,
+        "wires": [
+            [
+                "f75c74d2a5c10bdc"
+            ]
+        ]
+    },
+    {
+        "id": "60c2d2288ec6c75c",
+        "type": "function",
+        "z": "cebe0263a986f9c3",
+        "name": "query",
+        "func": "// var query =\"SELECT * FROM events ORDER BY event_id DESC LIMIT 1;\"\nvar query = \"SELECT event_id, platenumber, place, start_time, end_time, pigs_quantity, pigs_defect FROM events ORDER BY event_id DESC LIMIT 1;\"\nmsg.payload = query\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 300,
+        "wires": [
+            [
+                "6846d602d411c6fc"
+            ]
+        ]
+    },
+    {
+        "id": "a2bfd0a692f5ed74",
+        "type": "debug",
+        "z": "cebe0263a986f9c3",
+        "name": "debug 393",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f75c74d2a5c10bdc",
+        "type": "function",
+        "z": "cebe0263a986f9c3",
+        "name": "setCorrectData",
+        "func": "var data = msg.payload\n\nvar event_id = [];\nvar start_time = [];\nvar end_time = [];\nvar pigs_quantity = [];\nvar pigs_defect = [];\n// var platenumber = [];\nvar place = [];\n\nfunction addHours(hours, date = new Date()) {\n    if (typeof hours !== 'number') {\n        throw new Error('Invalid \"hours\" argument')\n    }\n    if (!(date instanceof Date)) {\n        throw new Error('Invalid \"date\" argument')\n    }\n    date.setHours(date.getHours() + hours)\n    return date\n}\n\nvar lgth_data = data.length\nfor(var i = 0; i < lgth_data;i++){\n    event_id.push(data[i]['event_id']);\n    start_time.push(new Date(addHours(3, data[i]['start_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));\n    if (data[i]['end_time'] == null) { end_time.push(\"Идет подсчет...\") }\n    else { end_time.push(new Date(addHours(3, data[i]['end_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16)); }\n    pigs_quantity.push(data[i]['pigs_quantity']);\n    pigs_defect.push(data[i]['pigs_defect']);\n    // platenumber.push(data[i]['platenumber']);\n    place.push(data[i]['place']); \n}\n\nvar table1_data = []\nfor(var i = 0; i < lgth_data;i++){\n    var tab = []\n    for (var j = 0; j < 1; j++) {\n        // tab.push(event_id[i].toString(), platenumber[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString(), pigs_defect[i].toString())\n        tab.push(event_id[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString(), pigs_defect[i].toString())\n    }\n    table1_data.push(tab)\n}\n\n\n// var table2_data = []\n// for(var i = 0; i < lgth_data;i++){\n//     var tab = []\n//     for (var j = 0; j < 1; j++) {\n//         tab.push(start_time[i].toString(), end_time[i].toString(), platenumber[i].toString())\n//     }\n//     table2_data.push(tab)\n// }\n\n// var start_time = data.start_time\n// var end_time = data.end_time\n// var pigs_quantity = data.pigs_quantity\n\n\nmsg.payload = table1_data\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 300,
+        "wires": [
+            [
+                "af203523bc9fce36",
+                "a2bfd0a692f5ed74"
+            ]
+        ]
+    },
+    {
+        "id": "e1b71e88ae89ce2b",
+        "type": "function",
+        "z": "cebe0263a986f9c3",
+        "name": "function 79",
+        "func": "var arr =[\n    [\"2025-01-21 02:53\", \"2025-01-21 02:55\", \"a123ks13\"], \n    [\"2025-01-21 02:56\", \"2025-01-21 02:57\", \"a123nr13\"], \n    [\"2025-01-21 02:59\", \"2025-01-21 03:00\", \"a123bc13\"]\n]\nmsg.payload = arr;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fcab92f3ca3d0281",
+        "type": "function",
+        "z": "cebe0263a986f9c3",
+        "name": "function 80",
+        "func": "function getRandomSeries(len){\n    var alphabet = \"ABEKMHOPCTYX\";\n    // var alphabet = \"авекмнорстух\"\n    var series = \"\";\n    while (series.length < len) {\n        series += alphabet[Math.floor(Math.random() * alphabet.length)];\n    }\n    return series\n}\nvar random_platenumber = \"\" + getRandomSeries(1) + Math.floor((Math.random() * 999) + 1).toString().padStart(3, '0')  + getRandomSeries(2) + \"13\"\nvar random_place = \"Пандус \" + Math.floor((Math.random() * 2) + 1)\nvar d = new Date()\nd.setHours(d.getHours() + Math.floor((Math.random() * 23) + 1))\nd.setMinutes(d.getMinutes() + Math.floor((Math.random() * 59) + 1))\nvar startTimeStr = d.toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 19);\nd.setMinutes(d.getMinutes() + Math.floor((Math.random() * 40) + 10))\nvar endTimeStr = d.toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 19);;\n// var endTimeStr = null;\nvar pigs_quantity = Math.floor((Math.random() * 100) + 1)\nvar pigs_defect = Math.floor((Math.random() * 10) + 1)\n// msg.payload = [startTimeStr, endTimeStr]\n// return msg;\nvar k = \"INSERT INTO events (platenumber, place, start_time, end_time, pigs_quantity, pigs_defect) VALUES ('\" \n    + random_platenumber + \"', '\" \n    + random_place + \"', '\"\n    // + startTimeStr + \"', \" \n    // + endTimeStr + \", '\" \n    + startTimeStr + \"', '\"\n    + endTimeStr + \"', '\" \n    + pigs_quantity + \"', '\"\n    + pigs_defect + \"')\";\n\nmsg.payload = k\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 400,
+        "wires": [
+            [
+                "8b188dc8e00b5fbd"
+            ]
+        ]
+    },
+    {
+        "id": "8b188dc8e00b5fbd",
+        "type": "postgres",
+        "z": "cebe0263a986f9c3",
+        "postgresdb": "184e08d38ff3c438",
+        "name": "",
+        "output": true,
+        "perrow": false,
+        "rowspermsg": "1",
+        "return_on_error": false,
+        "limit_queries": "0",
+        "limit_by": "payload",
+        "limit_value": "1",
+        "limit_drop_intermediate": false,
+        "limit_drop_if_in_queue": false,
+        "outputs": true,
+        "x": 440,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "78c7c0ec4c05b764",
+        "type": "inject",
+        "z": "cebe0263a986f9c3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 400,
+        "wires": [
+            [
+                "fcab92f3ca3d0281"
+            ]
+        ]
+    },
+    {
+        "id": "d78bcdef6b919625",
+        "type": "inject",
+        "z": "cebe0263a986f9c3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "0.6",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 260,
+        "wires": [
+            [
+                "60c2d2288ec6c75c"
+            ]
+        ]
+    },
+    {
+        "id": "dd27f90a7a45007c",
+        "type": "function",
+        "z": "cebe0263a986f9c3",
+        "name": "function 87",
+        "func": "function getRandomSeries(len){\n    var alphabet = \"ABEKMHOPCTYX\";\n    // var alphabet = \"авекмнорстух\"\n    var series = \"\";\n    while (series.length < len) {\n        series += alphabet[Math.floor(Math.random() * alphabet.length)];\n    }\n    return series\n}\nvar random_platenumber = \"\" + getRandomSeries(1) + Math.floor((Math.random() * 999) + 1).toString().padStart(3, '0')  + getRandomSeries(2) + \"13\"\nvar random_place = \"Пандус \" + Math.floor((Math.random() * 2) + 1)\nvar d = new Date()\nd.setHours(d.getHours() + Math.floor((Math.random() * 23) + 1))\nd.setMinutes(d.getMinutes() + Math.floor((Math.random() * 59) + 1))\nvar startTimeStr = d.toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 19);\nd.setMinutes(d.getMinutes() + Math.floor((Math.random() * 40) + 10))\n// var endTimeStr = d.toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 19);;\nvar endTimeStr = null;\nvar pigs_quantity = Math.floor((Math.random() * 100) + 1)\nvar pigs_defect = Math.floor((Math.random() * 10) + 1)\n// msg.payload = [startTimeStr, endTimeStr]\n// return msg;\nvar k = \"INSERT INTO events (platenumber, place, start_time, end_time, pigs_quantity, pigs_defect) VALUES ('\" \n    + random_platenumber + \"', '\" \n    + random_place + \"', '\"\n    + startTimeStr + \"', \" \n    + endTimeStr + \", '\" \n    + pigs_quantity + \"', '\"\n    + pigs_defect + \"')\";\n\nmsg.payload = k\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 480,
+        "wires": [
+            [
+                "4dbcf73a55092ff5"
+            ]
+        ]
+    },
+    {
+        "id": "4dbcf73a55092ff5",
+        "type": "postgres",
+        "z": "cebe0263a986f9c3",
+        "postgresdb": "184e08d38ff3c438",
+        "name": "",
+        "output": true,
+        "perrow": false,
+        "rowspermsg": "1",
+        "return_on_error": false,
+        "limit_queries": "0",
+        "limit_by": "payload",
+        "limit_value": "1",
+        "limit_drop_intermediate": false,
+        "limit_drop_if_in_queue": false,
+        "outputs": true,
+        "x": 440,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3e53f30e53e4ef69",
+        "type": "inject",
+        "z": "cebe0263a986f9c3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 480,
+        "wires": [
+            [
+                "dd27f90a7a45007c"
+            ]
+        ]
+    },
+    {
+        "id": "cf1e39c48b37a32d",
+        "type": "comment",
+        "z": "cebe0263a986f9c3",
+        "name": "Генерация данных в БД без end_time  NULL",
+        "info": "Генерация данных в БД без end_time  NULL",
+        "x": 190,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "036f92c7e17ba0f5",
+        "type": "comment",
+        "z": "cebe0263a986f9c3",
+        "name": "Генерация данных в БД c end_time NULL",
+        "info": "Генерация данных в БД c end_time NULL",
+        "x": 180,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "af203523bc9fce36",
+        "type": "ui_template",
+        "z": "cebe0263a986f9c3",
+        "group": "b609199da19ad8a0",
+        "name": "ReportTable",
+        "order": 16,
+        "width": 24,
+        "height": 3,
+        "format": "\n<style>\n    #table2, #table2 td{\n        font-family:'Courier New', monospace;\n        height: 40px;\n        font-size: 16px;\n        padding-left: 10px;\n        border: 1px solid black;\n        border-collapse: collapse;\n    }\n    .scroll-table-body {\n        font-family:'Courier New', monospace;\n        height: 50px; \n        overflow-x: auto;\n        overflow-y: auto;\n        table-layout: fixed;\n        /* margin-top: 0px;\n        margin-bottom: 20px;\n        border-bottom: 1px solid #eee; --> */\n    }\n    ::-webkit-scrollbar {\n        display: none;\n        /* width: 11px; */\n    }\n    ::-webkit-scrollbar-track {\n        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n    }\n    ::-webkit-scrollbar-thumb {\n        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n    }\n    .scroll-table-head table {\n        font-family:'Courier New', monospace;\n        font-size: 18px;\n        width:100%;\n        table-layout: fixed;\n        border: none;\n    }\n    .scroll-table thead th {\n        font-family:'Courier New', monospace;\n        font-weight: bold;  \n        text-align: left;\n        border: none;\n        padding: 10px 15px;\n        background: #d8d8d8;\n        font-size: 18px;\n        border-left: 1px solid #ddd;\n        border-right: 1px solid #ddd;\n    }\n    .scroll-table tbody td {\n        font-family:'Courier New', monospace;\n        width:101%;\n        text-align: left;\n        border-left: 1px solid #ddd;\n        border-right: 1px solid #ddd;\n        padding: 10px 15px;\n        font-size: 14px;\n        vertical-align: top;\n        \n    }\n    th, td{      \n        font-size: 16px;\n        heigth: 48px;\n        /* width: 170px; */\n        font-weight: normal;\n    }\n</style>\n\n<div class=\"scroll-table-head\">\n    <table id=\"table\" style=\"border: 1px solid black; border-collapse: collapse;\">\n        <thead>\n            <tr style=\"border: 1px solid black; border-collapse: collapse;\">\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Номер разгрузки</th>\n                <!-- <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Фото госномера прицепа а/м</th> -->\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Место разгрузки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Дата/время начала приемки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Дата/время окончания приемки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Количество принятых животных</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Cанитарный брак</th>\n            </tr>\n        </thead>\n    </table>\n    <div class=\"scroll-table-body\"> \n        <table id=\"table2\" style=\"border: 1px solid black; border-collapse: collapse;\">\n            <!-- <tbody style=\"\">\n                <tr ng-repeat=\"row in msg.payload[0]\" style=\"height:48px; border: 1px solid black; border-collapse: collapse;\">\n                    <td ng-repeat=\"item in row\" style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px;\">{{item}}</td>\n                </tr>\n            </tbody> -->\n            <!-- <tbody>\n                <tr ng-repeat=\"row in msg.payload\" style=\"height:48px; border: 3px solid gray; border-collapse: collapse;\">\n                    <td ng-repeat=\"item in row\" style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px;\">\n                        {{item}}</td>\n                </tr>\n            </tbody> -->\n            <tbody></tbody>\n        </table>\n        <script>\n            (function(scope) {\n                scope.$watch('msg.payload', function(newVal){\n                    if (newVal && Array.isArray(newVal)) {\n                        createTableFromArray(newVal);\n                    }\n                });\n                function createTableFromArray(data) {\n                    const tableBody = document.getElementById(\"table2\").getElementsByTagName('tbody')[0];\n                    \n                    // Очищаем таблицу перед добавлением новых данных (если нужно)\n                    tableBody.innerHTML = \"\";\n                    \n                    // Проходим по каждому элементу массива и создаем строки таблицы\n                    data.forEach(item => {\n                        const newRow = tableBody.insertRow();\n                        \n                        const cell1 = newRow.insertCell(0);\n                        const cell2 = newRow.insertCell(1);\n                        const cell3 = newRow.insertCell(2);\n                        const cell4 = newRow.insertCell(3);\n                        const cell5 = newRow.insertCell(4);\n                        const cell6 = newRow.insertCell(5);\n                        // const cell7 = newRow.insertCell(6);\n                        cell1.textContent = item[0];\n                        cell2.textContent = item[1];\n                        cell3.textContent = item[2];\n                        cell4.textContent = item[3];\n                        cell5.textContent = item[4];\n                        cell6.textContent = item[5];\n                        // cell7.textContent = item[6];                        \n                        // cell1.textContent = item.event_id;\n                        // cell2.textContent = item.platenumber;\n                        // cell3.textContent = item.place;\n                        // cell4.textContent = item.start_time;\n                        // cell5.textContent = item.end_time;\n                        // cell6.textContent = item.pigs_quantity;\n                        // cell7.textContent = item.pigs_defect;\n                    });\n                }\n            })(scope);\n        \n        \n            // Функция для создания таблицы из массива данных\n            // function createTableFromArray(data) {\n            //     const tableBody = document.getElementById(\"dynamicTable\").getElementsByTagName('tbody')[0];\n        \n            //     // Очищаем таблицу перед добавлением новых данных (если нужно)\n            //     tableBody.innerHTML = \"\";\n        \n            //     // Проходим по каждому элементу массива и создаем строки таблицы\n            //     data.forEach(item => {\n            //         const newRow = tableBody.insertRow();\n        \n            //         const cell1 = newRow.insertCell(0);\n            //         const cell2 = newRow.insertCell(1);\n            //         const cell3 = newRow.insertCell(2);\n            //         const cell4 = newRow.insertCell(3);\n            //         const cell5 = newRow.insertCell(4);\n            //         const cell6 = newRow.insertCell(5);\n            //         const cell7 = newRow.insertCell(6);\n        \n            //         cell1.textContent = item.event_id;\n            //         cell2.textContent = item.platenumber;\n            //         cell3.textContent = item.place;\n            //         cell4.textContent = item.start_time;\n            //         cell5.textContent = item.end_time;\n            //         cell6.textContent = item.pigs_quantity;\n            //         cell7.textContent = item.pigs_defect;\n            //     });\n            // }\n        \n            // // Вызываем функцию для создания таблицы\n            // createTableFromArray({{msg.payload[0]}});\n        </script>\n    </div>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 750,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    }
+]
