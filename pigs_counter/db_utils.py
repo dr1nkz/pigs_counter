@@ -145,7 +145,7 @@ def delete_event_data(start_time: str):
             DELETE FROM events WHERE start_time = %s;
         """
 
-        cursor.execute(query, (start_time))
+        cursor.execute(query, (start_time,))
 
         # Сохранить изменения и закрыть соединение
         connection.commit()
