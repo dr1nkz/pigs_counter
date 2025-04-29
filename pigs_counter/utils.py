@@ -144,12 +144,12 @@ def get_labelmap():
 
 def count_states(states, check_value):
     count = 0
-    # print(states.values())
     for state in states.values():
-        bool_values = [x for x in state if isinstance(
-            x, bool)]  # Оставляем только True / False
-        # print(bool_values)
-        if bool_values.count(check_value) >= 2:
+        bool_values = [x for x in state if isinstance(x, bool)]
+        if not bool_values:
+            continue  # Пропускаем, если нет булевых значений
+        check_amount = 1 if len(bool_values) == 1 else len(bool_values) - 1
+        if bool_values.count(check_value) >= check_amount:
             count += 1
     return count
 
