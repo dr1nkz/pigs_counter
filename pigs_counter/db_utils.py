@@ -159,3 +159,51 @@ def delete_event_data(start_time: str):
     finally:
         if 'connection' in locals() and connection:
             connection.close()
+
+
+def get_event_id_by_start_time(start_time: str):
+    """
+    Update event data
+
+    :start_time: float - start time of event
+    """
+
+    try:
+        # Установить соединение
+        connection = psycopg2.connect(
+            host=HOST,
+            port=PORT,
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
+        )
+
+        cursor = connection.cursor()
+        # Получение данных
+        query = """
+            SELECT event_id FROM events WHERE start_time = %s;
+        """
+
+        cursor.execute(
+            query, (start_time,))
+
+        # Сохранить изменения и закрыть соединение
+        result = cursor.fetchone()
+        connection.commit()
+        cursor.close()
+
+        if result:
+            # предполагаем, что event_id — целое число
+            event_id = str(result[0])
+        else:
+            event_id = '0'
+        return event_id
+
+    except Exception as e:
+        print(f"Ошибка подключения")
+        return '0'
+
+    finally:
+        if 'connection' in locals() and connection:
+            connection.close()
+        return '0'

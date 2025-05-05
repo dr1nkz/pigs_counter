@@ -11,7 +11,12 @@ import numpy as np
 import torch
 
 from detector import YOLOv8, Detections
-from db_utils import insert_event_data, update_event_data, delete_event_data
+from db_utils import (
+    insert_event_data,
+    update_event_data,
+    delete_event_data,
+    get_event_id_by_start_time
+)
 from utils import is_cross_of_line, print_log, count_states
 from camera_thread import CameraThread
 
@@ -418,8 +423,9 @@ def count_pigs(address):
                 out.release()
                 out = None
                 end_time_hms = end_time.strftime(r'%H.%M.%S')
+                event_id = get_event_id_by_start_time(start_time_str)
                 filepath_end = (
-                    f'{directory}/.{start_time_dmy} {start_time_hms}-{end_time_hms}.mp4')
+                    f'{directory}/.{event_id} {start_time_dmy} {start_time_hms}-{end_time_hms}.mp4')
                 if os.path.isfile(filepath):
                     os.rename(filepath, filepath_end)
                 # Reset variables
