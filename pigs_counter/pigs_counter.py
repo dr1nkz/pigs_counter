@@ -27,9 +27,9 @@ END_DELAY = int(os.getenv('END_DELAY'))
 ALLOWED_ZONE = np.array([[985, 500], [1378, 540], [1380, 842], [749, 783]])
 # ALLOWED_ZONE = np.array([[1378, 704], [1931, 760], [1934, 1186], [1048, 1102]])
 LINE_COORDINATES = (
-    ((1166, 0), (1062, 1080)),
-    ((1372, 0), (1283, 1080)),
-    ((1582, 0), (1523, 1080))
+    # ((1266, 0), (1162, 1080)),
+    ((1472, 0), (1383, 1080)),
+    # ((1682, 0), (1623, 1080))
 )
 # LINE_COORDINATES = (
 #     ((666, 0), (562, 1080)),
@@ -327,7 +327,8 @@ def count_pigs(address):
                 for tracker_id in coordinates.keys():
                     if len(coordinates[tracker_id]) == coordinates[tracker_id].maxlen:
                         if pigs_states.get(tracker_id) is None:
-                            pigs_states[tracker_id] = [None] * 3
+                            pigs_states[tracker_id] = [
+                                None] * len(LINE_COORDINATES)
                         for id, line_coordinate in enumerate(LINE_COORDINATES):
                             previous_cross = is_cross_of_line(
                                 coordinates[tracker_id][0], line_coordinate)
@@ -342,7 +343,8 @@ def count_pigs(address):
                                 if previous_cross and current_cross:
                                     pigs_states[tracker_id][id] = True
                                 elif not previous_cross and not current_cross:
-                                    pigs_states[tracker_id][id] = False
+                                    pigs_states[tracker_id][id] = 'undefined'
+                                    # pigs_states[tracker_id][id] = False
 
                 count_true = count_states(pigs_states, True)
                 count_false = count_states(pigs_states, False)
@@ -417,7 +419,7 @@ def count_pigs(address):
                 out = None
                 end_time_hms = end_time.strftime(r'%H.%M.%S')
                 filepath_end = (
-                    f'{directory}/.{start_time_hms}-{end_time_hms}.mp4')
+                    f'{directory}/.{start_time_dmy} {start_time_hms}-{end_time_hms}.mp4')
                 if os.path.isfile(filepath):
                     os.rename(filepath, filepath_end)
                 # Reset variables
