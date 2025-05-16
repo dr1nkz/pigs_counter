@@ -346,14 +346,15 @@ def count_pigs(address):
                                 pigs_states[tracker_id][id] = 'undefined'
                             elif pigs_states.get(tracker_id)[id] == 'undefined':
                                 if previous_cross and current_cross:
+                                    pigs_counter += 1
                                     pigs_states[tracker_id][id] = True
                                 elif not previous_cross and not current_cross:
-                                    pigs_states[tracker_id][id] = 'undefined'
-                                    # pigs_states[tracker_id][id] = False
+                                    pigs_counter -= 1
+                                    pigs_states[tracker_id][id] = False
 
-                count_true = count_states(pigs_states, True)
-                count_false = count_states(pigs_states, False)
-                pigs_counter = count_true - count_false
+                # count_true = count_states(pigs_states, True)
+                # count_false = count_states(pigs_states, False)
+                # pigs_counter = count_true - count_false
                 pigs_counter = pigs_counter if pigs_counter >= 0 else 0
                 update_event_data(pigs_counter, 0, start_time_str)
 
@@ -387,11 +388,11 @@ def count_pigs(address):
                     # cv2.putText(detected_img, f'{pigs_states.get(tracker_id)}', (x, y), font,
                     #             fontScale, (255, 0, 0), thickness, cv2.LINE_AA)
 
-                    # counter on the frame
-                    cv2.rectangle(detected_img, (50, 70), (220, 170),
-                                  background_color, thickness=cv2.FILLED)
-                    cv2.putText(detected_img, f'{pigs_counter}', (50, 150), font,
-                                fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
+                # counter on the frame
+                cv2.rectangle(detected_img, (50, 70), (220, 170),
+                                background_color, thickness=cv2.FILLED)
+                cv2.putText(detected_img, f'{pigs_counter}', (50, 150), font,
+                            fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
                 empty_rate_pigs = after_event_delay_pigs.count(
                     1) / len(after_event_delay_pigs)
@@ -425,7 +426,7 @@ def count_pigs(address):
                 end_time_hms = end_time.strftime(r'%H.%M.%S')
                 event_id = get_event_id_by_start_time(start_time_str)
                 filepath_end = (
-                    f'{directory}/.{event_id} {start_time_dmy} {start_time_hms}-{end_time_hms}.mp4')
+                    f'{directory}/.{start_time_dmy} {start_time_hms}-{end_time_hms}.mp4')
                 if os.path.isfile(filepath):
                     os.rename(filepath, filepath_end)
                 # Reset variables
@@ -445,12 +446,6 @@ def count_pigs(address):
                 fontScale = 1  # fontScale
                 thickness = 2  # Line thickness of 2 px
                 background_color = (254, 254, 254)
-
-                # consecutive and counter on the frame
-                cv2.rectangle(detected_img, (width1 - 270, 70), (width1 - 50, 170),
-                              background_color, thickness=cv2.FILLED)
-                # cv2.putText(detected_img, f'{(consecutive_end_pigs / fps):.1f}s', (width1 - 270, 150), font,
-                #             fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
             if detected_img is None or detected_img_ladder is None:
                 print(
