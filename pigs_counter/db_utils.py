@@ -1,15 +1,18 @@
 import psycopg2
 from datetime import datetime
 import json
+import os
+from dotenv import load_dotenv
 
 
 from utils import print_log
 
 
 # Параметры подключения
-HOST = "172.26.0.4"              # Имя сервиса PostgreSQL
-PORT = 5432                      # Порт PostgreSQL
-DB_NAME = "postgres_db"           # Имя базы данных
+load_dotenv()
+DB_HOST = os.getenv('DB_HOST')      # Имя сервиса PostgreSQL
+PORT = 5432                         # Порт PostgreSQL
+DB_NAME = "postgres_db"             # Имя базы данных
 DB_USER = "postgres_user"           # Пользователь PostgreSQL
 DB_PASSWORD = "postgres_password"   # Пароль PostgreSQL
 
@@ -29,7 +32,7 @@ def insert_event_data(platenumber: str, place: str, start_time: str, pigs_quanti
     try:
         # Установить соединение
         connection = psycopg2.connect(
-            host=HOST,
+            host=DB_HOST,
             port=PORT,
             dbname=DB_NAME,
             user=DB_USER,
@@ -75,7 +78,7 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str, end
     try:
         # Установить соединение
         connection = psycopg2.connect(
-            host=HOST,
+            host=DB_HOST,
             port=PORT,
             dbname=DB_NAME,
             user=DB_USER,
@@ -132,7 +135,7 @@ def delete_event_data(start_time: str):
     try:
         # Установить соединение
         connection = psycopg2.connect(
-            host=HOST,
+            host=DB_HOST,
             port=PORT,
             dbname=DB_NAME,
             user=DB_USER,
@@ -171,7 +174,7 @@ def get_event_id_by_start_time(start_time: str):
     try:
         # Установить соединение
         connection = psycopg2.connect(
-            host=HOST,
+            host=DB_HOST,
             port=PORT,
             dbname=DB_NAME,
             user=DB_USER,
