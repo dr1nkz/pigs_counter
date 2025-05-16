@@ -2,6 +2,7 @@ import numpy as np
 from shapely.geometry import Polygon
 import os
 from dotenv import load_dotenv
+from datetime import datetime
 
 
 load_dotenv()
@@ -139,3 +140,21 @@ def get_labelmap():
         print(f'No labelmap on \'{LABELMAP_PATH}\' found')
         labelmap = None
     return labelmap
+
+
+def count_states(states, check_value):
+    count = 0
+    for state in states.values():
+        bool_values = [x for x in state if isinstance(x, bool)]
+        if not bool_values:
+            continue  # Пропускаем, если нет булевых значений
+        check_amount = 1 if len(bool_values) == 1 else len(bool_values) - 1
+        if bool_values.count(check_value) >= check_amount:
+            count += 1
+    return count
+
+
+def print_log(log_string: str):
+    with open('/pigs_counter/log.log', 'a+') as log:
+        time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
+        log.write(f'{time_str} - {log_string}\n')

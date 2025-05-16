@@ -94,8 +94,8 @@ services:
   cron:
     container_name: cron
     image: 'justb4/cron:latest'
-    #environment:
-    #  - 'CRON_STRINGS=0 * * * * /cron_scripts/delete_old_files.sh'
+    environment:
+      - CRON_STRINGS=0 1 * * * /cron_scripts/delete_old_files.sh
     volumes:
       - ./cron_scripts:/cron_scripts
       - /var/run/docker.sock:/var/run/docker.sock:ro
