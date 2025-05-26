@@ -17,7 +17,12 @@ from db_utils import (
     delete_event_data,
     get_event_id_by_start_time
 )
-from utils import is_cross_of_line, print_log, count_states
+from utils import (
+    is_cross_of_line,
+    print_log,
+    count_states,
+    count_states_single_state
+)
 from camera_thread import CameraThread
 
 
@@ -32,9 +37,9 @@ END_DELAY = int(os.getenv('END_DELAY'))
 ALLOWED_ZONE = np.array([[985, 500], [1378, 540], [1380, 842], [749, 783]])
 # ALLOWED_ZONE = np.array([[1378, 704], [1931, 760], [1934, 1186], [1048, 1102]])
 LINE_COORDINATES = (
-    # ((1266, 0), (1162, 1080)),
+    ((1266, 0), (1162, 1080)),
     ((1472, 0), (1383, 1080)),
-    # ((1682, 0), (1623, 1080))
+    ((1682, 0), (1623, 1080))
 )
 # LINE_COORDINATES = (
 #     ((666, 0), (562, 1080)),
@@ -346,11 +351,13 @@ def count_pigs(address):
                                 pigs_states[tracker_id][id] = 'undefined'
                             elif pigs_states.get(tracker_id)[id] == 'undefined':
                                 if previous_cross and current_cross:
-                                    pigs_counter += 1
                                     pigs_states[tracker_id][id] = True
+                                    if count_states_single_state(pigs_states[tracker_id], True) == len(LINE_COORDINATES) - 1:
+                                        pigs_counter += 1
                                 elif not previous_cross and not current_cross:
-                                    pigs_counter -= 1
                                     pigs_states[tracker_id][id] = False
+                                    if count_states_single_state(pigs_states[tracker_id], False) == len(LINE_COORDINATES) - 1:
+                                        pigs_counter -= 1
 
                 # count_true = count_states(pigs_states, True)
                 # count_false = count_states(pigs_states, False)
@@ -390,7 +397,7 @@ def count_pigs(address):
 
                 # counter on the frame
                 cv2.rectangle(detected_img, (50, 70), (220, 170),
-                                background_color, thickness=cv2.FILLED)
+                              background_color, thickness=cv2.FILLED)
                 cv2.putText(detected_img, f'{pigs_counter}', (50, 150), font,
                             fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
