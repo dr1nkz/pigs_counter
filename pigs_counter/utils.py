@@ -154,6 +154,13 @@ def count_states(states, check_value):
     return count
 
 
+def count_states_single_state(states, check_value):
+    count = False
+    bool_values = [x for x in states if isinstance(x, bool)]
+    count = bool_values.count(check_value)
+    return count
+
+
 def print_log(log_string: str):
     with open('/pigs_counter/log.log', 'a+') as log:
         time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
