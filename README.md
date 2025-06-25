@@ -13,6 +13,6 @@ paths:
     source: LADDER_CAM_ADDRESS
 ```
 ### Run the app
-```
+```bash
 docker compose up -d
 ```
