@@ -56,7 +56,7 @@ def insert_event_data(platenumber: str, place: str, start_time: str, pigs_quanti
         print(f"Данные события {event_id} успешно добавлены в таблицу events")
 
     except Exception as e:
-        print(f"Ошибка подключения: {event_id}")
+        print(f"Ошибка подключения: {e}")
 
     finally:
         if 'connection' in locals() and connection:
@@ -118,7 +118,7 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str, end
         # print(f"Данные события {event_id} успешно обновлены")
 
     except Exception as e:
-        print(f"Ошибка подключения: {event_id}")
+        print(f"Ошибка подключения: {e}")
 
     finally:
         if 'connection' in locals() and connection:
@@ -157,7 +157,7 @@ def delete_event_data(start_time: str):
 
     except Exception as e:
         print(f"Ошибка подключения")
-        print_log(f'Ошибка подключения \'{start_time}\'')
+        print_log(f'Ошибка подключения {e}')
 
     finally:
         if 'connection' in locals() and connection:
@@ -203,7 +203,7 @@ def get_event_id_by_start_time(start_time: str):
         return event_id
 
     except Exception as e:
-        print(f"Ошибка подключения")
+        print(f"Ошибка подключения {e}")
         return '0'
 
     finally:
