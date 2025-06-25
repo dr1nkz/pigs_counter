@@ -199,7 +199,7 @@ class YOLOv8:
                           background_color, thickness=cv2.FILLED)
 
             # Using cv2.putText() method
-            cv2.putText(image, caption, (x_1 + 70, y_1 - 4 * thickness),
+            cv2.putText(image, caption, (x_1 + 140, y_1 - 4 * thickness),
                         font, fontScale, color, thickness, cv2.LINE_AA)
 
         return image
