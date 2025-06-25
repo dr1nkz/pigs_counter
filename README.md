@@ -7,7 +7,6 @@ set the **LADDER_CAM_ADDRESS** to rtsp://**host_ip**:8554/ladder_cam<br/>
 ### Set the address of cameras in **mediamtx/mediamtx.yml** file as follows
 ```yaml
 paths:
-  # example:
   cam:
     source: CAM_ADDRESS
   ladder_cam:
