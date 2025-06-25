@@ -37,9 +37,9 @@ END_DELAY = int(os.getenv('END_DELAY'))
 ALLOWED_ZONE = np.array([[985, 500], [1378, 540], [1380, 842], [749, 783]])
 # ALLOWED_ZONE = np.array([[1378, 704], [1931, 760], [1934, 1186], [1048, 1102]])
 LINE_COORDINATES = (
-    ((1266, 0), (1162, 1080)),
-    ((1472, 0), (1383, 1080)),
-    ((1682, 0), (1623, 1080))
+    ((500, 0), (400, 1080)),
+    ((1000, 0), (900, 1080)),
+    ((1500, 0), (1400, 1080))
 )
 # LINE_COORDINATES = (
 #     ((666, 0), (562, 1080)),
@@ -118,7 +118,8 @@ def count_pigs(address):
         pigs_states = defaultdict(list)
 
         # Counter of all pigs crossed the line
-        pigs_counter = 0
+        pigs_counter = [0] * len(LINE_COORDINATES)
+        result_counter = 0
 
         # Consecutive frames to start event
         consecutive_start_ladder = START_DELAY * fps
@@ -240,7 +241,7 @@ def count_pigs(address):
                     out = cv2.VideoWriter(
                         filepath, fourcc, fps, (target_width, target_height))
                     insert_event_data('A123BC13', 'Пандус 1',
-                                      start_time_str, pigs_counter, 0)
+                                      start_time_str, result_counter, 0)
 
                 detections = Detections(xyxy=bounding_boxes_pigs, confidence=scores,
                                         class_id=class_ids, tracker_id=[None] * len(bounding_boxes_pigs))
@@ -277,18 +278,19 @@ def count_pigs(address):
                             elif pigs_states.get(tracker_id)[id] == 'undefined':
                                 if previous_cross and current_cross:
                                     pigs_states[tracker_id][id] = True
-                                    if count_states_single_state(pigs_states[tracker_id], True) == len(LINE_COORDINATES) - 1:
-                                        pigs_counter += 1
+                                    # if count_states_single_state(pigs_states[tracker_id], True) == len(LINE_COORDINATES) - 1:
+                                    pigs_counter[id] += 1
                                 elif not previous_cross and not current_cross:
                                     pigs_states[tracker_id][id] = False
-                                    if count_states_single_state(pigs_states[tracker_id], False) == len(LINE_COORDINATES) - 1:
-                                        pigs_counter -= 1
+                                    # if count_states_single_state(pigs_states[tracker_id], False) == len(LINE_COORDINATES) - 1:
+                                    pigs_counter[id] -= 1
 
                 # count_true = count_states(pigs_states, True)
                 # count_false = count_states(pigs_states, False)
                 # pigs_counter = count_true - count_false
-                pigs_counter = pigs_counter if pigs_counter >= 0 else 0
-                update_event_data(pigs_counter, 0, start_time_str)
+                # pigs_counter = pigs_counter if pigs_counter >= 0 else 0
+                result_counter = int(np.average(pigs_counter))
+                update_event_data(result_counter, 0, start_time_str)
 
                 # Visual
                 line_color = (0, 0, 255)
@@ -321,10 +323,11 @@ def count_pigs(address):
                     #             fontScale, (255, 0, 0), thickness, cv2.LINE_AA)
 
                 # counter on the frame
-                cv2.rectangle(detected_img, (50, 70), (220, 170),
+                cv2.rectangle(detected_img, (50, 70), (560, 170),
                               background_color, thickness=cv2.FILLED)
-                cv2.putText(detected_img, f'{pigs_counter}', (50, 150), font,
-                            fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
+                for id, pig_counter in enumerate(pigs_counter):
+                    cv2.putText(detected_img, f'{pig_counter}', (50 + 170*id, 150), font,
+                                fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
                 empty_rate_pigs = after_event_delay_pigs.count(
                     1) / len(after_event_delay_pigs)
@@ -343,15 +346,15 @@ def count_pigs(address):
                     # and empty_rate_pigs >= 0.9 and after_event_delay_pigs_is_full
                     and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full
                     and empty_rate_pig_human_from_ladder >= 0.9 and after_event_delay_human_from_ladder_is_full):
-                print(f'Общее количество поросят: {pigs_counter}')
-                print_log(f'Общее количество поросят: {pigs_counter}')
+                print(f'Общее количество поросят: {result_counter}')
+                print_log(f'Общее количество поросят: {result_counter}')
                 end_time = datetime.now()
                 end_time_str = end_time.strftime(r'%Y-%m-%d %H:%M:%S')
-                if pigs_counter == 0:
+                if result_counter == 0:
                     delete_event_data(start_time_str)
                 else:
                     update_event_data(
-                        pigs_counter, 0, start_time_str, end_time_str)
+                        result_counter, 0, start_time_str, end_time_str)
                 # Release videowriter
                 out.release()
                 out = None
@@ -362,7 +365,7 @@ def count_pigs(address):
                 if os.path.isfile(filepath):
                     os.rename(filepath, filepath_end)
                 # Reset variables
-                pigs_counter = 0
+                pigs_counter = [0] * len(LINE_COORDINATES)
                 byte_track.reset()
                 coordinates.clear()
                 pigs_states.clear()
