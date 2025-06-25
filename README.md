@@ -16,3 +16,6 @@ paths:
 ```bash
 docker compose up -d
 ```
+## App
+the **UI** (nodered) is running on http://**host_ip**:1855/ui<br/>
+the **FILEBROWSER** is running on http://**host_ip**:80
