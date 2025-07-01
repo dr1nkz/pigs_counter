@@ -3,6 +3,7 @@ from shapely.geometry import Polygon
 import os
 from dotenv import load_dotenv
 from datetime import datetime
+from dataclasses import dataclass
 
 
 load_dotenv()
@@ -165,3 +166,18 @@ def print_log(log_string: str):
     with open('/pigs_counter/log.log', 'a+') as log:
         time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
         log.write(f'{time_str} - {log_string}\n')
+
+
+@dataclass
+class Detections:
+    xyxy: np.ndarray
+    confidence: np.ndarray
+    class_id: np.ndarray
+    tracker_id: np.ndarray
+
+    def __len__(self):
+        return len(self.class_id)
+
+    def __getitem__(self, index):
+        return Detections(xyxy=self.xyxy, confidence=self.confidence,
+                          class_id=self.class_id, tracker_id=self.tracker_id)
