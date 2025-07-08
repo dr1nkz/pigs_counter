@@ -11,6 +11,7 @@ import numpy as np
 import torch
 
 from detector import YOLOv8, Detections
+from detector_yolo_nas import YOLONASDetector
 from db_utils import (
     insert_event_data,
     update_event_data,
@@ -53,10 +54,13 @@ LINE_COORDINATES = (
 def count_pigs(address):
     """
     Запуск модели
-    """
-    pigs_detector = YOLOv8(path=MODEL_PATH,
-                           conf_thres=0.3,
-                           iou_thres=0.5)
+    # """
+    # pigs_detector = YOLOv8(path=MODEL_PATH,
+    #                        conf_thres=0.3,
+    #                        iou_thres=0.5)
+    pigs_detector = YOLONASDetector(path=MODEL_PATH,
+                                    conf_thres=0.3,
+                                    iou_thres=0.5)
     ladder_detector = YOLOv8(path=LADDER_MODEL_PATH,
                              conf_thres=0.3,
                              iou_thres=0.5)

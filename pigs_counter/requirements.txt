@@ -8,3 +8,5 @@ pyyaml
 shapely
 supervision
 psycopg2
+super-gradients
+torchinfo
