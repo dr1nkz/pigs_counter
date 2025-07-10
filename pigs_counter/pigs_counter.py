@@ -61,9 +61,12 @@ def count_pigs(address):
     pigs_detector = YOLONASDetector(path=MODEL_PATH,
                                     conf_thres=0.3,
                                     iou_thres=0.5)
-    ladder_detector = YOLOv8(path=LADDER_MODEL_PATH,
-                             conf_thres=0.3,
-                             iou_thres=0.5)
+    # ladder_detector = YOLOv8(path=LADDER_MODEL_PATH,
+    #                          conf_thres=0.3,
+    #                          iou_thres=0.5)
+    ladder_detector = YOLONASDetector(path=LADDER_MODEL_PATH,
+                                      conf_thres=0.3,
+                                      iou_thres=0.5)
 
     while (True):
         # cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
