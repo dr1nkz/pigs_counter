@@ -16,8 +16,8 @@ paths:
 Put the pigs model in **pigs_counter/pigs_yolo_nas_v1** and ladder_model in **pigs_counter/ladder_yolo_nas_v1**</br>
 Set the values in **pigs_counter/.env** as follows</br>
 ```
-MODEL_PATH = /pigs_counter/pigs_yolo_nas_v1/PIGS_YOLO_NAS_MODEL</br>
-LADDER_MODEL_PATH = /pigs_counter/ladder_yolo_nas_v1/LADDER_YOLO_NAS_MODEL</br>
+MODEL_PATH = /pigs_counter/pigs_yolo_nas_v1/PIGS_YOLO_NAS_MODEL
+LADDER_MODEL_PATH = /pigs_counter/ladder_yolo_nas_v1/LADDER_YOLO_NAS_MODEL
 ```
 ### Run the app
 ```bash
