@@ -12,18 +12,36 @@ class YOLONASDetector:
     Класс для работы с моделью YOLO-NAS (.pth) от SuperGradients
     """
 
-    def __init__(self, checkpoint_path, conf_thres=0.7, iou_thres=0.5, device=None):
+    def __init__(self, path, conf_thres=0.7, iou_thres=0.5, device=None):
         self.conf_threshold = conf_thres
         self.iou_threshold = iou_thres
+        self.path = path
         self.device = device or (
             "cuda" if torch.cuda.is_available() else "cpu")
         self.model = models.get(Models.YOLO_NAS_M,
-                                num_classes=1,
-                                checkpoint_path=checkpoint_path).to(self.device)
+                                num_classes=self._get_num_classes_from_ckpt(),
+                                checkpoint_path=path).to(self.device)
         self.model.eval()
+        self.boxes = []
+        self.scores = []
+        self.class_ids = []
 
     def __call__(self, image):
         return self.detect_objects(image)
+
+    def _get_num_classes_from_ckpt(self):
+        ckpt = torch.load(self.path, map_location='cpu')
+
+        if 'net' not in ckpt:
+            raise ValueError("Чекпойнт не содержит ключа 'net'")
+
+        state_dict = ckpt['net']  # теперь правильно
+
+        for key, value in state_dict.items():
+            if 'cls_pred.weight' in key:
+                return value.shape[0]  # <- число классов
+
+        raise ValueError("Не найден слой классификации в state_dict")
 
     def detect_objects(self, image):
         """
@@ -32,25 +50,30 @@ class YOLONASDetector:
         :return: boxes, scores, class_ids
         """
         img_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        predictions = self.model.predict(img_rgb, conf=self.conf_threshold)
-        # type: super_gradients.training.models.detection_predictions.DetectionPrediction
-        pred = predictions.prediction
+        results = self.model.predict(img_rgb, conf=self.conf_threshold)
+        pred = results.prediction
 
-        if pred.bboxes.shape[0] == 0:
+        if pred.bboxes_xyxy.shape[0] == 0:
+            self.boxes, self.scores, self.class_ids = [], [], []
             return [], [], []
 
-        boxes = pred.bboxes.cpu().numpy()  # xyxy
-        scores = pred.confidence.cpu().numpy()
-        class_ids = pred.labels.cpu().numpy()
+        boxes = pred.bboxes_xyxy  # (N, 4), уже в формате XYXY
+        scores = pred.confidence
+        class_ids = pred.labels
 
-        # NMS уже встроен в predict, но ты можешь применить свою nms:
         keep = nms(boxes, scores, self.iou_threshold)
-        return boxes[keep], scores[keep], class_ids[keep]
+        self.boxes = boxes[keep]
+        self.scores = scores[keep]
+        self.class_ids = class_ids[keep]
+
+        return boxes, scores, class_ids
 
     def draw_detections(self, image):
         """
         Рисование прямоугольников на изображении.
         """
+        if len(self.boxes) == 0:
+            return image
         classes = get_labelmap()
         class_names = list(classes.values())
         rng = np.random.default_rng(3)
@@ -77,15 +100,3 @@ class YOLONASDetector:
                         font, fontScale, color, thickness, cv2.LINE_AA)
 
         return image
-
-    def set_results(self, boxes, scores, class_ids):
-        self.boxes = boxes
-        self.scores = scores
-        self.class_ids = class_ids
-
-
-pigs_detector = YOLONASDetector(
-    checkpoint_path="checkpoints/test/average_model.pth",
-    conf_thres=0.3,
-    iou_thres=0.5
-)
