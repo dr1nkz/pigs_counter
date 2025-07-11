@@ -12,6 +12,11 @@ paths:
   ladder_cam:
     source: LADDER_CAM_ADDRESS
 ```
+If you want to stream video as camera, you need to comment the previous string in **mediamtx/mediamtx.yml** and use the  following **ffmpeg** commands</br>
+```bash
+ffmpeg -re -stream_loop -1 -i cam.mp4 -c:v copy -f rtsp rtsp://localhost:8554/cam
+ffmpeg -re -stream_loop -1 -i ladder_cam.mp4 -c:v copy -f rtsp rtsp://localhost:8554/ladder_cam
+```
 ### Set up the model
 Put the pigs model in **pigs_counter/pigs_yolo_nas_v1** and ladder_model in **pigs_counter/ladder_yolo_nas_v1**</br>
 Set the values in **pigs_counter/.env** as follows</br>
