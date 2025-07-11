@@ -12,7 +12,7 @@ paths:
   ladder_cam:
     source: LADDER_CAM_ADDRESS
 ```
-If you want to stream video as camera, you need to comment the previous string in **mediamtx/mediamtx.yml** and use the  following **ffmpeg** commands</br>
+If you want to stream video as camera, you need to comment the previous strings in **mediamtx/mediamtx.yml** and use the  following **ffmpeg** commands</br>
 ```bash
 ffmpeg -re -stream_loop -1 -i cam.mp4 -c:v copy -f rtsp rtsp://localhost:8554/cam
 ffmpeg -re -stream_loop -1 -i ladder_cam.mp4 -c:v copy -f rtsp rtsp://localhost:8554/ladder_cam
