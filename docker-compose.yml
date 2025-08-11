@@ -11,6 +11,7 @@ services:
       - /etc/localtime:/etc/localtime
       - ./pigs_counter:/pigs_counter
       - /data/videos:/videos
+      - /archive/videos:/archive
     deploy:
       resources:
         reservations:
@@ -28,8 +29,11 @@ services:
     image: bluenviron/mediamtx:latest-ffmpeg
     environment:
       - RTSP_PROTOCOLS=tcp
+      - TZ="Europe/Moscow"
     volumes:
       - ./mediamtx/mediamtx.yml:/mediamtx.yml
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     #ports:
     #  - 8189:8189
     #  - 8889:8889/udp
@@ -106,7 +110,8 @@ services:
     restart: unless-stopped
     image: filebrowser/filebrowser
     volumes:
-      - /data/videos:/srv
+      - /data/videos/:/srv/data
+      - /archive/videos/:/srv/archive
       - ./filebrowser/filebrowser.db:/database.db
     ports:
       - 80:80
