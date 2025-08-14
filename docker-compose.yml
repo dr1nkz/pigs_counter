@@ -23,6 +23,20 @@ services:
       network_pigs_counter:
         ipv4_address: 172.26.0.1
 
+  rfid:
+    container_name: rfid
+    # restart: unless-stopped
+    build: ./rfid
+    # environment:
+    #   - PYTHONPATH=""
+    command: [ "python3", "rfid_serial.py" ]
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./rfid:/rfid
+    networks:
+      network_pigs_counter:
+        ipv4_address: 172.26.0.6
+
   mediamtx:
     platform: linux/amd64
     container_name: mediamtx-server
@@ -41,9 +55,9 @@ services:
     #  - 8554:8554
     restart: unless-stopped
     network_mode: "host"
-    #networks:
-    #  network_pigs_counter:
-    #    ipv4_address: 172.26.0.2
+  #networks:
+  #  network_pigs_counter:
+  #    ipv4_address: 172.26.0.2
 
   nodered_pigs:
     container_name: nodered_pigs
@@ -78,12 +92,12 @@ services:
       - 5432:5432
     command: >
       postgres -c max_connections=1000
-               -c shared_buffers=256MB
-               -c effective_cache_size=768MB
-               -c maintenance_work_mem=64MB
-               -c checkpoint_completion_target=0.7
-               -c wal_buffers=16MB
-               -c default_statistics_target=100
+        -c shared_buffers=256MB
+        -c effective_cache_size=768MB
+        -c maintenance_work_mem=64MB
+        -c checkpoint_completion_target=0.7
+        -c wal_buffers=16MB
+        -c default_statistics_target=100
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres_user -d postgres_db" ]
       interval: 30s
@@ -106,6 +120,9 @@ services:
       - 8883:8883
     volumes:
       - ./nanomq/nanomq.conf:/etc/nanomq.conf
+    networks:
+      network_pigs_counter:
+        ipv4_address: 172.26.0.2
 
   cron:
     container_name: cron
