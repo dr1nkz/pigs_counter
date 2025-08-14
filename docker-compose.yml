@@ -95,6 +95,18 @@ services:
     networks:
       network_pigs_counter:
         ipv4_address: 172.26.0.4
+
+  nanomq:
+    image: emqx/nanomq:latest-slim
+    container_name: nanomq
+    restart: unless-stopped
+    ports:
+      - 1883:1883
+      - 8083:8083
+      - 8883:8883
+    volumes:
+      - ./nanomq/nanomq.conf:/etc/nanomq.conf
+
   cron:
     container_name: cron
     image: 'justb4/cron:latest'
