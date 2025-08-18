@@ -32,7 +32,7 @@ def connect_mqtt():
 
 def get_main_serial():
     return serial.Serial(port="/dev/ttyr00", baudrate=57600, parity=serial.PARITY_NONE,
-                         stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGH)
+                         stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=1)
 
 
 def get_all():
