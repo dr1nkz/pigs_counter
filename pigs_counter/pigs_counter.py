@@ -10,6 +10,7 @@ import supervision as sv
 import cv2
 import numpy as np
 import torch
+import paho.mqtt.client as mqtt
 
 from detector import YOLOv8, Detections
 from db_utils import (
@@ -37,6 +38,8 @@ START_DELAY = int(os.getenv('START_DELAY'))
 END_DELAY = int(os.getenv('END_DELAY'))
 LINE_COORDINATES = ast.literal_eval(os.getenv('LINE_COORDINATES'))
 ALLOWED_ZONE = ast.literal_eval(os.getenv('ALLOWED_ZONE'))
+MQTT_TOPIC = os.getenv('MQTT_TOPIC', 'python/mqtt')
+BROKER_HOST = os.getenv('BROKER_HOST', '192.168.1.116')
 
 
 def count_pigs(address):
@@ -67,6 +70,8 @@ def count_pigs(address):
         print_log(f'fps2: {fps2} width2: {width2} height2: {height2}')
 
         out = None
+        rfid_received_message = False
+        payload = None
         byte_track = sv.ByteTrack(frame_rate=fps,
                                   track_activation_threshold=0.25)
         coordinates = defaultdict(lambda: deque(maxlen=2))
@@ -308,8 +313,12 @@ def count_pigs(address):
                 if result_counter == 0:
                     delete_event_data(start_time_str)
                 else:
-                    update_event_data(
-                        result_counter, 0, start_time_str, end_time_str)
+                    if rfid_received_message:
+                        update_event_data(
+                            result_counter, 0, start_time_str, end_time_str, payload)
+                    else:
+                        update_event_data(
+                            result_counter, 0, start_time_str, end_time_str)
                 # Release videowriter
                 out.release()
                 out = None
@@ -331,6 +340,7 @@ def count_pigs(address):
                 after_event_delay_pig_human_from_ladder.clear()
                 after_event_delay_pig_human_from_ladder.append(0)
                 start_flag = False
+                rfid_received_message = False
             else:
                 font = cv2.FONT_HERSHEY_SIMPLEX  # font
                 fontScale = 1  # fontScale
@@ -361,5 +371,30 @@ def count_pigs(address):
         cam_ladder.stop()
 
 
+def on_connect(client, userdata, flags, reason_code, properties):
+    """
+    The callback for when the client receives a CONNACK response from the server.
+    """
+    print(f"Connected with result code {reason_code}")
+    # Subscribing in on_connect()
+    client.subscribe(MQTT_TOPIC)
+
+
+def on_message(client, userdata, msg):
+    """
+    The callback for when a PUBLISH message is received from the server.
+    """
+    if (msg.topic == MQTT_TOPIC):
+        print(msg.payload)
+    rfid_received_message = True
+    payload = msg.payload
+
+
 if __name__ == '__main__':
+    mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+    mqttc.on_connect = on_connect
+    mqttc.on_message = on_message
+    mqttc.connect(BROKER_HOST, 1883, 60)
+    mqttc.loop_start()
+
     count_pigs(CAM_ADDRESS)

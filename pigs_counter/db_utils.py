@@ -63,7 +63,8 @@ def insert_event_data(platenumber: str, place: str, start_time: str, pigs_quanti
             connection.close()
 
 
-def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str, end_time: str = 'NULL'):
+def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str,
+                      end_time: str = 'NULL', platenumber: str = 'NULL'):
     """
     Update event data
 
@@ -73,6 +74,7 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str, end
     :end_time: float - end time of event
     :pigs_quantity: int - quantity of pigs
     :pigs_defect: int - quantity of defect pigs
+    :platenumber: str - platenumber
     """
 
     try:
@@ -98,19 +100,34 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str, end
             cursor.execute(
                 query, (pigs_quantity, pigs_defect, start_time))
         else:
-            query = """
-                UPDATE events
-                SET end_time = %s, pigs_quantity = %s, pigs_defect = %s
-                WHERE start_time = %s;
-            """
+            if platenumber == 'NULL':
+                query = """
+                    UPDATE events
+                    SET end_time = %s, pigs_quantity = %s, pigs_defect = %s
+                    WHERE start_time = %s;
+                """
 
-            cursor.execute(
-                query, (end_time, pigs_quantity, pigs_defect, start_time))
-            print(f"Данные события {event_id} успешно обновлены")
-            with open('/pigs_counter/log.log', 'a+') as log:
-                time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
-                log.write(
-                    f'{time_str} - Данные события {event_id} успешно обновлены\n')
+                cursor.execute(
+                    query, (end_time, pigs_quantity, pigs_defect, start_time))
+                print(f"Данные события {event_id} успешно обновлены")
+                with open('/pigs_counter/log.log', 'a+') as log:
+                    time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
+                    log.write(
+                        f'{time_str} - Данные события {event_id} успешно обновлены\n')
+            else:
+                query = """
+                    UPDATE events
+                    SET end_time = %s, pigs_quantity = %s, pigs_defect = %s, platenumber = %s
+                    WHERE start_time = %s;
+                """
+
+                cursor.execute(
+                    query, (end_time, pigs_quantity, pigs_defect, platenumber, start_time))
+                print(f"Данные события {event_id} успешно обновлены")
+                with open('/pigs_counter/log.log', 'a+') as log:
+                    time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
+                    log.write(
+                        f'{time_str} - Данные события {event_id} успешно обновлены\n')
 
         # Сохранить изменения и закрыть соединение
         connection.commit()
