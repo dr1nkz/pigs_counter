@@ -1,12 +1,14 @@
-numpy==1.26
+# Основные зависимости
+# numpy==1.26.4
 python-dotenv
 opencv-python
-# torch==2.3.1
-# --extra-index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/
-# onnxruntime-gpu==1.18.0
 pyyaml
 shapely
-supervision
 psycopg2
-super-gradients
+
+# Используем последнюю версию super-gradients, где убрана зависимость от pycocotools
+super-gradients>=3.6.1
+
+# Другие зависимости
+supervision
 torchinfo
