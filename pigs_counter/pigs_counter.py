@@ -37,7 +37,7 @@ LADDER_MODEL_PATH = os.getenv('LADDER_MODEL_PATH')
 START_DELAY = int(os.getenv('START_DELAY'))
 END_DELAY = int(os.getenv('END_DELAY'))
 LINE_COORDINATES = ast.literal_eval(os.getenv('LINE_COORDINATES'))
-ALLOWED_ZONE = ast.literal_eval(os.getenv('ALLOWED_ZONE'))
+ALLOWED_ZONE = np.array(ast.literal_eval(os.getenv('ALLOWED_ZONE')))
 MQTT_TOPIC = os.getenv('MQTT_TOPIC', 'python/mqtt')
 BROKER_HOST = os.getenv('BROKER_HOST', '192.168.1.116')
 
