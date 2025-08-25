@@ -25,6 +25,7 @@ from utils import (
     count_states,
     count_states_single_state
 )
+from mqtt_notificator import send_mqtt_message
 from camera_thread import CameraThread
 
 
@@ -39,7 +40,7 @@ END_DELAY = int(os.getenv('END_DELAY'))
 LINE_COORDINATES = ast.literal_eval(os.getenv('LINE_COORDINATES'))
 ALLOWED_ZONE = np.array(ast.literal_eval(os.getenv('ALLOWED_ZONE')))
 MQTT_TOPIC = os.getenv('MQTT_TOPIC', 'python/mqtt')
-BROKER_HOST = os.getenv('BROKER_HOST', '192.168.1.116')
+BROKER_HOST = os.getenv('BROKER_HOST', 'nanomq')
 
 
 def count_pigs(address):
@@ -319,6 +320,8 @@ def count_pigs(address):
                     else:
                         update_event_data(
                             result_counter, 0, start_time_str, end_time_str)
+                    send_mqtt_message(
+                        result_counter, start_time_str, end_time_str, payload)
                 # Release videowriter
                 out.release()
                 out = None
@@ -341,6 +344,7 @@ def count_pigs(address):
                 after_event_delay_pig_human_from_ladder.append(0)
                 start_flag = False
                 rfid_received_message = False
+                send_mqtt_message()
             else:
                 font = cv2.FONT_HERSHEY_SIMPLEX  # font
                 fontScale = 1  # fontScale
