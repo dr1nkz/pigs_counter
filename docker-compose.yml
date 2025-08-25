@@ -33,6 +33,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime
       - ./rfid:/rfid
+    devices:
+      - /dev/ttyr00:/dev/ttyr00"
     networks:
       network_pigs_counter:
         ipv4_address: 172.26.0.6
