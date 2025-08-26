@@ -22,7 +22,7 @@ def send_mqtt_message(pigs_quantity: int, start_time: str, end_time: str, platen
     }
 
     # Отправляем в MQTT
-    client = mqtt.Client(callback_api_version=5)
+    client = mqtt.Client()
     client.connect(BROKER_HOST, MQTT_PORT, 60)
     try:
         client.publish(MQTT_NOTIFICATIONS_TOPIC, json.dumps(payload))
