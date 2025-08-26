@@ -6,3 +6,4 @@ nodered/.npm/_logs
 nodered/.DS_Store
 filebrowser.db
 *.pth
+*.log
