@@ -8,3 +8,4 @@ pyyaml
 shapely
 supervision
 psycopg2
+paho-mqtt==2.1.0
