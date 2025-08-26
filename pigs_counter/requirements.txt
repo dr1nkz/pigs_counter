@@ -12,3 +12,4 @@ super-gradients>=3.6.1
 # Другие зависимости
 supervision
 torchinfo
+paho-mqtt
