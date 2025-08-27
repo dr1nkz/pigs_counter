@@ -18,13 +18,26 @@ class YOLONASDetector:
         self.path = path
         self.device = device or (
             "cuda" if torch.cuda.is_available() else "cpu")
-        self.model = models.get(Models.YOLO_NAS_M,
-                                num_classes=self._get_num_classes_from_ckpt(),
-                                checkpoint_path=path).to(self.device)
+
+        # Загружаем модель
+        self.model = models.get(
+            Models.YOLO_NAS_M,
+            num_classes=self._get_num_classes_from_ckpt(),
+            checkpoint_path=path
+        ).to(self.device)
         self.model.eval()
-        self.boxes = []
-        self.scores = []
-        self.class_ids = []
+
+        # Попробуем достать имена классов из checkpoint
+        ckpt = torch.load(path, map_location='cpu')
+        if "classes" in ckpt:
+            # super_gradients обычно сохраняет dict {id: name}
+            self.class_names = list(ckpt["classes"].values())
+        else:
+            # если нет - сделаем просто numbered labels
+            num_classes = self._get_num_classes_from_ckpt()
+            self.class_names = [f"class_{i}" for i in range(num_classes)]
+
+        self.boxes, self.scores, self.class_ids = [], [], []
 
     def __call__(self, image):
         return self.detect_objects(image)
