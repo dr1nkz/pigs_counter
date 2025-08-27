@@ -38,7 +38,7 @@ END_DELAY = int(os.getenv('END_DELAY'))
 ALLOWED_ZONE = np.array([[985, 500], [1378, 540], [1380, 842], [749, 783]])
 # ALLOWED_ZONE = np.array([[1378, 704], [1931, 760], [1934, 1186], [1048, 1102]])
 LINE_COORDINATES = (
-    ((1331, 0), (1331, 1080))
+    ((1331, 0), (1331, 1080),)
 )
 # LINE_COORDINATES = (
 #     ((500, 0), (400, 1080)),
