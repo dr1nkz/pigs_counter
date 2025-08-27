@@ -320,10 +320,8 @@ def count_pigs(address):
                     else:
                         update_event_data(
                             result_counter, 0, start_time_str, end_time_str)
-                    send_mqtt_message(pigs_quantity=result_counter,
-                                      start_time=start_time_str,
-                                      end_time=end_time_str,
-                                      platenumber=payload)
+                    send_mqtt_message(result_counter, start_time_str,
+                                      end_time_str, platenumber=payload)
                 # Release videowriter
                 out.release()
                 out = None
@@ -346,7 +344,6 @@ def count_pigs(address):
                 after_event_delay_pig_human_from_ladder.append(0)
                 start_flag = False
                 rfid_received_message = False
-                send_mqtt_message()
             else:
                 font = cv2.FONT_HERSHEY_SIMPLEX  # font
                 fontScale = 1  # fontScale
