@@ -87,8 +87,7 @@ class YOLONASDetector:
         """
         if len(self.boxes) == 0:
             return image
-        classes = get_labelmap()
-        class_names = list(classes.values())
+        class_names = self.class_names
         rng = np.random.default_rng(3)
         colors = rng.uniform(0, 255, size=(len(class_names), 3))
 
