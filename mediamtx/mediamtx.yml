@@ -698,10 +698,13 @@ pathDefaults:
 paths:
   # example:
   cam:
-    source: rtsp://admin:Qwerty12345@192.168.1.64:554/ISAPI/Streaming/Channels/101
+    source: rtsp://admin:zK_78_Kz@192.168.1.64:554/ISAPI/Streaming/Channels/101
+  cam_2ndFlow:
+    source: rtsp://admin:zK_78_Kz@192.168.1.64:554/ISAPI/Streaming/Channels/102
   ladder_cam:
     source: rtsp://admin:Qwerty12345@192.168.1.65:554/ISAPI/Streaming/Channels/101
-
+  ladder_cam_2ndFlow:
+    source: rtsp://admin:Qwerty12345@192.168.1.65:554/ISAPI/Streaming/Channels/102
   # Settings under path "all_others" are applied to all paths that
   # do not match another entry.
   all_others:

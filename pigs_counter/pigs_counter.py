@@ -4,11 +4,13 @@ import os
 from datetime import datetime
 import subprocess
 import time
+import ast
 
 import supervision as sv
 import cv2
 import numpy as np
 import torch
+import paho.mqtt.client as mqtt
 
 from detector import YOLOv8, Detections
 from detector_yolo_nas import YOLONASDetector
@@ -24,6 +26,7 @@ from utils import (
     count_states,
     count_states_single_state
 )
+from mqtt_notificator import send_mqtt_message
 from camera_thread import CameraThread
 
 
@@ -35,16 +38,10 @@ LADDER_CAM_ADDRESS = os.getenv('LADDER_CAM_ADDRESS')
 LADDER_MODEL_PATH = os.getenv('LADDER_MODEL_PATH')
 START_DELAY = int(os.getenv('START_DELAY'))
 END_DELAY = int(os.getenv('END_DELAY'))
-ALLOWED_ZONE = np.array([[985, 500], [1378, 540], [1380, 842], [749, 783]])
-# ALLOWED_ZONE = np.array([[1378, 704], [1931, 760], [1934, 1186], [1048, 1102]])
-LINE_COORDINATES = (
-    ((1331, 0), (1331, 1080),)
-)
-# LINE_COORDINATES = (
-#     ((500, 0), (400, 1080)),
-#     ((1000, 0), (900, 1080)),
-#     ((1500, 0), (1400, 1080))
-# )
+LINE_COORDINATES = ast.literal_eval(os.getenv('LINE_COORDINATES'))
+ALLOWED_ZONE = np.array(ast.literal_eval(os.getenv('ALLOWED_ZONE')))
+MQTT_TOPIC = os.getenv('MQTT_TOPIC', 'python/mqtt')
+BROKER_HOST = os.getenv('BROKER_HOST', 'nanomq')
 
 
 def count_pigs(address):
@@ -65,13 +62,6 @@ def count_pigs(address):
                                       iou_thres=0.5)
 
     while (True):
-        # cap = cv2.VideoCapture(address, cv2.CAP_FFMPEG)
-        # cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-        # fps = int(cap.get(cv2.CAP_PROP_FPS))
-        # fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        # width1 = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        # height1 = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
         cam = CameraThread(address)
         cam.start()
         time.sleep(5)
@@ -79,11 +69,6 @@ def count_pigs(address):
         fps, width1, height1 = cam.get_properties()
         print(f'fps: {fps} width1: {width1} height1: {height1}')
         print_log(f'fps: {fps} width1: {width1} height1: {height1}')
-
-        # cap_ladder = cv2.VideoCapture(LADDER_CAM_ADDRESS, cv2.CAP_FFMPEG)
-        # cap_ladder.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-        # width2 = int(cap_ladder.get(cv2.CAP_PROP_FRAME_WIDTH))
-        # height2 = int(cap_ladder.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
         cam_ladder = CameraThread(LADDER_CAM_ADDRESS)
         cam_ladder.start()
@@ -93,28 +78,8 @@ def count_pigs(address):
         print_log(f'fps2: {fps2} width2: {width2} height2: {height2}')
 
         out = None
-
-        # Команда FFmpeg для стриминга
-        # ffmpeg_cmd = [
-        #     "ffmpeg",
-        #     "-y",  # Перезаписывать выходные файлы
-        #     "-f", "rawvideo",  # Формат входного видео
-        #     "-vcodec", "rawvideo",
-        #     "-pix_fmt", "bgr24",  # Формат пикселей
-        #     "-s", f"{width1}x{height1}",  # Размер кадра
-        #     "-r", str(fps),  # Частота кадров
-        #     "-i", "-",  # Вход из stdin
-        #     "-c:v", "libx264",  # Кодек для видео
-        #     "-preset", "ultrafast",  # Предустановка для скорости кодирования
-        #     "-pix_fmt", "yuv420p",  # Формат пикселей в выходном потоке
-        #     "-f", "rtsp",  # Формат для RTSP
-        #     PIGS_COUNTER_ADDRESS
-        # ]
-
-        # Открытие FFmpeg процесса
-        # ffmpeg_process = subprocess.Popen(
-        #     ffmpeg_cmd, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
+        rfid_received_message = False
+        payload = None
         byte_track = sv.ByteTrack(frame_rate=fps,
                                   track_activation_threshold=0.25)
         coordinates = defaultdict(lambda: deque(maxlen=2))
@@ -356,8 +321,14 @@ def count_pigs(address):
                 if result_counter == 0:
                     delete_event_data(start_time_str)
                 else:
-                    update_event_data(
-                        result_counter, 0, start_time_str, end_time_str)
+                    if rfid_received_message:
+                        update_event_data(
+                            result_counter, 0, start_time_str, end_time_str, payload)
+                    else:
+                        update_event_data(
+                            result_counter, 0, start_time_str, end_time_str)
+                    send_mqtt_message(result_counter, start_time_str,
+                                      end_time_str, platenumber=payload)
                 # Release videowriter
                 out.release()
                 out = None
@@ -379,6 +350,7 @@ def count_pigs(address):
                 after_event_delay_pig_human_from_ladder.clear()
                 after_event_delay_pig_human_from_ladder.append(0)
                 start_flag = False
+                rfid_received_message = False
             else:
                 font = cv2.FONT_HERSHEY_SIMPLEX  # font
                 fontScale = 1  # fontScale
@@ -405,15 +377,34 @@ def count_pigs(address):
             except:
                 pass
 
-            # ffmpeg_process.stdin.write(detected_img.tobytes())
-
-        # cap.release()
-        # cap_ladder.release()
         cam.stop()
         cam_ladder.stop()
-        # ffmpeg_process.stdin.close()
-        # ffmpeg_process.wait()
+
+
+def on_connect(client, userdata, flags, reason_code, properties):
+    """
+    The callback for when the client receives a CONNACK response from the server.
+    """
+    print(f"Connected with result code {reason_code}")
+    # Subscribing in on_connect()
+    client.subscribe(MQTT_TOPIC)
+
+
+def on_message(client, userdata, msg):
+    """
+    The callback for when a PUBLISH message is received from the server.
+    """
+    if (msg.topic == MQTT_TOPIC):
+        print(msg.payload)
+    rfid_received_message = True
+    payload = msg.payload
 
 
 if __name__ == '__main__':
+    mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+    mqttc.on_connect = on_connect
+    mqttc.on_message = on_message
+    mqttc.connect(BROKER_HOST, 1883, 60)
+    mqttc.loop_start()
+
     count_pigs(CAM_ADDRESS)

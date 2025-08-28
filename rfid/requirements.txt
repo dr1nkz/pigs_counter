@@ -1,0 +1,3 @@
+python-dotenv
+pyserial
+paho-mqtt
