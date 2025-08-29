@@ -12,6 +12,16 @@ paths:
   ladder_cam:
     source: LADDER_CAM_ADDRESS
 ```
+### Set the change_codec script
+set up the cron job like
+```bash
+*/30 * * * * bash <path to app dir>/cron_scripts/change_codec.sh
+```
+set up path in change_codec.sh to change_codec.py script
+
+```bash
+python3 <path to app dir>/pigs_counter/change_codec.py
+```
 ### Run the app
 ```bash
 docker compose up -d
