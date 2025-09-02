@@ -18,7 +18,7 @@ def change_codec(filepath):
     try:
         # command = ["ffmpeg", "-i", filepath, new_filename]
         command = ['ffmpeg', '-hwaccel', 'cuda', '-i', filepath,
-                   '-c:v', 'h264_nvenc', '-b:v', '2M', new_filename]
+                   '-c:v', 'h264_nvenc', '-b:v', '2M', "-vsync", "0", new_filename]
         subprocess.run(command, env=env, check=True)
         os.remove(filepath)  # Удаляем старый файл после успешной конвертации
         print(
