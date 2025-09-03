@@ -305,8 +305,8 @@ def count_pigs(address):
 
             if (start_flag is True
                     # and empty_rate_pigs >= 0.9 and after_event_delay_pigs_is_full
-                    and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full
-                    and empty_rate_pig_human_from_ladder >= 0.9 and after_event_delay_human_from_ladder_is_full):
+                    and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full):
+                # and empty_rate_pig_human_from_ladder >= 0.9 and after_event_delay_human_from_ladder_is_full):
                 print(f'Общее количество поросят: {result_counter}')
                 print_log(f'Общее количество поросят: {result_counter}')
                 end_time = datetime.now()
