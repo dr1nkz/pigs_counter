@@ -14,13 +14,14 @@ CLIENT_ID = os.getenv('CLIENT_ID', 'python-mqtt-0')
 # password = 'public'
 
 
-def connect_mqtt():
-    def on_connect(client, userdata, flags, rc):
-        if rc == 0:
-            print("Connected to MQTT Broker!")
-        else:
-            print("Failed to connect, return code %d\n", rc)
+def on_connect(client, userdata, flags, rc):
+    if rc == 0:
+        print("Connected to MQTT Broker!")
+    else:
+        print("Failed to connect, return code %d\n", rc)
 
+
+def connect_mqtt():
     # client = mqtt_client.Client(client_id)
     client = mqtt_client.Client(
         mqtt_client.CallbackAPIVersion.VERSION2, CLIENT_ID)
