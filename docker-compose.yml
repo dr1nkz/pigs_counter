@@ -25,7 +25,7 @@ services:
 
   rfid:
     container_name: rfid
-    # restart: unless-stopped
+    restart: unless-stopped
     build: ./rfid
     # environment:
     #   - PYTHONPATH=""
