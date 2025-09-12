@@ -5,6 +5,7 @@ from datetime import datetime
 import subprocess
 import time
 import ast
+import math
 
 import supervision as sv
 import cv2
@@ -41,6 +42,55 @@ LINE_COORDINATES = ast.literal_eval(os.getenv('LINE_COORDINATES'))
 ALLOWED_ZONE = np.array(ast.literal_eval(os.getenv('ALLOWED_ZONE')))
 MQTT_TOPIC = os.getenv('MQTT_TOPIC', 'python/mqtt')
 BROKER_HOST = os.getenv('BROKER_HOST', 'nanomq')
+# мёртвая зона (пиксели). Увеличь до 12-15 если всё ещё дёргает
+BAND_PX = 8
+MIN_CONSEC_FRAMES = 2     # у тебя N = 2
+COOLDOWN_FRAMES = 2       # пауза после срабатывания
+
+
+def signed_distance_px(point, line):
+    (x, y) = point
+    (x1, y1), (x2, y2) = line
+    vx, vy = x2 - x1, y2 - y1
+    cross = vx * (y - y1) - vy * (x - x1)
+    norm = math.hypot(vx, vy)
+    if norm == 0:
+        return 0.0
+    return cross / norm  # >0 слева, <0 справа, abs — расстояние в px
+
+
+def side_with_band(point, line, band_px=BAND_PX):
+    d = signed_distance_px(point, line)
+    if abs(d) <= band_px:
+        return 0   # на линии / внутри dead-zone
+    return 1 if d > 0 else -1
+
+
+def orient(a, b, c):
+    return (b[0]-a[0])*(c[1]-a[1]) - (b[1]-a[1])*(c[0]-a[0])
+
+
+def on_seg(a, b, p, eps=1e-9):
+    return min(a[0], b[0]) - eps <= p[0] <= max(a[0], b[0]) + eps and min(a[1], b[1]) - eps <= p[1] <= max(a[1], b[1]) + eps
+
+
+def segments_intersect(p0, p1, a, b, eps=1e-9):
+    o1 = orient(p0, p1, a)
+    o2 = orient(p0, p1, b)
+    o3 = orient(a, b, p0)
+    o4 = orient(a, b, p1)
+
+    if (o1*o2 < 0) and (o3*o4 < 0):
+        return True
+    if abs(o1) <= eps and on_seg(p0, p1, a):
+        return True
+    if abs(o2) <= eps and on_seg(p0, p1, b):
+        return True
+    if abs(o3) <= eps and on_seg(a, b, p0):
+        return True
+    if abs(o4) <= eps and on_seg(a, b, p1):
+        return True
+    return False
 
 
 def count_pigs(address):
@@ -75,8 +125,10 @@ def count_pigs(address):
         payload = None
         byte_track = sv.ByteTrack(frame_rate=fps,
                                   track_activation_threshold=0.25)
-        coordinates = defaultdict(lambda: deque(maxlen=2))
+        coordinates = defaultdict(lambda: deque(maxlen=3))
         pigs_states = defaultdict(list)
+        states_meta = defaultdict(lambda: [{'last_side': None, 'stable_side': None, 'frames_same': 0, 'cooldown': 0}
+                                           for _ in LINE_COORDINATES])
 
         # Counter of all pigs crossed the line
         pigs_counter = [0] * len(LINE_COORDINATES)
@@ -221,30 +273,49 @@ def count_pigs(address):
                         coordinates[tracker_id].append(point)
 
                 # Check if pig crossed the line left or right
-                for tracker_id in coordinates.keys():
-                    if len(coordinates[tracker_id]) == coordinates[tracker_id].maxlen:
-                        if pigs_states.get(tracker_id) is None:
-                            pigs_states[tracker_id] = [
-                                None] * len(LINE_COORDINATES)
-                        for id, line_coordinate in enumerate(LINE_COORDINATES):
-                            previous_cross = is_cross_of_line(
-                                coordinates[tracker_id][0], line_coordinate)
-                            current_cross = is_cross_of_line(
-                                coordinates[tracker_id][-1], line_coordinate)
+                for tracker_id in list(coordinates.keys()):
+                    if len(coordinates[tracker_id]) < 2:
+                        continue
 
-                            if previous_cross and not current_cross:  # Слева направо
-                                pigs_states[tracker_id][id] = 'undefined'
-                            elif not previous_cross and current_cross:  # Справа налево
-                                pigs_states[tracker_id][id] = 'undefined'
-                            elif pigs_states.get(tracker_id)[id] == 'undefined':
-                                if previous_cross and current_cross:
-                                    pigs_states[tracker_id][id] = True
-                                    # if count_states_single_state(pigs_states[tracker_id], True) == len(LINE_COORDINATES) - 1:
-                                    pigs_counter[id] += 1
-                                elif not previous_cross and not current_cross:
-                                    pigs_states[tracker_id][id] = False
-                                    # if count_states_single_state(pigs_states[tracker_id], False) == len(LINE_COORDINATES) - 1:
-                                    pigs_counter[id] -= 1
+                    if pigs_states.get(tracker_id) is None:
+                        pigs_states[tracker_id] = [
+                            None] * len(LINE_COORDINATES)
+
+                    pts = list(coordinates[tracker_id])  # максимум 3 точки
+
+                    for i, line_coord in enumerate(LINE_COORDINATES):
+                        meta = states_meta[tracker_id][i]
+                        if meta['cooldown'] > 0:
+                            meta['cooldown'] -= 1
+
+                        crossed = False
+                        direction = None
+
+                        # проверяем все сегменты: (p0->p1), (p1->p2)
+                        for j in range(len(pts)-1):
+                            p_prev, p_curr = pts[j], pts[j+1]
+                            d_prev = signed_distance_px(p_prev, line_coord)
+                            d_curr = signed_distance_px(p_curr, line_coord)
+
+                            # если обе точки в dead-zone → игнор
+                            if abs(d_prev) <= BAND_PX and abs(d_curr) <= BAND_PX:
+                                continue
+
+                            # смена стороны → возможное пересечение
+                            if d_prev * d_curr < 0 and segments_intersect(p_prev, p_curr, tuple(line_coord[0]), tuple(line_coord[1])):
+                                crossed = True
+                                # направление: d_prev<0 → d_curr>0 = вправо, иначе влево
+                                direction = +1 if d_prev < 0 and d_curr > 0 else -1
+                                break  # достаточно одного пересечения
+
+                        if crossed and meta['cooldown'] == 0:
+                            if direction == +1:
+                                pigs_counter[i] += 1
+                                pigs_states[tracker_id][i] = True
+                            else:
+                                pigs_counter[i] -= 1
+                                pigs_states[tracker_id][i] = False
+                            meta['cooldown'] = COOLDOWN_FRAMES
 
                 # count_true = count_states(pigs_states, True)
                 # count_false = count_states(pigs_states, False)
