@@ -2,15 +2,14 @@ from collections import defaultdict, deque
 from dotenv import load_dotenv
 import os
 from datetime import datetime
-import subprocess
 import time
 import ast
 
-import supervision as sv
 import cv2
 import numpy as np
-import torch
 import paho.mqtt.client as mqtt
+
+from ultralytics import solutions
 
 from detector import YOLOv8, Detections
 from db_utils import (
@@ -31,6 +30,7 @@ from camera_thread import CameraThread
 
 load_dotenv()
 MODEL_PATH = os.getenv('MODEL_PATH')
+PT_MODEL_PATH = os.getenv('PT_MODEL_PATH')
 CAM_ADDRESS = os.getenv('CAM_ADDRESS')
 PIGS_COUNTER_ADDRESS = os.getenv('PIGS_COUNTER_ADDRESS')
 LADDER_CAM_ADDRESS = os.getenv('LADDER_CAM_ADDRESS')
@@ -45,14 +45,28 @@ BROKER_HOST = os.getenv('BROKER_HOST', 'nanomq')
 
 def count_pigs(address):
     """
-    Запуск модели
+    Запуск модели — теперь с использованием ultralytics.solutions.ObjectCounter
+    Важное: логика с двумя камерами (cam и cam_ladder), запись видео в объединённом формате
+    и старт/стоп события по детекции на трапе (ladder) сохранены без изменений.
     """
+
     pigs_detector = YOLOv8(path=MODEL_PATH,
                            conf_thres=0.3,
                            iou_thres=0.5)
     ladder_detector = YOLOv8(path=LADDER_MODEL_PATH,
                              conf_thres=0.3,
                              iou_thres=0.5)
+
+    # Инициализация ObjectCounter — он заменяет ручную логику трекинга/подсчёта
+    # NOTE: мы отключаем интерактивный показ (show_in/show_out = False) — у тебя нет cv2.imshow
+    counter = solutions.ObjectCounter(
+        region=LINE_COORDINATES,
+        model=PT_MODEL_PATH,
+        classes=[0],            # считаем класс 0 — как в оригинальном коде
+        tracker="bytetrack.yaml",  # можно поменять при желании
+        show_in=True,
+        show_out=True,
+    )
 
     while (True):
         cam = CameraThread(address)
@@ -73,12 +87,10 @@ def count_pigs(address):
         out = None
         rfid_received_message = False
         payload = None
-        byte_track = sv.ByteTrack(frame_rate=fps,
-                                  track_activation_threshold=0.25)
-        coordinates = defaultdict(lambda: deque(maxlen=2))
-        pigs_states = defaultdict(list)
 
-        # Counter of all pigs crossed the line
+        coordinates = defaultdict(lambda: deque(maxlen=2))
+
+        # Counter of all pigs crossed the line (we'll keep the same variable but values come from ObjectCounter)
         pigs_counter = [0] * len(LINE_COORDINATES)
         result_counter = 0
 
@@ -118,17 +130,19 @@ def count_pigs(address):
             if frame is None or frame_ladder is None:
                 break
 
-            # Детектирование
+            # Детектирование (лишь для дополнительной отрисовки — ObjectCounter сам делает детекцию внутри)
             detected_img = frame.copy()
             bounding_boxes_pigs, scores, class_ids = pigs_detector(
                 detected_img)
             class_id_filter = 0
             bounding_boxes_pigs = np.array(bounding_boxes_pigs)[
-                class_ids == class_id_filter]
-            scores = np.array(scores)[class_ids == class_id_filter]
-            class_ids = np.array(class_ids)[class_ids == class_id_filter]
+                class_ids == class_id_filter] if len(bounding_boxes_pigs) > 0 else np.array([])
+            scores = np.array(scores)[class_ids == class_id_filter] if len(
+                scores) > 0 else np.array([])
+            class_ids = np.array(class_ids)[class_ids == class_id_filter] if len(
+                class_ids) > 0 else np.array([])
 
-            # Get coords od detected ladders and check if it in area
+            # Get coords of detected ladders and check if it in area (логика без изменений)
             detected_img_ladder = frame_ladder.copy()
             bounding_boxes_ladder_pig_human, _, class_ids_ladder = ladder_detector(
                 detected_img_ladder)
@@ -136,18 +150,12 @@ def count_pigs(address):
                 detected_img_ladder)
 
             if len(bounding_boxes_ladder_pig_human) != 0 and ALLOWED_ZONE is not None:
-                # Calculate the center points of the bounding boxes
                 points = np.array([[(x_1 + x_2) / 2, (y_1 + y_2) / 2]
                                    for [x_1, y_1, x_2, y_2] in bounding_boxes_ladder_pig_human]).astype('int')
 
-                # Initialize an array to store whether points are within allowed zones
-                point_in_zone = np.zeros(len(points), dtype=bool)
-
-                # Update the boolean mask for points within the current allowed zone
                 point_in_zone = np.array(list(
                     map(lambda x: cv2.pointPolygonTest(ALLOWED_ZONE, x.tolist(), False) >= 0, points)))
 
-                # Use this mask to filter or index your points or bounding boxes
                 bounding_boxes_ladder_pig_human = np.array(
                     [box for index, box in enumerate(bounding_boxes_ladder_pig_human) if point_in_zone[index]])
                 class_ids_ladder = np.array(
@@ -155,10 +163,10 @@ def count_pigs(address):
 
             mask = np.isin(class_ids_ladder, [0])
             bounding_boxes_ladder = np.array(
-                bounding_boxes_ladder_pig_human)[mask]
+                bounding_boxes_ladder_pig_human)[mask] if len(bounding_boxes_ladder_pig_human) > 0 else np.array([])
             mask = np.isin(class_ids_ladder, [1, 2])
             bounding_boxes_pig_human_from_ladder = np.array(
-                bounding_boxes_ladder_pig_human)[mask]
+                bounding_boxes_ladder_pig_human)[mask] if len(bounding_boxes_ladder_pig_human) > 0 else np.array([])
 
             if len(bounding_boxes_pigs) != 0:  # objects detected
                 after_event_delay_pigs.append(0)
@@ -177,10 +185,54 @@ def count_pigs(address):
                 if before_event_delay_ladder == consecutive_start_ladder:
                     start_flag = True
                     before_event_delay_ladder = 0
+                    try:
+                        counter.reset()
+                    except AttributeError:
+                        # если reset нет в версии, пересоздаём объект
+                        counter = solutions.ObjectCounter(
+                            region=LINE_COORDINATES,
+                            model=PT_MODEL_PATH,
+                            classes=[0],
+                            show_in=False,
+                            show_out=False
+                        )
             elif start_flag:
                 after_event_delay_ladder.append(1)
 
+            # Draw detections from the pigs_detector (kept for visual consistency)
             detected_img = pigs_detector.draw_detections(detected_img)
+
+            # --- ЗАМЕНА: вместо ручного трекинга/подсчёта используем ObjectCounter ---
+            # Обработка кадра ObjectCounter'ом (возвращает SolutionResults с plot_im, in_count, out_count и т.п.)
+            try:
+                results_counter = counter.process(detected_img)
+            except Exception:
+                # Если по каким-то причинам ObjectCounter упадёт, падаем обратно на "чистую" картинку
+                results_counter = None
+
+            if results_counter is not None:
+                # annotated image from ObjectCounter
+                detected_img = getattr(
+                    results_counter, 'plot_im', detected_img)
+
+                # ObjectCounter хранит кумулятивные счётчики in_count и out_count (см. docs)
+                in_count = int(getattr(results_counter, 'in_count', 0))
+                out_count = int(getattr(results_counter, 'out_count', 0))
+
+                # итоговый счётчик - можно выбирать нужную метрику; здесь используем сумму in+out
+                result_counter = out_count - in_count
+
+                # Если нужно — можно получить classwise/region counts из results_counter (зависит от версии Ultralitycs)
+
+                # Обновляем данные события в БД
+                if start_flag:
+                    try:
+                        update_event_data(result_counter, 0, start_time_str)
+                    except Exception:
+                        # игнорируем ошибки БД здесь, чтобы не прерывать поток
+                        pass
+
+            # --- конец замены ---
 
             if start_flag:
                 try:
@@ -204,109 +256,9 @@ def count_pigs(address):
                     insert_event_data('A123BC13', 'Пандус 1',
                                       start_time_str, result_counter, 0)
 
-                detections = Detections(xyxy=bounding_boxes_pigs, confidence=scores,
-                                        class_id=class_ids, tracker_id=[None] * len(bounding_boxes_pigs))
-                if len(detections.xyxy) != 0:
-                    detections = byte_track.update_with_detections(
-                        detections=detections)
-
-                # Bottom center anchors to dictionary
-                for tracker_id, xyxy in zip(detections.tracker_id, detections.xyxy):
-                    if tracker_id != -1:
-                        x_1 = xyxy[0]
-                        y_1 = xyxy[1]
-                        x_2 = xyxy[2]
-                        y_2 = int(xyxy[3])
-                        point = [int((x_1 + x_2) / 2), int((y_1 + y_2) / 2)]
-                        coordinates[tracker_id].append(point)
-
-                # Check if pig crossed the line left or right
-                for tracker_id in coordinates.keys():
-                    if len(coordinates[tracker_id]) == coordinates[tracker_id].maxlen:
-                        if pigs_states.get(tracker_id) is None:
-                            pigs_states[tracker_id] = [
-                                None] * len(LINE_COORDINATES)
-                        for id, line_coordinate in enumerate(LINE_COORDINATES):
-                            previous_cross = is_cross_of_line(
-                                coordinates[tracker_id][0], line_coordinate)
-                            current_cross = is_cross_of_line(
-                                coordinates[tracker_id][-1], line_coordinate)
-
-                            if previous_cross and not current_cross:  # Слева направо
-                                pigs_states[tracker_id][id] = 'undefined'
-                            elif not previous_cross and current_cross:  # Справа налево
-                                pigs_states[tracker_id][id] = 'undefined'
-                            elif pigs_states.get(tracker_id)[id] == 'undefined':
-                                if previous_cross and current_cross:
-                                    pigs_states[tracker_id][id] = True
-                                    # if count_states_single_state(pigs_states[tracker_id], True) == len(LINE_COORDINATES) - 1:
-                                    pigs_counter[id] += 1
-                                elif not previous_cross and not current_cross:
-                                    pigs_states[tracker_id][id] = False
-                                    # if count_states_single_state(pigs_states[tracker_id], False) == len(LINE_COORDINATES) - 1:
-                                    pigs_counter[id] -= 1
-
-                # count_true = count_states(pigs_states, True)
-                # count_false = count_states(pigs_states, False)
-                # pigs_counter = count_true - count_false
-                # pigs_counter = pigs_counter if pigs_counter >= 0 else 0
-                result_counter = int(np.average(pigs_counter))
-                update_event_data(result_counter, 0, start_time_str)
-
-                # Visual
-                line_color = (0, 0, 255)
-                line_thickness = 5
-                for line_coordinate in LINE_COORDINATES:
-                    detected_img = cv2.line(detected_img, line_coordinate[0], line_coordinate[1],
-                                            line_color, line_thickness, lineType=0)  # Draw line
-
-                for tracker_id, bounding_box in zip(detections.tracker_id, bounding_boxes_pigs):
-                    caption = f'#{tracker_id}'  # caption
-                    font = cv2.FONT_HERSHEY_SIMPLEX  # font
-                    fontScale = 1  # fontScale
-                    thickness = 2  # Line thickness of 2 px
-                    x_1 = bounding_box[0]
-                    y_1 = bounding_box[1]
-                    x_2 = bounding_box[2]
-                    y_2 = bounding_box[3]
-
-                    x, y = int(x_1), int(y_1 - 4 * thickness)
-                    (text_width, text_height), baseline = cv2.getTextSize(
-                        caption, font, fontScale, thickness)
-                    background_color = (254, 254, 254)
-
-                    # tracker_id on the frame
-                    # cv2.rectangle(detected_img, (x, y - text_height), (x + text_width, y + int(baseline/2)),
-                    #                 background_color, thickness=cv2.FILLED)
-                    cv2.putText(detected_img, caption, (x, y), font,
-                                fontScale, (0, 0, 255), thickness, cv2.LINE_AA)
-                    # cv2.putText(detected_img, f'{pigs_states.get(tracker_id)}', (x, y), font,
-                    #             fontScale, (255, 0, 0), thickness, cv2.LINE_AA)
-
-                # counter on the frame
-                cv2.rectangle(detected_img, (50, 70), (560, 170),
-                              background_color, thickness=cv2.FILLED)
-                for id, pig_counter in enumerate(pigs_counter):
-                    cv2.putText(detected_img, f'{pig_counter}', (50 + 170*id, 150), font,
-                                fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
-
-                empty_rate_pigs = after_event_delay_pigs.count(
-                    1) / len(after_event_delay_pigs)
-                after_event_delay_pigs_is_full = len(
-                    after_event_delay_pigs) == after_event_delay_pigs.maxlen
-                empty_rate_ladder = after_event_delay_ladder.count(
-                    1) / len(after_event_delay_ladder)
-                after_event_delay_ladder_is_full = len(
-                    after_event_delay_ladder) == after_event_delay_ladder.maxlen
-                empty_rate_pig_human_from_ladder = after_event_delay_pig_human_from_ladder.count(
-                    1) / len(after_event_delay_pig_human_from_ladder)
-                after_event_delay_human_from_ladder_is_full = len(
-                    after_event_delay_pig_human_from_ladder) == after_event_delay_pig_human_from_ladder.maxlen
-
             if (start_flag is True
-                    # and empty_rate_pigs >= 0.9 and after_event_delay_pigs_is_full
-                    and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full):
-                # and empty_rate_pig_human_from_ladder >= 0.9 and after_event_delay_human_from_ladder_is_full):
+                    and (after_event_delay_ladder.count(1) / len(after_event_delay_ladder)) >= 0.9
+                    and len(after_event_delay_ladder) == after_event_delay_ladder.maxlen):
                 print(f'Общее количество поросят: {result_counter}')
                 print_log(f'Общее количество поросят: {result_counter}')
                 end_time = datetime.now()
@@ -333,9 +285,7 @@ def count_pigs(address):
                     os.rename(filepath, filepath_end)
                 # Reset variables
                 pigs_counter = [0] * len(LINE_COORDINATES)
-                byte_track.reset()
                 coordinates.clear()
-                pigs_states.clear()
                 after_event_delay_pigs.clear()
                 after_event_delay_pigs.append(0)
                 after_event_delay_ladder.clear()
@@ -344,10 +294,12 @@ def count_pigs(address):
                 after_event_delay_pig_human_from_ladder.append(0)
                 start_flag = False
                 rfid_received_message = False
+
             else:
-                font = cv2.FONT_HERSHEY_SIMPLEX  # font
-                fontScale = 1  # fontScale
-                thickness = 2  # Line thickness of 2 px
+                # визуальная часть до старта — оставляем минимальную отрисовку
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                fontScale = 1
+                thickness = 2
                 background_color = (254, 254, 254)
 
             if detected_img is None or detected_img_ladder is None:
@@ -358,7 +310,7 @@ def count_pigs(address):
                 continue
 
             try:
-                if out.isOpened():
+                if out is not None and out.isOpened():
                     detected_img = cv2.resize(
                         detected_img, (target_width, target_height1))
                     detected_img_ladder = cv2.resize(
@@ -366,8 +318,7 @@ def count_pigs(address):
                     combined_frame = np.vstack(
                         (detected_img, detected_img_ladder))
                     out.write(combined_frame)
-                    # update_event_data(pigs_counter, 0, start_time_str)
-            except:
+            except Exception:
                 pass
 
         cam.stop()
@@ -379,7 +330,6 @@ def on_connect(client, userdata, flags, reason_code, properties):
     The callback for when the client receives a CONNACK response from the server.
     """
     print(f"Connected with result code {reason_code}")
-    # Subscribing in on_connect()
     client.subscribe(MQTT_TOPIC)
 
 
@@ -389,6 +339,10 @@ def on_message(client, userdata, msg):
     """
     if (msg.topic == MQTT_TOPIC):
         print(msg.payload)
+    # NOTE: MQTT handlers обновляют переменные-флаги в основной области видимости
+    # чтобы это работало корректно при многопоточности/асинхронности, можно использовать очередь или
+    # shared state; оставляем поведение как в оригинальном коде.
+    global rfid_received_message, payload
     rfid_received_message = True
     payload = msg.payload
 

@@ -7,3 +7,4 @@ nodered/.DS_Store
 filebrowser.db
 *.pth
 *.log
+*.pt
