@@ -71,6 +71,7 @@ def count_pigs(address):
         print_log(f'fps2: {fps2} width2: {width2} height2: {height2}')
 
         out = None
+        out_clear = None
         rfid_received_message = False
         payload = None
         byte_track = sv.ByteTrack(frame_rate=fps,
@@ -185,6 +186,7 @@ def count_pigs(address):
             if start_flag:
                 try:
                     out.isOpened()
+                    out_clear.isOpened()
                 except:
                     start_time = datetime.now()
                     start_time_str = start_time.strftime(r'%Y-%m-%d %H:%M:%S')
@@ -195,12 +197,15 @@ def count_pigs(address):
 
                     start_time_hms = start_time.strftime(r'%H.%M.%S')
                     filepath = (f'{directory}/.{start_time_hms}.mp4')
+                    filepath_clear = (f'{directory}/.{start_time_hms}_clear.mp4')
                     target_width = min(width1, width2)  # min width
                     target_height1 = int((height1 / width1) * target_width)
                     target_height2 = int((height2 / width2) * target_width)
                     target_height = target_height1 + target_height2
                     out = cv2.VideoWriter(
                         filepath, fourcc, fps, (target_width, target_height))
+                    out_clear = cv2.VideoWriter(
+                        filepath_clear, fourcc, fps, (width1, height1))
                     insert_event_data('A123BC13', 'Пандус 1',
                                       start_time_str, result_counter, 0)
 
@@ -325,6 +330,8 @@ def count_pigs(address):
                 # Release videowriter
                 out.release()
                 out = None
+                out_clear.release()
+                out_clear = None
                 end_time_hms = end_time.strftime(r'%H.%M.%S')
                 event_id = get_event_id_by_start_time(start_time_str)
                 filepath_end = (
@@ -366,6 +373,9 @@ def count_pigs(address):
                     combined_frame = np.vstack(
                         (detected_img, detected_img_ladder))
                     out.write(combined_frame)
+                    # update_event_data(pigs_counter, 0, start_time_str)
+                if out_clear.isOpened():
+                    out_clear.write(frame)
                     # update_event_data(pigs_counter, 0, start_time_str)
             except:
                 pass
