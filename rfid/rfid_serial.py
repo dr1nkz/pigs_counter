@@ -40,16 +40,22 @@ def get_all():
     Rfid = None
     cur_serial = get_main_serial()
     while True:
-        # raw_data = cur_serial.readline(10).encode('hex')
-        # raw_data = cur_serial.read(10).encode('hex')
         raw_data = cur_serial.read(10).hex()
-        if raw_data != '':
-            list = [raw_data[i:i+2]
-                    for i in range(0, len(raw_data), 2)]
-            decimal_value = int(''.join(list[5:8]), 16)
-            Rfid = decimal_value
-            # Rfid = raw_data
-            break
+        if raw_data:  # если что-то считали
+            bytes_list = [raw_data[i:i+2] for i in range(0, len(raw_data), 2)]
+
+            # Проверяем, что нужные байты есть
+            if len(bytes_list) >= 8:
+                hex_str = ''.join(bytes_list[5:8])
+                try:
+                    decimal_value = int(hex_str, 16)
+                    Rfid = decimal_value
+                    break
+                except ValueError:
+                    print(f"Некорректные данные: {hex_str}")
+            else:
+                print(f"Недостаточно данных: {bytes_list}")
+
     cur_serial.close()
     client.publish(MQTT_TOPIC, Rfid, 1)
     return [Rfid]
