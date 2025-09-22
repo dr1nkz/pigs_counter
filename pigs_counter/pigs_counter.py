@@ -41,6 +41,8 @@ LINE_COORDINATES = ast.literal_eval(os.getenv('LINE_COORDINATES'))
 ALLOWED_ZONE = np.array(ast.literal_eval(os.getenv('ALLOWED_ZONE')))
 MQTT_TOPIC = os.getenv('MQTT_TOPIC', 'python/mqtt')
 BROKER_HOST = os.getenv('BROKER_HOST', 'nanomq')
+payload = None
+rfid_received_message = False
 
 
 def count_pigs(address):
@@ -72,8 +74,6 @@ def count_pigs(address):
 
         out = None
         out_clear = None
-        rfid_received_message = False
-        payload = None
         byte_track = sv.ByteTrack(frame_rate=fps,
                                   track_activation_threshold=0.25)
         coordinates = defaultdict(lambda: deque(maxlen=2))
@@ -197,7 +197,8 @@ def count_pigs(address):
 
                     start_time_hms = start_time.strftime(r'%H.%M.%S')
                     filepath = (f'{directory}/.{start_time_hms}.mp4')
-                    filepath_clear = (f'{directory}/.{start_time_hms}_clear.mp4')
+                    filepath_clear = (
+                        f'{directory}/.{start_time_hms}_clear.mp4')
                     target_width = min(width1, width2)  # min width
                     target_height1 = int((height1 / width1) * target_width)
                     target_height2 = int((height2 / width2) * target_width)
@@ -319,7 +320,7 @@ def count_pigs(address):
                 if result_counter == 0:
                     delete_event_data(start_time_str)
                 else:
-                    if rfid_received_message:
+                    if rfid_received_message and payload != '15895658' and payload != b"15895658":
                         update_event_data(
                             result_counter, 0, start_time_str, end_time_str, payload)
                     else:
@@ -399,6 +400,7 @@ def on_message(client, userdata, msg):
     """
     if (msg.topic == MQTT_TOPIC):
         print(msg.payload)
+    global rfid_received_message, payload
     rfid_received_message = True
     payload = msg.payload
 
