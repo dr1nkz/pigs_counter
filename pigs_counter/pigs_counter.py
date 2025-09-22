@@ -78,6 +78,7 @@ def count_pigs(address):
                                   track_activation_threshold=0.25)
         coordinates = defaultdict(lambda: deque(maxlen=2))
         pigs_states = defaultdict(list)
+        global rfid_received_message, payload
 
         # Counter of all pigs crossed the line
         pigs_counter = [0] * len(LINE_COORDINATES)
