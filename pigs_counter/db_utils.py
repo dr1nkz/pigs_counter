@@ -17,7 +17,7 @@ DB_USER = "postgres_user"           # Пользователь PostgreSQL
 DB_PASSWORD = "postgres_password"   # Пароль PostgreSQL
 
 
-def insert_event_data(platenumber: str, place: str, start_time: str, pigs_quantity: int, pigs_defect: int):
+def insert_event_data(place: str, start_time: str, pigs_quantity: int, pigs_defect: int):
     """
     Insert event data
 
@@ -43,11 +43,11 @@ def insert_event_data(platenumber: str, place: str, start_time: str, pigs_quanti
         # Вставка данных
         event_id = 0
         query = f"""
-            INSERT INTO events (platenumber, place, start_time, pigs_quantity, pigs_defect)
-            VALUES (%s, %s, %s, %s, %s)
+            INSERT INTO events (place, start_time, pigs_quantity, pigs_defect)
+            VALUES (%s, %s, %s, %s)
         """
 
-        cursor.execute(query, (platenumber, place, start_time,
+        cursor.execute(query, (place, start_time,
                                pigs_quantity, pigs_defect))
 
         # Сохранить изменения и закрыть соединение

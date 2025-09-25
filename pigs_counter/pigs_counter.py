@@ -11,6 +11,7 @@ import cv2
 import numpy as np
 import torch
 import paho.mqtt.client as mqtt
+import serial
 
 from detector import YOLOv8, Detections
 from db_utils import (
@@ -41,8 +42,35 @@ LINE_COORDINATES = ast.literal_eval(os.getenv('LINE_COORDINATES'))
 ALLOWED_ZONE = np.array(ast.literal_eval(os.getenv('ALLOWED_ZONE')))
 MQTT_TOPIC = os.getenv('MQTT_TOPIC', 'python/mqtt')
 BROKER_HOST = os.getenv('BROKER_HOST', 'nanomq')
-payload = None
-rfid_received_message = False
+
+
+def get_main_serial():
+    return serial.Serial(port="/dev/ttyr00", baudrate=57600, parity=serial.PARITY_NONE,
+                         stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=1)
+
+
+def get_all():
+    Rfid = None
+    cur_serial = get_main_serial()
+    while True:
+        raw_data = cur_serial.read(10).hex()
+        if raw_data:  # если что-то считали
+            bytes_list = [raw_data[i:i+2] for i in range(0, len(raw_data), 2)]
+
+            # Проверяем, что нужные байты есть
+            if len(bytes_list) >= 8:
+                hex_str = ''.join(bytes_list[5:8])
+                try:
+                    decimal_value = int(hex_str, 16)
+                    Rfid = decimal_value
+                    break
+                except ValueError:
+                    print(f"Некорректные данные: {hex_str}")
+            else:
+                print(f"Недостаточно данных: {bytes_list}")
+
+    cur_serial.close()
+    return [Rfid]
 
 
 def count_pigs(address):
@@ -78,7 +106,6 @@ def count_pigs(address):
                                   track_activation_threshold=0.25)
         coordinates = defaultdict(lambda: deque(maxlen=2))
         pigs_states = defaultdict(list)
-        global rfid_received_message, payload
 
         # Counter of all pigs crossed the line
         pigs_counter = [0] * len(LINE_COORDINATES)
@@ -208,8 +235,8 @@ def count_pigs(address):
                         filepath, fourcc, fps, (target_width, target_height))
                     out_clear = cv2.VideoWriter(
                         filepath_clear, fourcc, fps, (width1, height1))
-                    insert_event_data('A123BC13', 'Пандус 1',
-                                      start_time_str, result_counter, 0)
+                    insert_event_data(
+                        'Пандус 1', start_time_str, result_counter, 0)
 
                 detections = Detections(xyxy=bounding_boxes_pigs, confidence=scores,
                                         class_id=class_ids, tracker_id=[None] * len(bounding_boxes_pigs))
@@ -258,7 +285,11 @@ def count_pigs(address):
                 # pigs_counter = count_true - count_false
                 # pigs_counter = pigs_counter if pigs_counter >= 0 else 0
                 result_counter = int(np.average(pigs_counter))
-                update_event_data(result_counter, 0, start_time_str)
+                rfid_number = None
+                if result_counter % 10 == 0:
+                    rfid_number = get_all()
+                update_event_data(result_counter, 0,
+                                  start_time_str, platenumber=str(rfid_number))
 
                 # Visual
                 line_color = (0, 0, 255)
@@ -321,14 +352,10 @@ def count_pigs(address):
                 if result_counter == 0:
                     delete_event_data(start_time_str)
                 else:
-                    if rfid_received_message and payload != '15895658' and payload != b"15895658":
-                        update_event_data(
-                            result_counter, 0, start_time_str, end_time_str, payload)
-                    else:
-                        update_event_data(
-                            result_counter, 0, start_time_str, end_time_str)
+                    update_event_data(result_counter, 0,
+                                      start_time_str, end_time_str)
                     send_mqtt_message(result_counter, start_time_str,
-                                      end_time_str, platenumber=payload)
+                                      end_time_str, platenumber=rfid_number)
                 # Release videowriter
                 out.release()
                 out = None
@@ -375,10 +402,8 @@ def count_pigs(address):
                     combined_frame = np.vstack(
                         (detected_img, detected_img_ladder))
                     out.write(combined_frame)
-                    # update_event_data(pigs_counter, 0, start_time_str)
                 if out_clear.isOpened():
                     out_clear.write(frame)
-                    # update_event_data(pigs_counter, 0, start_time_str)
             except:
                 pass
 
@@ -386,31 +411,31 @@ def count_pigs(address):
         cam_ladder.stop()
 
 
-def on_connect(client, userdata, flags, reason_code, properties):
-    """
-    The callback for when the client receives a CONNACK response from the server.
-    """
-    print(f"Connected with result code {reason_code}")
-    # Subscribing in on_connect()
-    client.subscribe(MQTT_TOPIC)
+# def on_connect(client, userdata, flags, reason_code, properties):
+#     """
+#     The callback for when the client receives a CONNACK response from the server.
+#     """
+#     print(f"Connected with result code {reason_code}")
+#     # Subscribing in on_connect()
+#     client.subscribe(MQTT_TOPIC)
 
 
-def on_message(client, userdata, msg):
-    """
-    The callback for when a PUBLISH message is received from the server.
-    """
-    if (msg.topic == MQTT_TOPIC):
-        print(msg.payload)
-    global rfid_received_message, payload
-    rfid_received_message = True
-    payload = msg.payload
+# def on_message(client, userdata, msg):
+#     """
+#     The callback for when a PUBLISH message is received from the server.
+#     """
+#     if (msg.topic == MQTT_TOPIC):
+#         print(msg.payload)
+#     global rfid_received_message, payload
+#     rfid_received_message = True
+#     payload = msg.payload
 
 
 if __name__ == '__main__':
-    mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-    mqttc.on_connect = on_connect
-    mqttc.on_message = on_message
-    mqttc.connect(BROKER_HOST, 1883, 60)
-    mqttc.loop_start()
+    # mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+    # mqttc.on_connect = on_connect
+    # mqttc.on_message = on_message
+    # mqttc.connect(BROKER_HOST, 1883, 60)
+    # mqttc.loop_start()
 
     count_pigs(CAM_ADDRESS)
