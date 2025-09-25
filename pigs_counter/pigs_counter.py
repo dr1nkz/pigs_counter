@@ -52,25 +52,21 @@ def get_main_serial():
 def get_all():
     Rfid = None
     cur_serial = get_main_serial()
-    while True:
-        raw_data = cur_serial.read(10).hex()
-        if raw_data:  # если что-то считали
-            bytes_list = [raw_data[i:i+2] for i in range(0, len(raw_data), 2)]
-
-            # Проверяем, что нужные байты есть
-            if len(bytes_list) >= 8:
-                hex_str = ''.join(bytes_list[5:8])
-                try:
-                    decimal_value = int(hex_str, 16)
-                    Rfid = decimal_value
-                    break
-                except ValueError:
-                    print(f"Некорректные данные: {hex_str}")
-            else:
-                print(f"Недостаточно данных: {bytes_list}")
-
+    raw_data = cur_serial.read(10).hex()
+    if raw_data:  # если что-то считали
+        bytes_list = [raw_data[i:i+2] for i in range(0, len(raw_data), 2)]
+        # Проверяем, что нужные байты есть
+        if len(bytes_list) >= 8:
+            hex_str = ''.join(bytes_list[5:8])
+            try:
+                decimal_value = int(hex_str, 16)
+                Rfid = decimal_value
+            except ValueError:
+                print(f"Некорректные данные: {hex_str}")
+        else:
+            print(f"Недостаточно данных: {bytes_list}")
     cur_serial.close()
-    return [Rfid]
+    return Rfid
 
 
 def count_pigs(address):
