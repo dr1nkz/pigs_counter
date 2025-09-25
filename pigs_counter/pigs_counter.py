@@ -287,7 +287,10 @@ def count_pigs(address):
                 result_counter = int(np.average(pigs_counter))
                 rfid_number = None
                 if result_counter % 10 == 0:
-                    rfid_number = get_all()
+                    try:
+                        rfid_number = get_all()
+                    except:
+                        print_log('Ошибка считывания rfid')
                 update_event_data(result_counter, 0,
                                   start_time_str, platenumber=str(rfid_number))
 
