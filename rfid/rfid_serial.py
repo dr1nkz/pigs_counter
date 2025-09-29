@@ -3,7 +3,8 @@ import serial
 import random
 from paho.mqtt import client as mqtt_client
 from dotenv import load_dotenv
-
+import time
+from datetime import datetime
 
 load_dotenv()
 BROKER_HOST = os.getenv('BROKER_HOST', 'nanomq')
@@ -38,6 +39,7 @@ def get_main_serial():
 
 def get_all():
     Rfid = None
+    client = connect_mqtt()
     cur_serial = get_main_serial()
     while True:
         raw_data = cur_serial.read(10).hex()
@@ -57,13 +59,17 @@ def get_all():
                 print(f"Недостаточно данных: {bytes_list}")
 
     cur_serial.close()
-    client.publish(MQTT_TOPIC, Rfid, 1)
+    result = client.publish(MQTT_TOPIC, str(Rfid), 1)
+    status = result[0]
+    if status == 0:
+        print(f"Message {str(Rfid)} successfully sent to topic {MQTT_TOPIC}")
+    else:
+        print(f"Failed to send message to topic {MQTT_TOPIC}")
+    client.disconnect()
     return [Rfid]
 
 
-client = connect_mqtt()
-
 while True:
     # get_all()
-    print(get_all())
+    get_all()
     # time.sleep(1)

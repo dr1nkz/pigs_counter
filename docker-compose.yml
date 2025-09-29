@@ -19,8 +19,6 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [ gpu ]
-    devices:
-      - /dev/ttyr00:/dev/ttyr00
     networks:
       network_pigs_counter:
         ipv4_address: 172.26.0.1
@@ -36,7 +34,7 @@ services:
       - /etc/localtime:/etc/localtime
       - ./rfid:/rfid
     devices:
-      - /dev/ttyr00:/dev/ttyr00
+      - /dev/ttyUSB0:/dev/ttyr00
     networks:
       network_pigs_counter:
         ipv4_address: 172.26.0.6
@@ -59,9 +57,6 @@ services:
     #  - 8554:8554
     restart: unless-stopped
     network_mode: "host"
-  #networks:
-  #  network_pigs_counter:
-  #    ipv4_address: 172.26.0.2
 
   nodered_pigs:
     container_name: nodered_pigs
@@ -87,8 +82,6 @@ services:
       POSTGRES_USER: postgres_user
       POSTGRES_PASSWORD: postgres_password
       PGDATA: /var/lib/postgresql/data
-    # ports:
-    #   - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data/:rw
       - ./pg_init/init.sql:/docker-entrypoint-initdb.d/init.sql
