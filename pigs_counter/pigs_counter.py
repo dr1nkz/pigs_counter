@@ -259,7 +259,7 @@ def count_pigs(address):
                 # pigs_counter = pigs_counter if pigs_counter >= 0 else 0
                 result_counter = int(np.average(pigs_counter))
                 if result_counter % 10 == 0 and rfid_received_message:
-                    update_event_data(result_counter, 0, start_time_str, platenumber=str(
+                    update_event_data(result_counter, 0, start_time_str, truck_id=str(
                         payload, encoding='utf-8'))
                 else:
                     update_event_data(result_counter, 0, start_time_str)
@@ -334,7 +334,7 @@ def count_pigs(address):
                     update_event_data(
                         result_counter, 0, start_time_str, end_time_str)
                     send_mqtt_message(result_counter, start_time_str,
-                                      end_time_str, platenumber=str(payload, encoding='utf-8'))
+                                      end_time_str, truck_id=str(payload, encoding='utf-8'))
                 # Release videowriter
                 out.release()
                 out = None

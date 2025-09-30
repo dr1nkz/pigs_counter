@@ -17,7 +17,7 @@ DB_USER = "postgres_user"           # Пользователь PostgreSQL
 DB_PASSWORD = "postgres_password"   # Пароль PostgreSQL
 
 
-def insert_event_data(platenumber: str, place: str, start_time: str, pigs_quantity: int, pigs_defect: int):
+def insert_event_data(truck_id: str, place: str, start_time: str, pigs_quantity: int, pigs_defect: int):
     """
     Insert event data
 
@@ -43,11 +43,11 @@ def insert_event_data(platenumber: str, place: str, start_time: str, pigs_quanti
         # Вставка данных
         event_id = 0
         query = f"""
-            INSERT INTO events (platenumber, place, start_time, pigs_quantity, pigs_defect)
+            INSERT INTO events (truck_id, place, start_time, pigs_quantity, pigs_defect)
             VALUES (%s, %s, %s, %s, %s)
         """
 
-        cursor.execute(query, (platenumber, place, start_time,
+        cursor.execute(query, (truck_id, place, start_time,
                                pigs_quantity, pigs_defect))
 
         # Сохранить изменения и закрыть соединение
@@ -64,7 +64,7 @@ def insert_event_data(platenumber: str, place: str, start_time: str, pigs_quanti
 
 
 def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str,
-                      end_time: str = 'NULL', platenumber: str = 'NULL'):
+                      end_time: str = 'NULL', truck_id: str = 'NULL'):
     """
     Update event data
 
@@ -74,7 +74,7 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str,
     :end_time: float - end time of event
     :pigs_quantity: int - quantity of pigs
     :pigs_defect: int - quantity of defect pigs
-    :platenumber: str - platenumber
+    :truck_id: str - truck_id
     """
 
     try:
@@ -90,60 +90,51 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str,
         cursor = connection.cursor()
         # Вставка данных
         event_id = 0
-        if end_time == 'NULL':
-            if platenumber == 'NULL':
-                query = """
-                    UPDATE events
-                    SET pigs_quantity = %s, pigs_defect = %s
-                    WHERE start_time = %s;
-                """
+        # Список полей и значений
+        fields = []
+        values = []
 
-                cursor.execute(
-                    query, (pigs_quantity, pigs_defect, start_time))
-                print(f"Данные события {event_id} успешно обновлены")
-                with open('/pigs_counter/log.log', 'a+') as log:
-                    time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
-                    log.write(
-                        f'{time_str} - Данные события {event_id} успешно обновлены\n')
-            else:
-                query = """
-                    UPDATE events
-                    SET pigs_quantity = %s, pigs_defect = %s, platenumber = %s
-                    WHERE start_time = %s;
-                """
+        # Обновляем pigs_quantity и pigs_defect всегда
+        fields.append('pigs_quantity = %s')
+        values.append(pigs_quantity)
 
-                cursor.execute(
-                    query, (pigs_quantity, pigs_defect, platenumber, start_time))
+        fields.append('pigs_defect = %s')
+        values.append(pigs_defect)
 
-        else:
-            if platenumber == 'NULL':
-                query = """
-                    UPDATE events
-                    SET end_time = %s, pigs_quantity = %s, pigs_defect = %s
-                    WHERE start_time = %s;
-                """
+        # Обновляем end_time только если оно есть
+        if end_time != 'NULL' and end_time is not None:
+            fields.append('end_time = %s')
+            values.append(end_time)
 
-                cursor.execute(
-                    query, (end_time, pigs_quantity, pigs_defect, start_time))
-                print(f"Данные события {event_id} успешно обновлены")
-                with open('/pigs_counter/log.log', 'a+') as log:
-                    time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
-                    log.write(
-                        f'{time_str} - Данные события {event_id} успешно обновлены\n')
-            else:
-                query = """
-                    UPDATE events
-                    SET end_time = %s, pigs_quantity = %s, pigs_defect = %s, platenumber = %s
-                    WHERE start_time = %s;
-                """
+        # Обновляем truck_id только если оно есть
+        if truck_id != 'NULL' and truck_id is not None:
+            fields.append('truck_id = %s')
+            values.append(truck_id)
 
-                cursor.execute(
-                    query, (end_time, pigs_quantity, pigs_defect, platenumber, start_time))
-                print(f"Данные события {event_id} успешно обновлены")
-                with open('/pigs_counter/log.log', 'a+') as log:
-                    time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
-                    log.write(
-                        f'{time_str} - Данные события {event_id} успешно обновлены\n')
+        # Подтягиваем truck_plate и trailer_plate с COALESCE
+        fields.append(
+            'truck_plate = COALESCE((SELECT t.truck_plate FROM trucks t WHERE t.truck_id = e.truck_id), e.truck_plate)')
+        fields.append(
+            'trailer_plate = COALESCE((SELECT t.trailer_plate FROM trucks t WHERE t.truck_id = e.truck_id), e.trailer_plate)')
+
+        # Условие WHERE по start_time
+        values.append(start_time)
+
+        # Формируем SQL
+        query = f"""
+        UPDATE events e
+        SET {', '.join(fields)}
+        WHERE e.start_time = %s;
+        """
+
+        # Выполняем запрос
+        cursor.execute(query, tuple(values))
+
+        print(f"Данные события {event_id} успешно обновлены")
+        with open('/pigs_counter/log.log', 'a+') as log:
+            time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
+            log.write(
+                f'{time_str} - Данные события {event_id} успешно обновлены\n')
 
         # Сохранить изменения и закрыть соединение
         connection.commit()
