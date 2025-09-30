@@ -91,14 +91,30 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str,
         # Вставка данных
         event_id = 0
         if end_time == 'NULL':
-            query = """
-                UPDATE events
-                SET pigs_quantity = %s, pigs_defect = %s
-                WHERE start_time = %s;
-            """
+            if platenumber == 'NULL':
+                query = """
+                    UPDATE events
+                    SET pigs_quantity = %s, pigs_defect = %s
+                    WHERE start_time = %s;
+                """
 
-            cursor.execute(
-                query, (pigs_quantity, pigs_defect, start_time))
+                cursor.execute(
+                    query, (pigs_quantity, pigs_defect, start_time))
+                print(f"Данные события {event_id} успешно обновлены")
+                with open('/pigs_counter/log.log', 'a+') as log:
+                    time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
+                    log.write(
+                        f'{time_str} - Данные события {event_id} успешно обновлены\n')
+            else:
+                query = """
+                    UPDATE events
+                    SET pigs_quantity = %s, pigs_defect = %s, platenumber = %s
+                    WHERE start_time = %s;
+                """
+
+                cursor.execute(
+                    query, (pigs_quantity, pigs_defect, platenumber, start_time))
+
         else:
             if platenumber == 'NULL':
                 query = """

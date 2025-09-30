@@ -258,12 +258,13 @@ def count_pigs(address):
                 # pigs_counter = count_true - count_false
                 # pigs_counter = pigs_counter if pigs_counter >= 0 else 0
                 result_counter = int(np.average(pigs_counter))
-                # if result_counter % 10 == 0 and rfid_received_message:
-                #    update_event_data(result_counter, 0, start_time_str, platenumber=payload)
-                # else:
-                #    update_event_data(result_counter, 0, start_time_str)
+                if result_counter % 10 == 0 and rfid_received_message:
+                    update_event_data(result_counter, 0, start_time_str, platenumber=str(
+                        payload, encoding='utf-8'))
+                else:
+                    update_event_data(result_counter, 0, start_time_str)
                 print(payload)
-                update_event_data(result_counter, 0, start_time_str)
+                # update_event_data(result_counter, 0, start_time_str)
 
                 # Visual
                 line_color = (0, 0, 255)
@@ -326,12 +327,12 @@ def count_pigs(address):
                 if result_counter == 0:
                     delete_event_data(start_time_str)
                 else:
-                    if rfid_received_message:
-                        update_event_data(
-                            result_counter, 0, start_time_str, end_time_str, str(payload, encoding='utf-8'))
-                    else:
-                        update_event_data(
-                            result_counter, 0, start_time_str, end_time_str)
+                    # if rfid_received_message:
+                    #     update_event_data(
+                    #         result_counter, 0, start_time_str, end_time_str, str(payload, encoding='utf-8'))
+                    # else:
+                    update_event_data(
+                        result_counter, 0, start_time_str, end_time_str)
                     send_mqtt_message(result_counter, start_time_str,
                                       end_time_str, platenumber=str(payload, encoding='utf-8'))
                 # Release videowriter
