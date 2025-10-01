@@ -130,12 +130,6 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str,
         # Выполняем запрос
         cursor.execute(query, tuple(values))
 
-        print(f"Данные события {event_id} успешно обновлены")
-        with open('/pigs_counter/log.log', 'a+') as log:
-            time_str = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
-            log.write(
-                f'{time_str} - Данные события {event_id} успешно обновлены\n')
-
         # Сохранить изменения и закрыть соединение
         connection.commit()
         cursor.close()
