@@ -257,7 +257,6 @@ def count_pigs(address):
                         payload, encoding='utf-8'))
                 else:
                     update_event_data(result_counter, 0, start_time_str)
-                print(payload)
                 # update_event_data(result_counter, 0, start_time_str)
 
                 # Visual
