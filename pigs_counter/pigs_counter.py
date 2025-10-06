@@ -17,7 +17,8 @@ from db_utils import (
     insert_event_data,
     update_event_data,
     delete_event_data,
-    get_event_id_by_start_time
+    get_event_id_by_start_time,
+    get_truck_id_by_start_time
 )
 from utils import (
     is_cross_of_line,
@@ -37,10 +38,12 @@ LADDER_CAM_ADDRESS = os.getenv('LADDER_CAM_ADDRESS')
 LADDER_MODEL_PATH = os.getenv('LADDER_MODEL_PATH')
 START_DELAY = int(os.getenv('START_DELAY'))
 END_DELAY = int(os.getenv('END_DELAY'))
+END_DELAY_LADDER = int(os.getenv('END_DELAY_LADDER'))
 LINE_COORDINATES = ast.literal_eval(os.getenv('LINE_COORDINATES'))
 ALLOWED_ZONE = np.array(ast.literal_eval(os.getenv('ALLOWED_ZONE')))
 MQTT_TOPIC = os.getenv('MQTT_TOPIC', 'python/mqtt')
 BROKER_HOST = os.getenv('BROKER_HOST', 'nanomq')
+RFID_STUB = 'Считывание...'
 payload = None
 rfid_received_message = False
 
@@ -85,18 +88,14 @@ def count_pigs(address):
 
         # Consecutive frames to start event
         consecutive_start_ladder = START_DELAY * fps
-        consecutive_end_pigs = END_DELAY * fps
         consecutive_end_ladder = END_DELAY * fps
-        consecutive_end_pig_human_from_ladder = 10 * fps
+        consecutive_end_rfid = END_DELAY_LADDER * fps
         start_flag = False
         before_event_delay_ladder = 0
-        after_event_delay_pigs = deque(maxlen=consecutive_end_pigs)
-        after_event_delay_pigs.append(0)
         after_event_delay_ladder = deque(maxlen=consecutive_end_ladder)
         after_event_delay_ladder.append(0)
-        after_event_delay_pig_human_from_ladder = deque(
-            maxlen=consecutive_end_pig_human_from_ladder)
-        after_event_delay_pig_human_from_ladder.append(0)
+        after_event_delay_rfid = deque(maxlen=consecutive_end_rfid)
+        after_event_delay_rfid.append(0)
 
         while True:
             frame = cam.get_frame()
@@ -161,16 +160,6 @@ def count_pigs(address):
             bounding_boxes_pig_human_from_ladder = np.array(
                 bounding_boxes_ladder_pig_human)[mask]
 
-            if len(bounding_boxes_pigs) != 0:  # objects detected
-                after_event_delay_pigs.append(0)
-            elif start_flag:
-                after_event_delay_pigs.append(1)
-
-            if len(bounding_boxes_pig_human_from_ladder) != 0:  # objects detected
-                after_event_delay_pig_human_from_ladder.append(0)
-            elif start_flag:
-                after_event_delay_pig_human_from_ladder.append(1)
-
             if len(bounding_boxes_ladder) != 0:
                 after_event_delay_ladder.append(0)
                 if not start_flag:
@@ -202,7 +191,7 @@ def count_pigs(address):
                     target_height = target_height1 + target_height2
                     out = cv2.VideoWriter(
                         filepath, fourcc, fps2, (target_width, target_height))
-                    insert_event_data('Считывание...', 'Пандус 1',
+                    insert_event_data(RFID_STUB, 'Пандус 1',
                                       start_time_str, result_counter, 0)
 
                 detections = Detections(xyxy=bounding_boxes_pigs, confidence=scores,
@@ -258,6 +247,11 @@ def count_pigs(address):
                 else:
                     update_event_data(result_counter, 0, start_time_str)
                 # update_event_data(result_counter, 0, start_time_str)
+                if rfid_received_message:
+                    after_event_delay_rfid.append(0)
+                else:
+                    after_event_delay_rfid.append(1)
+                rfid_received_message = False
 
                 # Visual
                 line_color = (0, 0, 255)
@@ -296,23 +290,20 @@ def count_pigs(address):
                     cv2.putText(detected_img, f'{pig_counter}', (50 + 170*id, 150), font,
                                 fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
-                empty_rate_pigs = after_event_delay_pigs.count(
-                    1) / len(after_event_delay_pigs)
-                after_event_delay_pigs_is_full = len(
-                    after_event_delay_pigs) == after_event_delay_pigs.maxlen
                 empty_rate_ladder = after_event_delay_ladder.count(
                     1) / len(after_event_delay_ladder)
                 after_event_delay_ladder_is_full = len(
                     after_event_delay_ladder) == after_event_delay_ladder.maxlen
-                empty_rate_pig_human_from_ladder = after_event_delay_pig_human_from_ladder.count(
-                    1) / len(after_event_delay_pig_human_from_ladder)
-                after_event_delay_human_from_ladder_is_full = len(
-                    after_event_delay_pig_human_from_ladder) == after_event_delay_pig_human_from_ladder.maxlen
+                rfid_is_scanned = get_truck_id_by_start_time(
+                    start_time_str) and get_truck_id_by_start_time(start_time_str) != RFID_STUB
+                empty_rate_rfid = after_event_delay_rfid.count(
+                    1) / len(after_event_delay_rfid)
+                after_event_delay_rfid_is_full = len(
+                    after_event_delay_rfid) == after_event_delay_rfid.maxlen
 
             if (start_flag is True
-                    # and empty_rate_pigs >= 0.9 and after_event_delay_pigs_is_full
-                    and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full):
-                # and empty_rate_pig_human_from_ladder >= 0.9 and after_event_delay_human_from_ladder_is_full):
+                    and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
+                         or (rfid_is_scanned and empty_rate_rfid >= 0.9 and after_event_delay_rfid_is_full))):  # по мметке если метка считана
                 print(f'Общее количество поросят: {result_counter}')
                 print_log(f'Общее количество поросят: {result_counter}')
                 end_time = datetime.now()
@@ -342,12 +333,10 @@ def count_pigs(address):
                 byte_track.reset()
                 coordinates.clear()
                 pigs_states.clear()
-                after_event_delay_pigs.clear()
-                after_event_delay_pigs.append(0)
                 after_event_delay_ladder.clear()
                 after_event_delay_ladder.append(0)
-                after_event_delay_pig_human_from_ladder.clear()
-                after_event_delay_pig_human_from_ladder.append(0)
+                after_event_delay_rfid.clear()
+                after_event_delay_rfid.append(0)
                 start_flag = False
                 rfid_received_message = False
             else:

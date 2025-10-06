@@ -227,4 +227,50 @@ def get_event_id_by_start_time(start_time: str):
     finally:
         if 'connection' in locals() and connection:
             connection.close()
-        return '0'
+
+
+def get_truck_id_by_start_time(start_time: str):
+    """
+    Get truck_id
+
+    :start_time: float - start time of event
+    """
+
+    try:
+        # Установить соединение
+        connection = psycopg2.connect(
+            host=DB_HOST,
+            port=PORT,
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
+        )
+
+        cursor = connection.cursor()
+        # Получение данных
+        query = """
+            SELECT truck_id FROM events WHERE start_time = %s;
+        """
+
+        cursor.execute(
+            query, (start_time,))
+
+        # Сохранить изменения и закрыть соединение
+        result = cursor.fetchone()
+        connection.commit()
+        cursor.close()
+
+        if result:
+            # предполагаем, что event_id — целое число
+            truck_id = str(result[0])
+        else:
+            truck_id = None
+        return truck_id
+
+    except Exception as e:
+        print(f"Ошибка подключения {e}")
+        return None
+
+    finally:
+        if 'connection' in locals() and connection:
+            connection.close()
