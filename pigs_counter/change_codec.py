@@ -17,8 +17,8 @@ def change_codec(filepath):
         filepath).lstrip('.'))  # Убираем точку из имени файла
     try:
         # command = ["ffmpeg", "-i", filepath, new_filename]
-        command = ['ffmpeg', '-hwaccel', 'cuda', '-i', filepath, "-r", "30",
-                   '-c:v', 'h264_nvenc', '-b:v', '2M', new_filename]
+        command = ['ffmpeg', '-hwaccel', 'cuda', '-i', filepath, '-c:v', 'h264_nvenc',
+                   '-b:v', '2M', "-fps_mode", "passthrough",  new_filename]
         subprocess.run(command, env=env, check=True)
         os.remove(filepath)  # Удаляем старый файл после успешной конвертации
         print(
