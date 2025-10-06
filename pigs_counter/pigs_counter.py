@@ -201,7 +201,7 @@ def count_pigs(address):
                     target_height2 = int((height2 / width2) * target_width)
                     target_height = target_height1 + target_height2
                     out = cv2.VideoWriter(
-                        filepath, fourcc, fps, (target_width, target_height))
+                        filepath, fourcc, fps2, (target_width, target_height))
                     insert_event_data('Считывание...', 'Пандус 1',
                                       start_time_str, result_counter, 0)
 
