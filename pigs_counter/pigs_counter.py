@@ -236,11 +236,11 @@ def count_pigs(address):
                                     # if count_states_single_state(pigs_states[tracker_id], False) == len(LINE_COORDINATES) - 1:
                                     pigs_counter[id] -= 1
 
-                # count_true = count_states(pigs_states, True)
-                # count_false = count_states(pigs_states, False)
-                # pigs_counter = count_true - count_false
-                # pigs_counter = pigs_counter if pigs_counter >= 0 else 0
-                result_counter = int(np.average(pigs_counter))
+                count_true = count_states(pigs_states, True)
+                count_false = count_states(pigs_states, False)
+                pigs_counter = count_true - count_false
+                result_counter = pigs_counter if pigs_counter >= 0 else 0
+                # result_counter = int(np.average(pigs_counter))
                 if result_counter % 10 == 0 and rfid_received_message:
                     update_event_data(result_counter, 0, start_time_str, truck_id=str(
                         payload, encoding='utf-8'))
