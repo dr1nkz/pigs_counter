@@ -238,8 +238,8 @@ def count_pigs(address):
 
                 count_true = count_states(pigs_states, True)
                 count_false = count_states(pigs_states, False)
-                pigs_counter = count_true - count_false
-                result_counter = pigs_counter if pigs_counter >= 0 else 0
+                result_counter = count_true - count_false
+                result_counter = result_counter if result_counter >= 0 else 0
                 # result_counter = int(np.average(pigs_counter))
                 if result_counter % 10 == 0 and rfid_received_message:
                     update_event_data(result_counter, 0, start_time_str, truck_id=str(
@@ -286,9 +286,11 @@ def count_pigs(address):
                 # counter on the frame
                 cv2.rectangle(detected_img, (50, 70), (560, 170),
                               background_color, thickness=cv2.FILLED)
-                for id, pig_counter in enumerate(pigs_counter):
-                    cv2.putText(detected_img, f'{pig_counter}', (50 + 170*id, 150), font,
-                                fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
+                # for id, pig_counter in enumerate(pigs_counter):
+                #     cv2.putText(detected_img, f'{pig_counter}', (50 + 170*id, 150), font,
+                #                 fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
+                cv2.putText(detected_img, f'{result_counter}', (50 + 170*id, 150), font,
+                            fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
                 empty_rate_ladder = after_event_delay_ladder.count(
                     1) / len(after_event_delay_ladder)
