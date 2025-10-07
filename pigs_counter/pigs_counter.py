@@ -38,7 +38,7 @@ LADDER_CAM_ADDRESS = os.getenv('LADDER_CAM_ADDRESS')
 LADDER_MODEL_PATH = os.getenv('LADDER_MODEL_PATH')
 START_DELAY = int(os.getenv('START_DELAY'))
 END_DELAY = int(os.getenv('END_DELAY'))
-END_DELAY_LADDER = int(os.getenv('END_DELAY_LADDER'))
+END_DELAY_RFID = int(os.getenv('END_DELAY_RFID'))
 LINE_COORDINATES = ast.literal_eval(os.getenv('LINE_COORDINATES'))
 ALLOWED_ZONE = np.array(ast.literal_eval(os.getenv('ALLOWED_ZONE')))
 MQTT_TOPIC = os.getenv('MQTT_TOPIC', 'python/mqtt')
@@ -89,13 +89,14 @@ def count_pigs(address):
         # Consecutive frames to start event
         consecutive_start_ladder = START_DELAY * fps
         consecutive_end_ladder = END_DELAY * fps
-        consecutive_end_rfid = END_DELAY_LADDER * fps
+        consecutive_end_rfid = END_DELAY_RFID
         start_flag = False
         before_event_delay_ladder = 0
         after_event_delay_ladder = deque(maxlen=consecutive_end_ladder)
         after_event_delay_ladder.append(0)
         after_event_delay_rfid = deque(maxlen=consecutive_end_rfid)
         after_event_delay_rfid.append(0)
+        last_rfid_check = time.time()
 
         while True:
             frame = cam.get_frame()
@@ -247,11 +248,15 @@ def count_pigs(address):
                 else:
                     update_event_data(result_counter, 0, start_time_str)
                 # update_event_data(result_counter, 0, start_time_str)
-                if rfid_received_message:
-                    after_event_delay_rfid.append(0)
-                else:
-                    after_event_delay_rfid.append(1)
-                rfid_received_message = False
+
+                now = time.time()
+                if now - last_rfid_check >= 1.0:
+                    if rfid_received_message:
+                        after_event_delay_rfid.append(0)
+                    else:
+                        after_event_delay_rfid.append(1)
+                    rfid_received_message = False  # сброс
+                    last_rfid_check = now
 
                 # Visual
                 line_color = (0, 0, 255)
