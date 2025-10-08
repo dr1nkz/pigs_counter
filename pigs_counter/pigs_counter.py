@@ -289,7 +289,7 @@ def count_pigs(address):
                 # for id, pig_counter in enumerate(pigs_counter):
                 #     cv2.putText(detected_img, f'{pig_counter}', (50 + 170*id, 150), font,
                 #                 fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
-                cv2.putText(detected_img, f'{result_counter}', (50 + 170*id, 150), font,
+                cv2.putText(detected_img, f'{result_counter}', (50 + 170, 150), font,
                             fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
                 empty_rate_ladder = after_event_delay_ladder.count(
