@@ -237,11 +237,11 @@ def count_pigs(address):
                                     # if count_states_single_state(pigs_states[tracker_id], False) == len(LINE_COORDINATES) - 1:
                                     pigs_counter[id] -= 1
 
-                # count_true = count_states(pigs_states, True)
-                # count_false = count_states(pigs_states, False)
-                # pigs_counter = count_true - count_false
-                # pigs_counter = pigs_counter if pigs_counter >= 0 else 0
-                result_counter = int(np.average(pigs_counter))
+                count_true = count_states(pigs_states, True)
+                count_false = count_states(pigs_states, False)
+                result_counter = count_true - count_false
+                result_counter = result_counter if result_counter >= 0 else 0
+                # result_counter = int(np.average(pigs_counter))
                 if result_counter % 10 == 0 and rfid_received_message:
                     update_event_data(result_counter, 0, start_time_str, truck_id=str(
                         payload, encoding='utf-8'))
@@ -291,9 +291,11 @@ def count_pigs(address):
                 # counter on the frame
                 cv2.rectangle(detected_img, (50, 70), (560, 170),
                               background_color, thickness=cv2.FILLED)
-                for id, pig_counter in enumerate(pigs_counter):
-                    cv2.putText(detected_img, f'{pig_counter}', (50 + 170*id, 150), font,
-                                fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
+                # for id, pig_counter in enumerate(pigs_counter):
+                #     cv2.putText(detected_img, f'{pig_counter}', (50 + 170*id, 150), font,
+                #                 fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
+                cv2.putText(detected_img, f'{result_counter}', (50 + 170, 150), font,
+                            fontScale*3, (0, 255, 0), thickness*3, cv2.LINE_AA)
 
                 empty_rate_ladder = after_event_delay_ladder.count(
                     1) / len(after_event_delay_ladder)
@@ -307,8 +309,9 @@ def count_pigs(address):
                     after_event_delay_rfid) == after_event_delay_rfid.maxlen
 
             if (start_flag is True
-                    and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
-                         or (rfid_is_scanned and empty_rate_rfid >= 0.9 and after_event_delay_rfid_is_full))):  # по мметке если метка считана
+                    and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full):
+                # and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
+                #      or (rfid_is_scanned and empty_rate_rfid >= 0.9 and after_event_delay_rfid_is_full))):  # по мметке если метка считана
                 print(f'Общее количество поросят: {result_counter}')
                 print_log(f'Общее количество поросят: {result_counter}')
                 end_time = datetime.now()
