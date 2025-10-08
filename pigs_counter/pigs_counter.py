@@ -5,6 +5,7 @@ from datetime import datetime
 import subprocess
 import time
 import ast
+import urllib
 
 import supervision as sv
 import cv2
@@ -318,6 +319,13 @@ def count_pigs(address):
                 print_log(f'Общее количество поросят: {result_counter}')
                 end_time = datetime.now()
                 end_time_str = end_time.strftime(r'%Y-%m-%d %H:%M:%S')
+                end_time_hms = end_time.strftime(r'%H.%M.%S')
+                filepath_end = (
+                    f'{directory}/.{start_time_dmy} {start_time_hms}-{end_time_hms}.mp4')
+
+                filename_end = os.path.basename(filepath_end).lstrip(".")
+                filename_end = urllib.parse.quote(filename_end)
+                video_url = f"http://192.168.1.116/files/data/{start_time_dmy}/{filename_end}"
                 if result_counter == 0:
                     delete_event_data(start_time_str)
                 else:
@@ -326,16 +334,13 @@ def count_pigs(address):
                     #         result_counter, 0, start_time_str, end_time_str, str(payload, encoding='utf-8'))
                     # else:
                     update_event_data(
-                        result_counter, 0, start_time_str, end_time_str)
+                        result_counter, 0, start_time_str, end_time_str, video_url=video_url)
                     send_mqtt_message(result_counter, start_time_str,
                                       end_time_str, get_truck_id_by_start_time(start_time_str))
                 # Release videowriter
                 out.release()
                 out = None
-                end_time_hms = end_time.strftime(r'%H.%M.%S')
                 event_id = get_event_id_by_start_time(start_time_str)
-                filepath_end = (
-                    f'{directory}/.{start_time_dmy} {start_time_hms}-{end_time_hms}.mp4')
                 if os.path.isfile(filepath):
                     os.rename(filepath, filepath_end)
                 # Reset variables

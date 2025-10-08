@@ -64,7 +64,7 @@ def insert_event_data(truck_id: str, place: str, start_time: str, pigs_quantity:
 
 
 def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str,
-                      end_time: str = 'NULL', truck_id: str = 'NULL'):
+                      end_time: str = 'NULL', truck_id: str = 'NULL', video_url: str = 'NULL'):
     """
     Update event data
 
@@ -110,6 +110,11 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str,
         if truck_id != 'NULL' and truck_id is not None:
             fields.append('truck_id = %s')
             values.append(truck_id)
+
+        # Обновляем video_url только если оно есть
+        if video_url != 'NULL' and video_url is not None:
+            fields.append('video_url = %s')
+            values.append(video_url)
 
         # Подтягиваем truck_plate и trailer_plate с COALESCE
         fields.append(
