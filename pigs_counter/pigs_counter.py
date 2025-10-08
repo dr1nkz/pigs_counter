@@ -24,7 +24,7 @@ from utils import (
     is_cross_of_line,
     print_log,
     count_states,
-    count_states_single_state
+    count_states_single_state,
 )
 from mqtt_notificator import send_mqtt_message
 from camera_thread import CameraThread
@@ -311,7 +311,7 @@ def count_pigs(address):
 
             if (start_flag is True and
                     ((empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full) or
-                     get_truck_id_by_start_time(start_time_str) != str(payload, encoding='utf-8'))):
+                     (payload is not None and get_truck_id_by_start_time(start_time_str) != str(payload, encoding='utf-8')))):
                 # and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
                 #      or (rfid_is_scanned and empty_rate_rfid >= 0.9 and after_event_delay_rfid_is_full))):  # по мметке если метка считана
                 print(f'Общее количество поросят: {result_counter}')
@@ -349,6 +349,7 @@ def count_pigs(address):
                 after_event_delay_rfid.append(0)
                 start_flag = False
                 rfid_received_message = False
+                payload = None
             else:
                 font = cv2.FONT_HERSHEY_SIMPLEX  # font
                 fontScale = 1  # fontScale
