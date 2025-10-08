@@ -326,7 +326,7 @@ def count_pigs(address):
                     update_event_data(
                         result_counter, 0, start_time_str, end_time_str)
                     send_mqtt_message(result_counter, start_time_str,
-                                      end_time_str, truck_id=str(payload, encoding='utf-8'))
+                                      end_time_str, truck_id=get_truck_id_by_start_time(start_time_str))
                 # Release videowriter
                 out.release()
                 out = None
