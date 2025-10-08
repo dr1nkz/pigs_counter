@@ -309,9 +309,9 @@ def count_pigs(address):
                     after_event_delay_rfid) == after_event_delay_rfid.maxlen
 
             if (start_flag is True
-                    and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full):
-                # and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
-                #      or (rfid_is_scanned and empty_rate_rfid >= 0.9 and after_event_delay_rfid_is_full))):  # по мметке если метка считана
+                    # and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full):
+                and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
+                     or (rfid_is_scanned and empty_rate_rfid >= 0.9 and after_event_delay_rfid_is_full))):  # по мметке если метка считана
                 print(f'Общее количество поросят: {result_counter}')
                 print_log(f'Общее количество поросят: {result_counter}')
                 end_time = datetime.now()
