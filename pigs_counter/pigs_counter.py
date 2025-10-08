@@ -242,7 +242,8 @@ def count_pigs(address):
                 result_counter = count_true - count_false
                 result_counter = result_counter if result_counter >= 0 else 0
                 # result_counter = int(np.average(pigs_counter))
-                if result_counter % 10 == 0 and rfid_received_message:
+                if (rfid_received_message and
+                        get_truck_id_by_start_time(start_time_str) == RFID_STUB):
                     update_event_data(result_counter, 0, start_time_str, truck_id=str(
                         payload, encoding='utf-8'))
                 else:
@@ -308,10 +309,11 @@ def count_pigs(address):
                 after_event_delay_rfid_is_full = len(
                     after_event_delay_rfid) == after_event_delay_rfid.maxlen
 
-            if (start_flag is True
-                    # and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full):
-                and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
-                     or (rfid_is_scanned and empty_rate_rfid >= 0.9 and after_event_delay_rfid_is_full))):  # по мметке если метка считана
+            if (start_flag is True and
+                    ((empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full) or
+                     get_truck_id_by_start_time(start_time_str) != str(payload, encoding='utf-8'))):
+                # and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
+                #      or (rfid_is_scanned and empty_rate_rfid >= 0.9 and after_event_delay_rfid_is_full))):  # по мметке если метка считана
                 print(f'Общее количество поросят: {result_counter}')
                 print_log(f'Общее количество поросят: {result_counter}')
                 end_time = datetime.now()
@@ -326,7 +328,7 @@ def count_pigs(address):
                     update_event_data(
                         result_counter, 0, start_time_str, end_time_str)
                     send_mqtt_message(result_counter, start_time_str,
-                                      end_time_str, truck_id=str(payload, encoding='utf-8'))
+                                      end_time_str, get_truck_id_by_start_time(start_time_str))
                 # Release videowriter
                 out.release()
                 out = None
