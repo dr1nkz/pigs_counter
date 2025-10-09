@@ -398,10 +398,10 @@ def on_message(client, userdata, msg):
     The callback for when a PUBLISH message is received from the server.
     """
     if (msg.topic == MQTT_TOPIC):
-        print(msg.payload)
-    global rfid_received_message, payload
-    rfid_received_message = True
-    payload = msg.payload
+        # print(msg.payload)
+        global rfid_received_message, payload
+        rfid_received_message = True
+        payload = msg.payload
 
 
 if __name__ == '__main__':
