@@ -22,7 +22,7 @@
         "tab": "894abbe699040ef2",
         "order": 1,
         "disp": false,
-        "width": "23",
+        "width": "26",
         "collapse": false,
         "className": ""
     },
@@ -56,18 +56,18 @@
             "customTheme": {
                 "name": "Untitled Theme 1",
                 "default": "#4B7930",
-                "baseColor": "#8ca3d9",
+                "baseColor": "#7083d2",
                 "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
                 "reset": false
             },
             "themeState": {
                 "base-color": {
                     "default": "#62749d",
-                    "value": "#8ca3d9",
+                    "value": "#7083d2",
                     "edited": true
                 },
                 "page-titlebar-backgroundColor": {
-                    "value": "#8ca3d9",
+                    "value": "#7083d2",
                     "edited": false
                 },
                 "page-backgroundColor": {
@@ -76,10 +76,10 @@
                 },
                 "page-sidebar-backgroundColor": {
                     "value": "#ffffff",
-                    "edited": false
+                    "edited": true
                 },
                 "group-textColor": {
-                    "value": "#c6d1ec",
+                    "value": "#aab5e4",
                     "edited": false
                 },
                 "group-borderColor": {
@@ -115,10 +115,10 @@
             }
         },
         "site": {
-            "name": "Node-RED Dashboard",
+            "name": "Подсчет количества животных при приемке на ООО \"МПК Атяшевский\"",
             "hideToolbar": "false",
             "allowSwipe": "false",
-            "lockMenu": "false",
+            "lockMenu": "true",
             "allowTempTheme": "true",
             "dateFormat": "DD/MM/YYYY",
             "sizes": {
@@ -136,7 +136,7 @@
     {
         "id": "22c802fe2e9fb766",
         "type": "ui_tab",
-        "name": "Cameras",
+        "name": "Камеры",
         "icon": "dashboard",
         "order": 2,
         "disabled": false,
@@ -145,115 +145,155 @@
     {
         "id": "b609199da19ad8a0",
         "type": "ui_group",
-        "name": "Cameras",
+        "name": "Камеры",
         "tab": "22c802fe2e9fb766",
         "order": 1,
         "disp": false,
-        "width": "26",
+        "width": "29",
         "collapse": false,
         "className": ""
     },
     {
-        "id": "184e08d38ff3c438",
+        "id": "d45898b2c897236c",
         "type": "postgresdb",
         "cfgname": "",
-        "hostname": "172.26.0.4",
+        "hostname": "172.26.1.4",
         "port": "5432",
         "db": "postgres_db",
         "ssl": false
     },
     {
-        "id": "6b0dc530bd054917",
+        "id": "0f4ce176c69d3605",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
-        "order": 2,
-        "width": 2,
+        "order": 3,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "e27905450c17859f",
+        "id": "7473d1bfeda910bb",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 6,
-        "width": 4,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "1dbb3eedc8717272",
+        "id": "9483d22cbb302179",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
-        "order": 9,
-        "width": 4,
+        "order": 8,
+        "width": 3,
         "height": 1
     },
     {
-        "id": "ba822299f8ccc896",
+        "id": "1f906be2c6d11dc7",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 10,
-        "width": 4,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "a10fc7899a27d1e7",
+        "id": "046c979aba1ff635",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 11,
-        "width": 4,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "4ab8c14f44abe295",
+        "id": "e5eb0b1faad9a0ad",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 12,
-        "width": 4,
+        "width": 3,
         "height": 1
     },
     {
-        "id": "4c127429d4334c93",
+        "id": "0ab14d6ebc253705",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 13,
-        "width": 4,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "f8612cb5a8622110",
+        "id": "ee5c304e6236d46e",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 14,
-        "width": 4,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "79223c5fa234c15d",
+        "id": "769f308dc94a91c1",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 15,
-        "width": 4,
+        "width": 3,
         "height": 1
     },
     {
-        "id": "c833c1cb07e2883a",
+        "id": "9c9ce94721dfeab4",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 16,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "6ade4a24be26f101",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 17,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "e9a6c418eaae7188",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 18,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "25c5af5aeeb2cb09",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 19,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "da2c55df7fc99b3d",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
@@ -263,17 +303,17 @@
         "height": 1
     },
     {
-        "id": "a918b283cd97f6b9",
+        "id": "76f745bfe39ea02f",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 21,
-        "width": 1,
+        "width": 3,
         "height": 1
     },
     {
-        "id": "1f0be13e8d911601",
+        "id": "64725e76cb0163a7",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
@@ -283,7 +323,7 @@
         "height": 1
     },
     {
-        "id": "6f96a2d9f25d18b7",
+        "id": "2596fbc88b2b3cc2",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
@@ -293,17 +333,17 @@
         "height": 1
     },
     {
-        "id": "70c64087cb8b6292",
+        "id": "4ae5f2b491138ac8",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 24,
-        "width": 1,
+        "width": 3,
         "height": 1
     },
     {
-        "id": "aa639e70e83a160a",
+        "id": "6b961a47b8aec580",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
@@ -313,813 +353,393 @@
         "height": 1
     },
     {
-        "id": "871a7899d51d5f16",
+        "id": "78afe2f81aa5719a",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 26,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "4a5720d79e672b6a",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 27,
-        "width": 21,
+        "width": 3,
         "height": 1
     },
     {
-        "id": "49ed12e5595c4b43",
+        "id": "addd284ef69a3a13",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 28,
-        "width": 4,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "f96ec2dfd92b797c",
+        "id": "ccd4b354aa25b648",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 29,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "b30bf2c20e0ad0c6",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 30,
-        "width": 4,
+        "width": 3,
         "height": 1
     },
     {
-        "id": "3813b5aed7b2681e",
+        "id": "60e5b494bb0d385f",
+        "type": "ui_spacer",
+        "z": "cebe0263a986f9c3",
+        "name": "spacer",
+        "group": "b609199da19ad8a0",
+        "order": 31,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d7a7b730fb9d0857",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 32,
-        "width": 12,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "76939de0d7242384",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 33,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "6b001c96b902bd38",
+        "id": "9cba180707f4a23f",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 34,
-        "width": 12,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "da0f499b8c0e0ced",
+        "id": "f43868e2a973609a",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 35,
-        "width": 12,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "965188cbe42789bb",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 36,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "a459076aa398cb70",
+        "id": "cfe08cc32f44175c",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 37,
-        "width": 12,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "846800da33c91db3",
+        "id": "2922db633d19274a",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 38,
-        "width": 12,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "f1f24ab89db47f7c",
+        "id": "b99544d29ee74fd2",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 39,
-        "width": 12,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "c3be653ce2d9b6af",
+        "id": "8190e254595bcc9c",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 40,
-        "width": 12,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "84a1be37791713f4",
+        "id": "c3b07eebff3e7084",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 41,
-        "width": 12,
+        "width": 1,
         "height": 1
     },
     {
-        "id": "4ccce11a5ff52108",
+        "id": "36685a2c0747a03f",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 42,
-        "width": 12,
+        "width": 27,
         "height": 1
     },
     {
-        "id": "4ddcbc1dcdc2119a",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 43,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "c7721acb22b65755",
+        "id": "855ae3ef2c6032ef",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 44,
-        "width": 12,
+        "width": 23,
         "height": 1
     },
     {
-        "id": "354836843dac02e3",
+        "id": "ce7681a768330897",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 45,
-        "width": 12,
+        "width": 27,
         "height": 1
     },
     {
-        "id": "2a50f05e74f2461f",
+        "id": "0fd528f9d51fc521",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 46,
-        "width": 12,
+        "width": 27,
         "height": 1
     },
     {
-        "id": "927c00b9964419fb",
+        "id": "484d3dbd4aa6be22",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 47,
-        "width": 12,
+        "width": 27,
         "height": 1
     },
     {
-        "id": "98e564d9a2504224",
+        "id": "6280972249c47eb7",
         "type": "ui_spacer",
         "z": "cebe0263a986f9c3",
         "name": "spacer",
         "group": "b609199da19ad8a0",
         "order": 48,
-        "width": 12,
+        "width": 28,
         "height": 1
     },
     {
-        "id": "ba745963805c873b",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 49,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "6f9db1e180c49e13",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 50,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "17949327fe1ef97f",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 51,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "273e2a383f0cae37",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 52,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "e4777bade9aa95a4",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 53,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "61076bcaed5ad584",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 55,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "5dbc07da71b825c6",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 56,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "2273e88713c8875d",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 57,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "9026bddc40970e11",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 58,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "51f785436bb89d22",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 59,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "d31f3a88104ce3f5",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 60,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "760433b832260618",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 61,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "5a2a36fdb23c175e",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 62,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "a1d03e0a37c190b2",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 63,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "2566e685f5055446",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 64,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "65c8aca3f35416e3",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 65,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "ec015e97a39cdebf",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 66,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "c923586908b15a8f",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 67,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "432a8171491ed99c",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 68,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "57f58baade0a736a",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 69,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "73ea6f4cb90cf143",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 70,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "2aa33fcfdac95e38",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 71,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "95293cf0f68fdb88",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 72,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "712f59c694740231",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 73,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "426238a10e421cec",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 74,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "561747ddd307159a",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 75,
-        "width": 12,
-        "height": 1
-    },
-    {
-        "id": "01f1852b1b34f551",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 76,
-        "width": 26,
-        "height": 1
-    },
-    {
-        "id": "f36ef59fa84b1eca",
-        "type": "ui_spacer",
-        "z": "cebe0263a986f9c3",
-        "name": "spacer",
-        "group": "b609199da19ad8a0",
-        "order": 77,
-        "width": 26,
-        "height": 1
-    },
-    {
-        "id": "5661d82c549dd875",
+        "id": "ca0ffbc845924e3c",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
-        "order": 6,
-        "width": 1,
+        "order": 8,
+        "width": 26,
         "height": 1
     },
     {
-        "id": "e7ba87fcc76429a7",
+        "id": "311b5bfe0feb3196",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 9,
-        "width": 23,
+        "width": 26,
         "height": 1
     },
     {
-        "id": "2c936934bcdc7851",
+        "id": "8ccadc22d5111e0e",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 10,
-        "width": 23,
+        "width": 26,
         "height": 1
     },
     {
-        "id": "b7901365d9ebb008",
+        "id": "bf10f547c2158d4b",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 11,
-        "width": 23,
+        "width": 26,
         "height": 1
     },
     {
-        "id": "484c4c00f850b6dc",
+        "id": "a35c10d39ddfabd1",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 12,
-        "width": 23,
+        "width": 26,
         "height": 1
     },
     {
-        "id": "fe1c2592e91c6cf3",
+        "id": "2ae9b20a7d759449",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 13,
-        "width": 23,
+        "width": 26,
         "height": 1
     },
     {
-        "id": "00df0a4d12fae8a4",
+        "id": "155649fa45bd1685",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 14,
-        "width": 23,
+        "width": 26,
         "height": 1
     },
     {
-        "id": "271f55ec4237fdec",
+        "id": "4faa975607d076aa",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 15,
-        "width": 23,
+        "width": 26,
         "height": 1
     },
     {
-        "id": "2875bba55f85604e",
+        "id": "06aa9279559eeafa",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 16,
-        "width": 23,
+        "width": 26,
         "height": 1
     },
     {
-        "id": "f9503b9fc36174b5",
+        "id": "9920d42bb71f024e",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 17,
-        "width": 23,
+        "width": 3,
         "height": 1
     },
     {
-        "id": "3d87ffd100206ec7",
+        "id": "272930c699a0a4a7",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 19,
-        "width": 23,
+        "width": 2,
         "height": 1
     },
     {
-        "id": "4a6341e40696428a",
+        "id": "8fd83a29e4b91bc7",
+        "type": "ui_spacer",
+        "z": "92226df4e340c706",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 21,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "708af2ca12219606",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 22,
-        "width": 23,
+        "width": 3,
         "height": 1
     },
     {
-        "id": "b0930e2568086849",
+        "id": "31764dbbc051f0e6",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
-        "order": 23,
-        "width": 7,
+        "order": 24,
+        "width": 3,
         "height": 1
     },
     {
-        "id": "9c86238dd0d0bfc7",
+        "id": "a0b23f8a4195af13",
+        "type": "ui_spacer",
+        "z": "92226df4e340c706",
+        "name": "spacer",
+        "group": "b5ccc75c0e8c4463",
+        "order": 25,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "aa63dc3481cfb05c",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 26,
-        "width": 4,
+        "width": 3,
         "height": 1
     },
     {
-        "id": "a5a7eaaee4579ac2",
+        "id": "570bfb2c9ddad8cf",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 27,
-        "width": 7,
+        "width": 3,
         "height": 1
     },
     {
-        "id": "99d11976314757bf",
+        "id": "54bd01ef4a74ae2c",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
         "order": 28,
-        "width": 4,
-        "height": 1
-    },
-    {
-        "id": "b206097823a98812",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 29,
-        "width": 7,
-        "height": 1
-    },
-    {
-        "id": "6830be0d34e4b86d",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 31,
-        "width": 7,
-        "height": 1
-    },
-    {
-        "id": "c99402abe0249261",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 32,
         "width": 10,
         "height": 1
     },
     {
-        "id": "d2eba837cc02188a",
+        "id": "ed0b4488ba25ca50",
         "type": "ui_spacer",
         "z": "92226df4e340c706",
         "name": "spacer",
         "group": "b5ccc75c0e8c4463",
-        "order": 33,
-        "width": 7,
-        "height": 1
-    },
-    {
-        "id": "562db63d108df465",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 34,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "c06c2b608af529e2",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 35,
-        "width": 7,
-        "height": 1
-    },
-    {
-        "id": "307666204a40c40a",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 36,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "cb9dc5ea204af050",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 37,
-        "width": 7,
-        "height": 1
-    },
-    {
-        "id": "9e35e19e1a887174",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 38,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "e30edac52db51a75",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 39,
-        "width": 7,
-        "height": 1
-    },
-    {
-        "id": "d8cd4077b4915f01",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 40,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "e09e4b242f3dfac8",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 41,
-        "width": 7,
-        "height": 1
-    },
-    {
-        "id": "ed7d46e8c89da936",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 42,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "6ea8c39f4f8f2ba0",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 43,
-        "width": 7,
-        "height": 1
-    },
-    {
-        "id": "99319b52da696a3e",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 44,
-        "width": 10,
-        "height": 1
-    },
-    {
-        "id": "99153b5acd9fcc56",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 45,
-        "width": 7,
-        "height": 1
-    },
-    {
-        "id": "db94161a6865fda2",
-        "type": "ui_spacer",
-        "z": "92226df4e340c706",
-        "name": "spacer",
-        "group": "b5ccc75c0e8c4463",
-        "order": 46,
-        "width": 10,
+        "order": 30,
+        "width": 6,
         "height": 1
     },
     {
@@ -1129,7 +749,7 @@
         "name": "",
         "group": "b5ccc75c0e8c4463",
         "order": 5,
-        "width": 4,
+        "width": 5,
         "height": 1,
         "passthru": false,
         "label": "Сформировать",
@@ -1154,64 +774,22 @@
         "id": "11c335f9b3db6c0c",
         "type": "ui_template",
         "z": "92226df4e340c706",
+        "d": true,
         "group": "b5ccc75c0e8c4463",
         "name": "Подсчет заголовок",
         "order": 1,
-        "width": 23,
+        "width": 26,
         "height": 1,
-        "format": "<table id=\"table1\" height=\"100%\" style=\"border-bottom: 1px solid;\">\n    <tbody>\n        <tr>\n            <th style=\"font-size: 23px; text-align: left;  \"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\"\n            </th>\n        </tr>\n    </tbody>\n</table>\n<!-- <div style=\"\"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\" </div> -->",
+        "format": "<table id=\"table1\" height=\"100%\" style=\"border-bottom: 1px solid;\">\n    <tbody>\n        <tr>\n            <th style=\"font-family:'Courier New', monospace; font-size: 23px; text-align: left;  \"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\"\n            </th>\n        </tr>\n    </tbody>\n</table>\n<!-- <div style=\"\"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\" </div> -->",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 190,
-        "y": 80,
+        "x": 130,
+        "y": 40,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "0eb6574948aeea61",
-        "type": "fs-list",
-        "z": "92226df4e340c706",
-        "name": "",
-        "path": "payload",
-        "pathType": "msg",
-        "pattern": "*",
-        "patternType": "str",
-        "filter": "all",
-        "recursive": false,
-        "follow": true,
-        "property": "payload",
-        "propertyType": "msg",
-        "x": 1020,
-        "y": 640,
-        "wires": [
-            [
-                "be30497b1fa9bca4",
-                "5a97f5f938015f64"
-            ]
-        ]
-    },
-    {
-        "id": "6e534272610f41c9",
-        "type": "function",
-        "z": "92226df4e340c706",
-        "name": "function 71",
-        "func": "msg.payload = '/data/static/Reports'\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 850,
-        "y": 640,
-        "wires": [
-            [
-                "0eb6574948aeea61"
-            ]
         ]
     },
     {
@@ -1223,12 +801,12 @@
         "tosidebar": true,
         "console": true,
         "tostatus": true,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "payload",
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "path",
         "statusType": "msg",
-        "x": 570,
-        "y": 500,
+        "x": 1030,
+        "y": 640,
         "wires": []
     },
     {
@@ -1242,15 +820,15 @@
         "order": 3,
         "width": 5,
         "height": 1,
-        "passthru": true,
+        "passthru": false,
         "mode": "datetime-local",
         "delay": 300,
         "topic": "topic",
-        "sendOnBlur": true,
+        "sendOnBlur": false,
         "className": "",
         "topicType": "msg",
-        "x": 1070,
-        "y": 40,
+        "x": 1010,
+        "y": 20,
         "wires": [
             [
                 "cd448ce96f9f5935"
@@ -1268,15 +846,15 @@
         "order": 4,
         "width": 5,
         "height": 1,
-        "passthru": true,
+        "passthru": false,
         "mode": "datetime-local",
         "delay": 300,
         "topic": "topic",
-        "sendOnBlur": true,
+        "sendOnBlur": false,
         "className": "",
         "topicType": "msg",
-        "x": 1070,
-        "y": 80,
+        "x": 1010,
+        "y": 60,
         "wires": [
             [
                 "3b8574b55e09ca6c"
@@ -1289,16 +867,16 @@
         "z": "92226df4e340c706",
         "group": "b5ccc75c0e8c4463",
         "name": "ReportTable",
-        "order": 8,
-        "width": 23,
-        "height": 10,
-        "format": "\n<style>\n    #table2, #table2 td{\n        height: 48px;\n        font-size: 16px;\n        padding-left: 10px;\n        border: 1px solid black;\n        border-collapse: collapse;\n    }\n    .scroll-table-body {\n        height: 400px; \n        overflow-x: auto;\n        overflow-y: auto;\n        table-layout: fixed;\n        /* margin-top: 0px;\n        margin-bottom: 20px;\n        border-bottom: 1px solid #eee; --> */\n    }\n    ::-webkit-scrollbar {\n        display: yes;\n        /* width: 11px; */\n    }\n    ::-webkit-scrollbar-track {\n        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n    }\n    ::-webkit-scrollbar-thumb {\n        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n    }\n    .scroll-table-head table {\n        width:100%;\n        table-layout: fixed;\n        border: none;\n    }\n    .scroll-table thead th {\n        font-weight: bold;  \n        text-align: left;\n        border: none;\n        padding: 10px 15px;\n        background: #d8d8d8;\n        font-size: 14px;\n        border-left: 1px solid #ddd;\n        border-right: 1px solid #ddd;\n    }\n    .scroll-table tbody td {\n        width:101%;\n        text-align: left;\n        border-left: 1px solid #ddd;\n        border-right: 1px solid #ddd;\n        padding: 10px 15px;\n        font-size: 14px;\n        vertical-align: top;\n        \n    }\n    th, td{      \n        font-size: 14px;\n        heigth: 48px;\n        /* width: 170px; */\n        font-weight: normal;\n    }\n</style>\n\n<div class=\"scroll-table-head\">\n    <table id=\"table\" style=\"border: 1px solid black; border-collapse: collapse;\">\n        <thead>\n            <tr style=\"border: 1px solid black; border-collapse: collapse;\">\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px; width: 170px;\">А/М\n                    Номер разгрузки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px; width: 170px;\">\n                    Фото госномера прицепа а/м</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px; width: 170px;\">\n                    Место разгрузки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px; width: 170px;\">\n                    Дата/время начала приемки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px; width: 170px;\">\n                    Дата/время окончания приемки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px; width: 170px;\">\n                    Количество принятых животных</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px; width: 170px;\">\n                    Cанитарный брак</th>\n            </tr>\n        </thead>\n    </table>\n    <div class=\"scroll-table-body\"> \n        <table id=\"table2\" style=\"border: 1px solid black; border-collapse: collapse;\">\n            <!-- <tbody style=\"\">\n                <tr ng-repeat=\"row in msg.payload[0]\" style=\"height:48px; border: 1px solid black; border-collapse: collapse;\">\n                    <td ng-repeat=\"item in row\" style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px;\">{{item}}</td>\n                </tr>\n            </tbody> -->\n            <!-- <tbody>\n                <tr ng-repeat=\"row in msg.payload\" style=\"height:48px; border: 3px solid gray; border-collapse: collapse;\">\n                    <td ng-repeat=\"item in row\" style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px;\">\n                        {{item}}</td>\n                </tr>\n            </tbody> -->\n            <tbody></tbody>\n        </table>\n        <script>\n            (function(scope) {\n                scope.$watch('msg.payload[0]', function(newVal){\n                    if (newVal && Array.isArray(newVal)) {\n                        createTableFromArray(newVal);\n                    }\n                });\n                function createTableFromArray(data) {\n                    const tableBody = document.getElementById(\"table2\").getElementsByTagName('tbody')[0];\n                    \n                    // Очищаем таблицу перед добавлением новых данных (если нужно)\n                    tableBody.innerHTML = \"\";\n                    \n                    // Проходим по каждому элементу массива и создаем строки таблицы\n                    data.forEach(item => {\n                        const newRow = tableBody.insertRow();\n                        \n                        const cell1 = newRow.insertCell(0);\n                        const cell2 = newRow.insertCell(1);\n                        const cell3 = newRow.insertCell(2);\n                        const cell4 = newRow.insertCell(3);\n                        const cell5 = newRow.insertCell(4);\n                        const cell6 = newRow.insertCell(5);\n                        const cell7 = newRow.insertCell(6);\n                        \n                        cell1.textContent = item.event_id;\n                        cell2.textContent = item.platenumber;\n                        cell3.textContent = item.place;\n                        cell4.textContent = item.start_time;\n                        cell5.textContent = item.end_time;\n                        cell6.textContent = item.pigs_quantity;\n                        cell7.textContent = item.pigs_defect;\n                    });\n                }\n            })(scope);\n        \n        \n            // Функция для создания таблицы из массива данных\n            // function createTableFromArray(data) {\n            //     const tableBody = document.getElementById(\"dynamicTable\").getElementsByTagName('tbody')[0];\n        \n            //     // Очищаем таблицу перед добавлением новых данных (если нужно)\n            //     tableBody.innerHTML = \"\";\n        \n            //     // Проходим по каждому элементу массива и создаем строки таблицы\n            //     data.forEach(item => {\n            //         const newRow = tableBody.insertRow();\n        \n            //         const cell1 = newRow.insertCell(0);\n            //         const cell2 = newRow.insertCell(1);\n            //         const cell3 = newRow.insertCell(2);\n            //         const cell4 = newRow.insertCell(3);\n            //         const cell5 = newRow.insertCell(4);\n            //         const cell6 = newRow.insertCell(5);\n            //         const cell7 = newRow.insertCell(6);\n        \n            //         cell1.textContent = item.event_id;\n            //         cell2.textContent = item.platenumber;\n            //         cell3.textContent = item.place;\n            //         cell4.textContent = item.start_time;\n            //         cell5.textContent = item.end_time;\n            //         cell6.textContent = item.pigs_quantity;\n            //         cell7.textContent = item.pigs_defect;\n            //     });\n            // }\n        \n            // // Вызываем функцию для создания таблицы\n            // createTableFromArray({{msg.payload[0]}});\n        </script>\n    </div>\n    <div class=\"scroll-table-head\">\n        <table id=\"table\" style=\"border: 1px solid black; border-collapse: collapse;\">\n            <tr>\n                \n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Общее время\n                    разгрузки</th>\n                <!-- <th style=\"#d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\"> </th> -->\n                <th colspan=\"3\" style=\"border: 1px solid black; border-collapse: collapse; height:48px; width: 520px;\">{{msg.payload[1].correctDiffTime}}</th>\n                <!-- <th style=\"border: 1px solid black; border-collapse: collapse; height:48px;\"> </th> -->\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Общее\n                    количество</th>\n                <th style=\"1px solid black; border-collapse: collapse; text-align: left; padding-left: 10px; height:48px;\">{{msg.payload[1].sumPigsQuantity}}</th>\n                <th style=\"border: 1px solid black; border-collapse: collapse; text-align: left; padding-left: 10px; height:48px;\">{{msg.payload[1].sumPigsDefect}}\n                </th>\n            </tr>\n        </table>\n</div>",
+        "order": 7,
+        "width": 26,
+        "height": 11,
+        "format": "\n<style>\n    #table2, #table2 td{\n        font-family:'Courier New', monospace;\n        height: 40px;\n        font-size: 16px;\n        padding-left: 10px;\n        border: 1px solid black;\n        border-collapse: collapse;\n    }\n    .scroll-table-body {\n        font-family:'Courier New', monospace;\n        height: 400px; \n        overflow-x: auto;\n        overflow-y: auto;\n        table-layout: fixed;\n        /* margin-top: 0px;\n        margin-bottom: 20px;\n        border-bottom: 1px solid #eee; --> */\n    }\n    ::-webkit-scrollbar {\n        display: none;\n        /* width: 11px; */\n    }\n    ::-webkit-scrollbar-track {\n        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n    }\n    ::-webkit-scrollbar-thumb {\n        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n    }\n    .scroll-table-head table {\n        font-family:'Courier New', monospace;\n        width:100%;\n        table-layout: fixed;\n        border: none;\n    }\n    .scroll-table thead th {\n        font-family:'Courier New', monospace;\n        font-weight: bold;  \n        text-align: left;\n        border: none;\n        padding: 10px 15px;\n        background: #d8d8d8;\n        font-size: 14px;\n        border-left: 1px solid #ddd;\n        border-right: 1px solid #ddd;\n    }\n    .scroll-table tbody td {\n        font-family:'Courier New', monospace;\n        width:101%;\n        text-align: left;\n        border-left: 1px solid #ddd;\n        border-right: 1px solid #ddd;\n        padding: 10px 15px;\n        font-size: 14px;\n        vertical-align: top;\n        \n    }\n    th, td{      \n        font-size: 14px;\n        heigth: 48px;\n        /* width: 170px; */\n        font-weight: normal;\n    }\n</style>\n\n<div class=\"scroll-table-head\">\n    <table id=\"table\" style=\"border: 1px solid black; border-collapse: collapse;\">\n        <thead>\n            <tr style=\"border: 1px solid black; border-collapse: collapse;\">\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Номер разгрузки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    ID метки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Госномер т/с</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Номер прицепа</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Место разгрузки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Дата/время начала приемки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Дата/время окончания приемки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Количество принятых животных</th>\n            </tr>\n        </thead>\n    </table>\n    <div class=\"scroll-table-body\"> \n        <table id=\"table2\" style=\"border: 1px solid black; border-collapse: collapse;\">\n            <!-- <tbody style=\"\">\n                <tr ng-repeat=\"row in msg.payload[0]\" style=\"height:48px; border: 1px solid black; border-collapse: collapse;\">\n                    <td ng-repeat=\"item in row\" style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px;\">{{item}}</td>\n                </tr>\n            </tbody> -->\n            <!-- <tbody>\n                <tr ng-repeat=\"row in msg.payload\" style=\"height:48px; border: 3px solid gray; border-collapse: collapse;\">\n                    <td ng-repeat=\"item in row\" style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px;\">\n                        {{item}}</td>\n                </tr>\n            </tbody> -->\n            <tbody></tbody>\n        </table>\n        <script>\n            (function(scope) {\n                scope.$watch('msg.payload[0]', function(newVal){\n                    if (newVal && Array.isArray(newVal)) {\n                        createTableFromArray(newVal);\n                    }\n                });\n                function createTableFromArray(data) {\n                    const tableBody = document.getElementById(\"table2\").getElementsByTagName('tbody')[0];\n                    \n                    // Очищаем таблицу перед добавлением новых данных (если нужно)\n                    tableBody.innerHTML = \"\";\n                    \n                    // Проходим по каждому элементу массива и создаем строки таблицы\n                    data.forEach(item => {\n                        const newRow = tableBody.insertRow();\n                        \n                        const cell1 = newRow.insertCell(0);\n                        const cell2 = newRow.insertCell(1);\n                        const cell3 = newRow.insertCell(2);\n                        const cell4 = newRow.insertCell(3);\n                        const cell5 = newRow.insertCell(4);\n                        const cell6 = newRow.insertCell(5);\n                        const cell7 = newRow.insertCell(6);\n                        const cell8 = newRow.insertCell(7);\n                        // const cell9 = newRow.insertCell(8);\n                        \n                        // cell1.textContent = item.event_id;\n                        const link = document.createElement('a');\n                        // link.href = 'http://192.168.1.116:81/files/data/08.10.2025/';\n                        link.href = item.url;\n                        link.textContent = item.event_id; // или любой другой текст\n                        link.target = '_blank'; // опционально: открывать в новой вкладке\n                        cell1.appendChild(link);\n                        cell2.textContent = item.truck_id;\n                        cell3.textContent = item.truck_plate;\n                        cell4.textContent = item.trailer_plate;\n                        cell5.textContent = item.place;\n                        cell6.textContent = item.start_time;\n                        cell7.textContent = item.end_time;\n                        cell8.textContent = item.pigs_quantity;\n\n                        // const link = document.createElement('a');\n                        // link.href = 'http://192.168.1.116:81/files/data/08.10.2025/';\n                        // link.textContent = 'Скачать'; // или любой другой текст\n                        // link.target = '_blank'; // опционально: открывать в новой вкладке\n                        // cell9.appendChild(link);\n\n                        // cell9.textContent = 'http://192.168.1.116:81/files/data/08.10.2025/'\n                        // cell9.\n                        // cell9.textContent = item.pigs_defect;\n                    });\n                }\n            })(scope);\n        \n        \n            // Функция для создания таблицы из массива данных\n            // function createTableFromArray(data) {\n            //     const tableBody = document.getElementById(\"dynamicTable\").getElementsByTagName('tbody')[0];\n        \n            //     // Очищаем таблицу перед добавлением новых данных (если нужно)\n            //     tableBody.innerHTML = \"\";\n        \n            //     // Проходим по каждому элементу массива и создаем строки таблицы\n            //     data.forEach(item => {\n            //         const newRow = tableBody.insertRow();\n        \n            //         const cell1 = newRow.insertCell(0);\n            //         const cell2 = newRow.insertCell(1);\n            //         const cell3 = newRow.insertCell(2);\n            //         const cell4 = newRow.insertCell(3);\n            //         const cell5 = newRow.insertCell(4);\n            //         const cell6 = newRow.insertCell(5);\n            //         const cell7 = newRow.insertCell(6);\n        \n            //         cell1.textContent = item.event_id;\n            //         cell2.textContent = item.platenumber;\n            //         cell3.textContent = item.place;\n            //         cell4.textContent = item.start_time;\n            //         cell5.textContent = item.end_time;\n            //         cell6.textContent = item.pigs_quantity;\n            //         cell7.textContent = item.pigs_defect;\n            //     });\n            // }\n        \n            // // Вызываем функцию для создания таблицы\n            // createTableFromArray({{msg.payload[0]}});\n        </script>\n    </div>\n    <div class=\"scroll-table-head\">\n        <table id=\"table\" style=\"border: 1px solid black; border-collapse: collapse;\">\n            <tr>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Общее время\n                    разгрузки</th>\n                <!-- <th style=\"#d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\"> </th> -->\n                <th colspan=\"3\" style=\"border: 1px solid black; border-collapse: collapse; height:48px; width: 400px;\">{{msg.payload[1].correctDiffTime}}</th>\n                <!-- <th style=\"border: 1px solid black; border-collapse: collapse; height:48px;\"> </th> -->\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Общее\n                    количество принятых животных</th>\n                <th style=\"1px solid black; border-collapse: collapse; text-align: left; padding-left: 10px; height:48px; width: 170px;\">{{msg.payload[1].sumPigsQuantity}}</th>\n                <!-- <th style=\"border: 1px solid black; border-collapse: collapse; text-align: left; padding-left: 10px; height:48px;\">{{msg.payload[1].sumPigsDefect}}</th> -->\n            </tr>\n        </table>\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 810,
+        "x": 890,
         "y": 200,
         "wires": [
             []
@@ -1308,20 +886,19 @@
         "id": "79d010a509c919f5",
         "type": "function",
         "z": "92226df4e340c706",
-        "name": "function 72",
-        "func": "// msg.payload = new Date(Date.now()).toLocaleString('ru-RU', { timeZone: 'UTC' })\nmsg.payload = new Date(Date.now()).toDateString()\nreturn msg;",
+        "name": "setDataNow",
+        "func": "// msg.payload = new Date(Date.now()).toLocaleString('ru-RU', { timeZone: 'UTC' })\nlet timeSetNow = new Date(Date.now())\n\nmsg.payload = timeSetNow\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 910,
-        "y": 60,
+        "x": 530,
+        "y": 40,
         "wires": [
             [
-                "af8f71bd43d513c2",
-                "237362f3198ff57d"
+                "6152c97bad6b2fb1"
             ]
         ]
     },
@@ -1332,7 +909,7 @@
         "d": true,
         "group": "b5ccc75c0e8c4463",
         "name": "Пояснение",
-        "order": 18,
+        "order": 20,
         "width": 23,
         "height": 1,
         "format": "<table id=\"table1\" height=\"100%\" style=\"border-bottom: 1px solid;\">\n    <tbody>\n        <tr>\n            <th style=\"font-size: 12px; text-align: left;  \"> *К отчету принимаются только цельные разгрузки.\n            </th>\n        </tr>\n        <tr>\n            <th style=\"font-size: 12px; text-align: left;  \"> В случае наложения времени начала, либо окончания на середину разгрузки машина к отчету не принимается\n            </th>\n        </tr>\n    </tbody>\n</table>\n<!-- <div style=\"\"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\" </div> -->",
@@ -1354,7 +931,7 @@
         "d": true,
         "group": "b5ccc75c0e8c4463",
         "name": "Быстрый просмотр",
-        "order": 20,
+        "order": 18,
         "width": 23,
         "height": 1,
         "format": "<table id=\"table1\" height=\"100%\" style=\"\">\n    <tbody>\n        <tr>\n            <th style=\"font-size: 23px; text-align: left;  \"> Быстрый просмотр информации по выбранной разгрузке\n            </th>\n        </tr>\n    </tbody>\n</table>\n<!-- <div style=\"\"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\" </div> -->",
@@ -1376,7 +953,7 @@
         "d": true,
         "group": "b5ccc75c0e8c4463",
         "name": "FastReportTable",
-        "order": 21,
+        "order": 23,
         "width": 23,
         "height": 5,
         "format": "<style>\n    th, td{      \n        font-size: 14px;\n        heigth: 48px;\n        font-weight: normal;\n    }\n</style>\n\n<table id=\"table\" style=\"border: 1px solid black; border-collapse: collapse;\">\n    <tr style=\"border: 1px solid black; border-collapse: collapse;\">\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">А/М Номер разгрузки</th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Фото госномера прицепа а/м</th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Место разгрузки</th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Дата/время начала приемки</th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Дата/время окончания приемки</th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Количество принятых животных</th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">В том числе санитарный брак</th>\n    </tr>\n    <tbody>\n        <tr style=\"height:48px; border: 1px solid black; border-collapse: collapse;\">\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px; \">№1 7306 АМ13</td>\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px; \">1</td>\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px; \">Пандус 1</td>\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px; \">22.10.24 10:05</td>\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px; \">22.10.24 10:42</td>\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px;\">50</td>\n            <td style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px; \">2</td>\n        </tr>\n    </tbody>\n    <tr>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Общее время разгрузки</th>\n        <th style=\"#d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\"> </th>\n        <th style=\"border: 1px solid black; border-collapse: collapse; height:48px;\">0 д 0 ч 37 м</th>\n        <th style=\"border: 1px solid black; border-collapse: collapse; height:48px;\"> </th>\n        <th style=\"background-color: #d3d3d3; border: 1px solid black; border-collapse: collapse; height:48px;\">Общее количество</th>\n        <th style=\"1px solid black; border-collapse: collapse; text-align: left; padding-left: 10px; height:48px;\">50</th>\n        <th style=\"border: 1px solid black; border-collapse: collapse; text-align: left; padding-left: 10px; height:48px;\">2</th>\n    </tr>\n</table>",
@@ -1392,67 +969,23 @@
         ]
     },
     {
-        "id": "fd7926ee2b655e5f",
-        "type": "fs-mkdir",
-        "z": "92226df4e340c706",
-        "name": "",
-        "purpose": "reg",
-        "path": "/data/static/",
-        "pathType": "str",
-        "foldername": "payload",
-        "foldernameType": "msg",
-        "recursive": true,
-        "exists": true,
-        "prefix": "",
-        "prefixType": "str",
-        "mode": "777",
-        "property": "payload",
-        "propertyType": "msg",
-        "x": 570,
-        "y": 680,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "8c226e7f9d8e3520",
-        "type": "function",
-        "z": "92226df4e340c706",
-        "name": "function 73",
-        "func": "msg.payload = \"Reports\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 370,
-        "y": 680,
-        "wires": [
-            [
-                "fd7926ee2b655e5f"
-            ]
-        ]
-    },
-    {
         "id": "52a3e8cdc35b54f1",
         "type": "function",
         "z": "92226df4e340c706",
-        "name": "function 82",
-        "func": "var data = msg.payload\n\nvar event_id = [];\nvar start_time = [];\nvar end_time = [];\nvar pigs_quantity = [];\nvar pigs_defect = [];\nvar platenumber = [];\nvar place = [];\n\nfunction addHours(hours, date = new Date()) {\n    if (typeof hours !== 'number') {\n        throw new Error('Invalid \"hours\" argument')\n    }\n    if (!(date instanceof Date)) {\n        throw new Error('Invalid \"date\" argument')\n    }\n    date.setHours(date.getHours() + hours)\n    return date\n}\n\n\n\nvar lgth_data = data.length\nfor(var i = 0; i < lgth_data;i++){\n    event_id.push(data[i]['event_id']);\n    start_time.push(new Date(addHours(3, data[i]['start_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));\n    end_time.push(new Date(addHours(3, data[i]['end_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));\n    pigs_quantity.push(data[i]['pigs_quantity']);\n    pigs_defect.push(data[i]['pigs_defect']);\n    platenumber.push(data[i]['platenumber']);\n    place.push(data[i]['place']);   \n}\n\n\nconst sumPigsQuantity = pigs_quantity.reduce((acc, num) => acc + num, 0);\nconst sumPigsDefect = pigs_defect.reduce((acc, num) => acc + num, 0);\nvar diffTime = 0\nfor (var i = 0; i < lgth_data; i++) {\n    let tempArr = []\n    var endTimeVal = new Date(addHours(3, data[i]['end_time']))\n    var startTimeVal = new Date(addHours(3, data[i]['start_time']))\n    diffTime += ((endTimeVal.valueOf() - startTimeVal.valueOf())/1000); \n}\n\n\nvar getCorrectTime = (value) => (String(Math.trunc((value / 3600)) % 24)) + \"ч \" + String(Math.floor((value / 60) % 60)) + \"м \" + String(value % 60) + \"с\";\nvar correctDiffTime = getCorrectTime(diffTime);\n// var k = new Date(end_time[0] - start_time[0])\n\nvar table1_data = []\nfor(var i = 0; i < lgth_data;i++){\n    \n    // for (var j = 0; j < 1; j++) {\n        // tab.push(event_id[i].toString(), platenumber[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString(), pigs_defect[i].toString())\n    var tab = { \n        event_id: event_id[i].toString(),\n        platenumber: platenumber[i].toString(),\n        place: place[i].toString(),\n        start_time: start_time[i].toString(),\n        end_time: end_time[i].toString(),\n        pigs_quantity: pigs_quantity[i].toString(),\n        pigs_defect: pigs_defect[i].toString()\n    }\n        // (event_id[i].toString(), platenumber[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString(), pigs_defect[i].toString())\n    // }\n    table1_data.push(tab)\n}\n\n// msg.payload = table1_data\n// return msg\nvar total_data = {}\n\nmsg.payload = [\n    table1_data, \n    total_data = {\n        correctDiffTime: correctDiffTime,\n        sumPigsQuantity: sumPigsQuantity,\n        sumPigsDefect: sumPigsDefect\n    },\n    data\n]\n\nreturn msg;",
+        "name": "makeCorrectData",
+        "func": "var data = msg.payload\n\nvar event_id = [];\nvar start_time = [];\nvar end_time = [];\nvar pigs_quantity = [];\n// var pigs_defect = [];\nvar truck_plate = [];\nvar trailer_plate = [];\nvar truck_id = [];\nvar place = [];\nlet url = [];\n\nfunction addHours(hours, date = new Date()) {\n    if (typeof hours !== 'number') {\n        throw new Error('Invalid \"hours\" argument')\n    }\n    if (!(date instanceof Date)) {\n        throw new Error('Invalid \"date\" argument')\n    }\n    date.setHours(date.getHours() + hours)\n    return date\n}\n\n\n\nvar lgth_data = data.length\nfor(var i = 0; i < lgth_data;i++){\n    event_id.push(data[i]['event_id']);\n    start_time.push(new Date(addHours(3, data[i]['start_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));\n    if (data[i]['end_time'] === null || isNaN(data[i]['end_time'])) { end_time.push(\"Не расчитано\")}\n    else end_time.push(new Date(addHours(3, data[i]['end_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));\n    pigs_quantity.push(data[i]['pigs_quantity']);\n    // pigs_defect.push(data[i]['pigs_defect']);\n    if (data[i]['truck_plate'] == null) { truck_plate.push(\"Вычисление...\") }\n    else { truck_plate.push(data[i]['truck_plate']);}\n    place.push(data[i]['place']);\n    if (data[i]['trailer_plate'] == null) { trailer_plate.push(\"Вычисление...\") }\n    else { trailer_plate.push(data[i]['trailer_plate']); }\n    if (data[i]['truck_id'] == null) { truck_id.push(\"Вычисление...\") }\n    else { truck_id.push(data[i]['truck_id']); }\n    url.push('url');   \n}\n\n\nconst sumPigsQuantity = pigs_quantity.reduce((acc, num) => acc + num, 0);\n// const sumPigsDefect = pigs_defect.reduce((acc, num) => acc + num, 0);\nvar diffTime = 0;\n\nfor (let i = 0; i < lgth_data; i++) {\n    // let tempArr = []\n    if (data[i]['end_time']===null){\n        data[i]['end_time'] = data[i]['start_time'];\n        let endTimeVal = new Date(data[i]['end_time']);\n        let startTimeVal = new Date( data[i]['start_time']);\n        diffTime += ((endTimeVal.valueOf() - startTimeVal.valueOf()) / 1000);\n    }\n    else{\n        let endTimeVal = new Date( data[i]['end_time']);\n        let startTimeVal = new Date( data[i]['start_time']);\n        diffTime += ((endTimeVal.valueOf()+2000 - startTimeVal.valueOf()) / 1000);\n    }\n    // let endTimeVal = new Date(addHours(3, data[i]['end_time']));\n    // let startTimeVal = new Date(addHours(3, data[i]['start_time']));\n    // diffTime += ((endTimeVal.valueOf() - startTimeVal.valueOf()) / 1000);\n}\n\n\nvar getCorrectTime = (value) => (String(Math.trunc((value / 3600)) % 24)) + \"ч \" + String(Math.trunc((value / 60) % 60)) + \"м \" //+ String(Math.floor(value % 60)) + \"с\";\nvar correctDiffTime = getCorrectTime(diffTime);\n// var k = new Date(end_time[0] - start_time[0])\n\nvar table1_data = []\nfor(var i = 0; i < lgth_data;i++){\n    \n    // for (var j = 0; j < 1; j++) {\n        // tab.push(event_id[i].toString(), platenumber[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString(), pigs_defect[i].toString())\n    var tab = { \n        event_id: event_id[i].toString(),\n        truck_id: truck_id[i].toString(),\n        truck_plate: truck_plate[i].toString(),\n        trailer_plate: trailer_plate[i].toString(),\n        place: place[i].toString(),\n        start_time: start_time[i].toString(),\n        end_time: end_time[i].toString(),\n        url: url[i],\n        pigs_quantity: pigs_quantity[i].toString()\n        \n        \n        // event_id: event_id[i].toString(),\n        // truck_plate: truck_plate[i].toString(),\n        // place: place[i].toString(),\n        // start_time: start_time[i].toString(),\n        // end_time: end_time[i].toString(),\n        // pigs_quantity: pigs_quantity[i].toString(),\n        // // pigs_defect: pigs_defect[i].toString()\n    }\n        // (event_id[i].toString(), platenumber[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString(), pigs_defect[i].toString())\n    // }\n    table1_data.push(tab)\n}\n\n// msg.payload = table1_data\n// return msg\nvar total_data = {}\n\nmsg.payload = [\n    table1_data, \n    total_data = {\n        correctDiffTime: correctDiffTime,\n        sumPigsQuantity: sumPigsQuantity\n        // ,\n        // sumPigsDefect: sumPigsDefect\n    },\n    data\n]\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 610,
+        "x": 630,
         "y": 200,
         "wires": [
             [
                 "ed8ec862ccce0a59",
-                "072c7a1f0320f2f8",
-                "d151e03104f5aa56"
+                "072c7a1f0320f2f8"
             ]
         ]
     },
@@ -1460,7 +993,7 @@
         "id": "de6c3f8c4c9465f8",
         "type": "postgres",
         "z": "92226df4e340c706",
-        "postgresdb": "184e08d38ff3c438",
+        "postgresdb": "d45898b2c897236c",
         "name": "",
         "output": true,
         "perrow": false,
@@ -1476,27 +1009,8 @@
         "y": 200,
         "wires": [
             [
-                "52a3e8cdc35b54f1",
-                "69bb46803e2ac180"
+                "52a3e8cdc35b54f1"
             ]
-        ]
-    },
-    {
-        "id": "2dc0c76561366bc0",
-        "type": "function",
-        "z": "92226df4e340c706",
-        "name": "function 83",
-        "func": "var query = new Date().toString()\n\n\n\n\n\n// var query = \"SELECT * FROM events ORDER BY event_id DESC OFFSET 1;\"\n// var query = \"SELECT event_id, platenumber, place, start_time, end_time, pigs_quantity, pigs_defect WHERE event_id NOT IN(SELECT * FROM(SELECT event_id FROM events ORDER BY event_id DESC LIMIT 1));\"\nmsg.payload = query\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 450,
-        "y": 760,
-        "wires": [
-            []
         ]
     },
     {
@@ -1518,10 +1032,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1220,
-        "y": 40,
+        "x": 1160,
+        "y": 20,
         "wires": [
-            []
+            [
+                "abc1fec045c3fcfb"
+            ]
         ]
     },
     {
@@ -1543,39 +1059,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1210,
-        "y": 80,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "5469ddfc985bab47",
-        "type": "inject",
-        "z": "92226df4e340c706",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 720,
+        "x": 1150,
         "y": 60,
         "wires": [
-            [
-                "79d010a509c919f5"
-            ]
+            []
         ]
     },
     {
@@ -1583,7 +1070,7 @@
         "type": "function",
         "z": "92226df4e340c706",
         "name": "query",
-        "func": "var start_datetime = new Date(flow.get(\"start_ts_input\"));\nvar end_datetime = new Date(flow.get(\"end_ts_input\"));\n\nfunction addHours(hours,  date = new Date()) {   \n  if (typeof hours !== 'number') { \n    throw new Error('Invalid \"hours\" argument') \n  } \n  if (!(date instanceof Date)) { \n    throw new Error('Invalid \"date\" argument') \n  } \n  date.setHours(date.getHours() + hours) \n  return date \n}\naddHours(-3, start_datetime);\naddHours(-3, end_datetime);\n// msg.payload = start_datetime;\n// return msg;\n// function normalDate(date){\n//     const formattedDate = date.toLocaleString('ru-RU', {\n//         year: 'numeric',\n//         month: '2-digit',\n//         day: '2-digit',\n//         hour: '2-digit',\n//         minute: '2-digit',\n//         second: '2-digit',\n//     });\n    \n//     return formattedDate.replace(',', '').replace(/\\./g, '/')\n// }\n\n// var start_query_time = \"'\" + normalDate(start_datetime) + \"'\"\n// var end_query_time = \"'\" + normalDate(end_datetime) + \"'\"\n\n\nvar start_query_time = \"'\" + start_datetime.toLocaleDateString(\"us-US\") + \" \" + start_datetime.toLocaleTimeString(\"us-US\") + \"'\"\nvar end_query_time = \"'\" + end_datetime.toLocaleDateString(\"us-US\") + \" \" + end_datetime.toLocaleTimeString(\"us-US\") + \"'\"\nvar query = \"SELECT event_id, platenumber, place, start_time, end_time, pigs_quantity, pigs_defect from events WHERE end_time IS NOT NULL AND start_time >= \" + start_query_time + \" AND start_time <= \" + end_query_time + \";\"\n// var query = \"SELECT date_trunc('second', dd)::timestamp ts, COALESCE(sum(speed_vtg_13mo0821.skmh), 0) skmh FROM generate_series(\" + start_query_time + \",\" + end_query_time + \", '1 second':: interval) dd LEFT JOIN speed_vtg_13mo0821 ON(speed_vtg_13mo0821.ts = date_trunc('second', dd)::timestamp) GROUP BY date_trunc('second', dd)::timestamp ORDER BY ts ASC\";\n// var query = \"SELECT ts, sum(skmh) skmh FROM (SELECT date_trunc('minute', main.ts)::timestamptz ts, CASE WHEN (date_trunc('minute', main.ts)::timestamptz = date_trunc('minute', net.time)::timestamptz) THEN COALESCE(sum(skmh)/60, 5) ELSE COALESCE(sum(skmh)/60, 0) END AS skmh FROM (SELECT date_trunc('second', dd)::timestamptz ts, speed_vtg_13mo0821.skmh skmh FROM generate_series( \" + start_query_time + \"::timestamptz, \" + end_query_time + \"::timestamptz, '1 second':: interval) dd LEFT JOIN speed_vtg_13mo0821 ON(speed_vtg_13mo0821.ts = date_trunc('second', dd)::timestamptz) ORDER BY ts ASC) main LEFT JOIN (SELECT DATE_TRUNC('second',time) AS time FROM netdata_13mo0821 GROUP BY time) net ON(main.ts = net.time) GROUP BY date_trunc('minute', main.ts)::timestamptz, date_trunc('minute', net.time)::timestamptz) GROUP BY ts\"\n// var query = \"SELECT ts, sum(skmh) skmh FROM (SELECT date_trunc('minute', main.ts)::timestamptz ts, CASE WHEN (date_trunc('minute', main.ts)::timestamptz = date_trunc('minute', net.time)::timestamptz) THEN COALESCE(sum(skmh)/60, 5) ELSE COALESCE(sum(skmh)/60, 0) END AS skmh FROM (SELECT date_trunc('second', dd)::timestamptz ts, short_speed_vtg_13mo0821.skmh skmh FROM generate_series( \" + start_query_time + \"::timestamptz, \" + end_query_time + \"::timestamptz, '1 second':: interval) dd LEFT JOIN (SELECT * FROM speed_vtg_13mo0821 WHERE ts BETWEEN \" + start_query_time + \"::timestamptz AND \" + end_query_time + \"::timestamptz) short_speed_vtg_13mo0821 ON (short_speed_vtg_13mo0821.ts = date_trunc('second', dd)::timestamptz) ORDER BY ts ASC) main LEFT JOIN (SELECT DATE_TRUNC('second',time) AS time FROM (SELECT * FROM netdata_13mo0821 WHERE time BETWEEN \" + start_query_time + \"::timestamptz AND \" + end_query_time + \"::timestamptz) GROUP BY time) net ON(main.ts = net.time) GROUP BY date_trunc('minute', main.ts)::timestamptz, date_trunc('minute', net.time)::timestamptz) GROUP BY ts\"// var coord_gga_13mo0821 = \"SELECT * FROM coord_gga_13mo0821 WHERE ts BETWEEN '\" + start_datetime + \"' AND '\" + end_datetime + \"'\" + \" ORDER BY ts ASC\";\nmsg.payload = query;\nreturn msg;",
+        "func": "var start_datetime = new Date(flow.get(\"start_ts_input\"));\nvar end_datetime = new Date(flow.get(\"end_ts_input\"));\n\nfunction addHours(hours,  date = new Date()) {   \n  if (typeof hours !== 'number') { \n    throw new Error('Invalid \"hours\" argument') \n  } \n  if (!(date instanceof Date)) { \n    throw new Error('Invalid \"date\" argument') \n  } \n  date.setHours(date.getHours() + hours) \n  return date \n}\n// addHours(-3, start_datetime);\n// addHours(-3, end_datetime);\n// msg.payload = start_datetime;\n// return msg;\n// function normalDate(date){\n//     const formattedDate = date.toLocaleString('us-US', {\n//         year: 'numeric',\n//         month: '2-digit',\n//         day: '2-digit',\n//         hour: '2-digit',\n//         minute: '2-digit',\n//         second: '2-digit',\n//     });\n    \n//     return formattedDate.replace(',', '').replace(/\\./g, '/')\n// }\n\n// var start_query_time = \"'\" + normalDate(start_datetime) + \"'\"\n// var end_query_time = \"'\" + normalDate(end_datetime) + \"'\"\n\n\nvar start_query_time = \"'\" + start_datetime.toLocaleDateString(\"us-US\") + \" \" + start_datetime.toLocaleTimeString(\"us-US\") + \"'\"\nvar end_query_time = \"'\" + end_datetime.toLocaleDateString(\"us-US\") + \" \" + end_datetime.toLocaleTimeString(\"us-US\") + \"'\"\n// var query = \"SELECT event_id, platenumber, place, start_time, end_time, pigs_quantity, pigs_defect from events WHERE start_time >= \" + start_query_time + \" AND start_time <= \" + end_query_time + \" ORDER BY event_id;\"\n\n\nvar query = \"SELECT event_id, truck_plate, place, start_time, end_time, pigs_quantity, trailer_plate, truck_id FROM events WHERE start_time >= \" + start_query_time + \" AND start_time <= \" + end_query_time + \" ORDER BY event_id;\"\n// var query = \"SELECT event_id as event_id, truck_plate as platenumber, place as place, start_time as start_time, end_time as end_time, pigs_quantity as pigs_quantity, pigs_defect as pigs_defect from events WHERE start_time >= \" + start_query_time + \" AND start_time <= \" + end_query_time + \" ORDER BY event_id;\"\n\n\n\n// var query = \"SELECT event_id, platenumber, place, start_time, end_time, pigs_quantity, pigs_defect from events WHERE end_time IS NOT NULL AND start_time >= \" + start_query_time + \" AND start_time <= \" + end_query_time + \" ORDER BY event_id;\"\n// let query = \"SELECT event_id, platenumber, place, start_time, end_time, pigs_quantity, pigs_defect from events WHERE end_time IS NOT NULL AND start_time >= '2025-02-25 21:00:00' AND start_time <= '2025-02-26 21:00:00' ORDER BY event_id;\"\n// var query = \"SELECT date_trunc('second', dd)::timestamp ts, COALESCE(sum(speed_vtg_13mo0821.skmh), 0) skmh FROM generate_series(\" + start_query_time + \",\" + end_query_time + \", '1 second':: interval) dd LEFT JOIN speed_vtg_13mo0821 ON(speed_vtg_13mo0821.ts = date_trunc('second', dd)::timestamp) GROUP BY date_trunc('second', dd)::timestamp ORDER BY ts ASC\";\n// var query = \"SELECT ts, sum(skmh) skmh FROM (SELECT date_trunc('minute', main.ts)::timestamptz ts, CASE WHEN (date_trunc('minute', main.ts)::timestamptz = date_trunc('minute', net.time)::timestamptz) THEN COALESCE(sum(skmh)/60, 5) ELSE COALESCE(sum(skmh)/60, 0) END AS skmh FROM (SELECT date_trunc('second', dd)::timestamptz ts, speed_vtg_13mo0821.skmh skmh FROM generate_series( \" + start_query_time + \"::timestamptz, \" + end_query_time + \"::timestamptz, '1 second':: interval) dd LEFT JOIN speed_vtg_13mo0821 ON(speed_vtg_13mo0821.ts = date_trunc('second', dd)::timestamptz) ORDER BY ts ASC) main LEFT JOIN (SELECT DATE_TRUNC('second',time) AS time FROM netdata_13mo0821 GROUP BY time) net ON(main.ts = net.time) GROUP BY date_trunc('minute', main.ts)::timestamptz, date_trunc('minute', net.time)::timestamptz) GROUP BY ts\"\n// var query = \"SELECT ts, sum(skmh) skmh FROM (SELECT date_trunc('minute', main.ts)::timestamptz ts, CASE WHEN (date_trunc('minute', main.ts)::timestamptz = date_trunc('minute', net.time)::timestamptz) THEN COALESCE(sum(skmh)/60, 5) ELSE COALESCE(sum(skmh)/60, 0) END AS skmh FROM (SELECT date_trunc('second', dd)::timestamptz ts, short_speed_vtg_13mo0821.skmh skmh FROM generate_series( \" + start_query_time + \"::timestamptz, \" + end_query_time + \"::timestamptz, '1 second':: interval) dd LEFT JOIN (SELECT * FROM speed_vtg_13mo0821 WHERE ts BETWEEN \" + start_query_time + \"::timestamptz AND \" + end_query_time + \"::timestamptz) short_speed_vtg_13mo0821 ON (short_speed_vtg_13mo0821.ts = date_trunc('second', dd)::timestamptz) ORDER BY ts ASC) main LEFT JOIN (SELECT DATE_TRUNC('second',time) AS time FROM (SELECT * FROM netdata_13mo0821 WHERE time BETWEEN \" + start_query_time + \"::timestamptz AND \" + end_query_time + \"::timestamptz) GROUP BY time) net ON(main.ts = net.time) GROUP BY date_trunc('minute', main.ts)::timestamptz, date_trunc('minute', net.time)::timestamptz) GROUP BY ts\"// var coord_gga_13mo0821 = \"SELECT * FROM coord_gga_13mo0821 WHERE ts BETWEEN '\" + start_datetime + \"' AND '\" + end_datetime + \"'\" + \" ORDER BY ts ASC\";\nmsg.payload = query;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1599,71 +1086,23 @@
         ]
     },
     {
-        "id": "bfca23496ef046be",
-        "type": "inject",
-        "z": "92226df4e340c706",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 280,
-        "y": 800,
-        "wires": [
-            [
-                "2dc0c76561366bc0"
-            ]
-        ]
-    },
-    {
-        "id": "e08516445ada40fa",
-        "type": "function",
-        "z": "92226df4e340c706",
-        "name": "function 84",
-        "func": "// var dateReportStart = flow.get('start_ts_input')\n// var dateReportEnd = flow.get('end_ts_input')\n\n// function addHours(hours, date = new Date()) {\n//     if (typeof hours !== 'number') {\n//         throw new Error('Invalid \"hours\" argument')\n//     }\n//     if (!(date instanceof Date)) {\n//         throw new Error('Invalid \"date\" argument')\n//     }\n//     date.setHours(date.getHours() + hours)\n//     return date\n// }\n\n// // msg.payload = new Date(dateReportEnd)\n// addHours(-3, new Date(dateReportStart));\n// addHours(-3, new Date(dateReportEnd));\n\n// function getCorrectDatetime(date = new Date()) {\n//     let d = date.getDate()\n//     let m = date.getMonth()\n//     let y = date.getFullYear()\n//     let h = date.getHours()\n//     let minutes = date.getMinutes()\n//     let corrDate = `${d}/${m}/${y} ${String(h).padStart(2, '0')}:${String(minutes).padStart(2, '0') }`\n//     return corrDate\n// } \n\n// msg.path = \"/data/static/Отчет \" + getCorrectDatetime(new Date(addHours(-3, new Date(dateReportStart)))) + \" - \" + getCorrectDatetime(new Date(addHours(-3, new Date(dateReportEnd)))) + \".csv\"\nmsg.path = \"/data/static/Отчет.csv\"\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 610,
-        "y": 320,
-        "wires": [
-            [
-                "894581c1f90885f2"
-            ]
-        ]
-    },
-    {
         "id": "072c7a1f0320f2f8",
         "type": "function",
         "z": "92226df4e340c706",
-        "name": "function 85",
-        "func": "\nvar arr = msg.payload[2]\n\nfunction addHours(hours, date = new Date()) {\n    if (typeof hours !== 'number') {\n        throw new Error('Invalid \"hours\" argument')\n    }\n    if (!(date instanceof Date)) {\n        throw new Error('Invalid \"date\" argument')\n    }\n    date.setHours(date.getHours() + hours)\n    return date\n}\n\nvar table = []\nfor (let i=0; i<arr.length;i++){\n    table.push({\n        'Номер разгрузки':arr[i]['event_id'],\n        'Фото госномера прицепа а/м': arr[i]['platenumber'],\n        'Место разгрузки': arr[i]['place'],\n        'Дата/время начала приемки': new Date(addHours(3, arr[i]['start_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16),\n        'Дата/время окончания приемки': new Date(addHours(3, arr[i]['end_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16),\n        'Количество принятых животных': arr[i]['pigs_quantity'],\n        'Cанитарный брак': arr[i]['pigs_defect']\n    })\n    if(i==arr.length-1) {\n        table.push({\n            'Номер разгрузки': 'Общее время разгрузки',\n            'Фото госномера прицепа а/м': '',\n            'Место разгрузки': msg.payload[1].correctDiffTime,\n            'Дата/время начала приемки': '',\n            'Дата/время окончания приемки': 'Общее количество',\n            'Количество принятых животных': msg.payload[1].sumPigsQuantity,\n            'Cанитарный брак': msg.payload[1].sumPigsDefect\n        })\n    }\n}\n\nmsg.payload = table\nreturn msg;",
+        "name": "makeCorrectDataForCsv",
+        "func": "\nvar arr = msg.payload[2]\n\nfunction addHours(hours, date = new Date()) {\n    if (typeof hours !== 'number') {\n        throw new Error('Invalid \"hours\" argument')\n    }\n    if (!(date instanceof Date)) {\n        throw new Error('Invalid \"date\" argument')\n    }\n    date.setHours(date.getHours() + hours)\n    return date\n}\n\nvar table = []\nfor (let i=0; i<arr.length;i++){\n    // if (arr[i]['end_time'] === null) { arr[i]['end_time'] = arr[i]['start_time'] }\n    if (arr[i]['end_time'] === null) { arr[i]['end_time'] = 'Вычисляем...' }\n    if (arr[i]['truck_id'] === null) { arr[i]['truck_id'] = 'Вычисляем...'}\n    if (arr[i]['truck_plate'] === null) { arr[i]['truck_plate'] = 'Вычисляем...' }\n    if (arr[i]['trailer_plate'] === null) { arr[i]['trailer_plate'] = 'Вычисляем...' }\n    table.push({\n        'Номер разгрузки':arr[i]['event_id'],\n        'ID метки': arr[i]['truck_id'],\n        'Госномер т/с': arr[i]['truck_plate'],\n        'Госномер прицепа': arr[i]['trailer_plate'],\n        'Место разгрузки': arr[i]['place'],\n        'Дата/время начала приемки': new Date( arr[i]['start_time']).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16), \n        'Дата/время окончания приемки': new Date( arr[i]['end_time']).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16),\n        'Количество принятых животных': arr[i]['pigs_quantity']\n        // ,\n        // 'Cанитарный брак': arr[i]['pigs_defect']\n    })\n    if(i==arr.length-1) {\n        table.push({\n            'Номер разгрузки': '',\n            'ID метки': '',\n            'Госномер т/с': '',\n            'Госномер прицепа': 'Общее время разгрузки',\n            'Место разгрузки': msg.payload[1].correctDiffTime,\n            'Дата/время начала приемки': '',\n            'Дата/время окончания приемки': 'Общее количество',\n            'Количество принятых животных': msg.payload[1].sumPigsQuantity\n            // 'Cанитарный брак': msg.payload[1].sumPigsDefect\n        })\n    }\n}\n\nmsg.payload = table\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 610,
+        "x": 650,
         "y": 260,
         "wires": [
             [
-                "941127626ebde61b"
+                "347db286b0ce1e13",
+                "da95699ad510c144"
             ]
         ]
     },
@@ -1683,7 +1122,7 @@
         "strings": true,
         "include_empty_strings": "",
         "include_null_values": "",
-        "x": 750,
+        "x": 930,
         "y": 260,
         "wires": [
             [
@@ -1714,8 +1153,8 @@
         "z": "92226df4e340c706",
         "name": "",
         "group": "b5ccc75c0e8c4463",
-        "order": 7,
-        "width": 4,
+        "order": 6,
+        "width": 5,
         "height": 1,
         "passthru": false,
         "label": "Выгрузить в Excel",
@@ -1724,15 +1163,15 @@
         "bgcolor": "",
         "className": "",
         "icon": "",
-        "payload": "{\"url\":\"http://localhost:1855/static/Отчет.csv\"}",
-        "payloadType": "json",
+        "payload": "file_name",
+        "payloadType": "flow",
         "topic": "open_link",
         "topicType": "str",
-        "x": 890,
+        "x": 810,
         "y": 380,
         "wires": [
             [
-                "6508cd6b136ab437"
+                "8bbae74e2f7e574b"
             ]
         ]
     },
@@ -1743,16 +1182,16 @@
         "group": "b5ccc75c0e8c4463",
         "name": "Выберите период отчета",
         "order": 2,
-        "width": 4,
+        "width": 6,
         "height": 1,
-        "format": "<div style=\"font-size: 15px; text-align: center; padding-top: 15px\"> Выберите период отчета </div>",
+        "format": "<div style=\"font-family:'Courier New', monospace; font-size: 15px; text-align: center; padding-top: 15px\"> Выберите период отчета </div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 230,
-        "y": 140,
+        "x": 150,
+        "y": 80,
         "wires": [
             []
         ]
@@ -1763,79 +1202,361 @@
         "z": "92226df4e340c706",
         "group": "b5ccc75c0e8c4463",
         "name": "",
-        "order": 30,
+        "order": 29,
         "width": 10,
         "height": 1,
-        "format": "<script>\n    (function(scope) {\n        scope.$watch('msg', function(msg) {\n            if (msg && msg.payload && msg.payload.url) {\n                window.open(msg.payload.url, '_blank');\n            }\n        });\n    })(scope);\n</script>",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
+        "format": "<!-- <script>\n    (function(scope) {\n        scope.$watch('msg', function(msg) {\n            // if (msg && msg.payload && msg.payload.url) {\n            //     window.open(msg.payload.url, '_blank');\n            // }\n            if (msg && msg.payload && msg.payload.url && \n                typeof msg.payload.url === 'string' &&\n                msg.payload.url.startsWith('http')) {\n                // Только для явных HTTP/HTTPS ссылок\n                window.open(msg.payload.url, '_blank');\n            }            \n        });\n    })(scope);\n</script> -->\n\n\n\n<script>\n    (function(scope) {\n    let lastExecution = 0;\n    const DEBOUNCE_DELAY = 1000; // 1 секунда\n    \n    scope.$watch('msg', function(msg) {\n        const now = Date.now();\n        \n        if (now - lastExecution < DEBOUNCE_DELAY) return;\n        \n        if (msg && msg.payload && msg.payload.url && \n            typeof msg.payload.url === 'string' &&\n            msg.payload.url.startsWith('http')) {\n            \n            window.open(msg.payload.url, '_blank');\n            lastExecution = now;\n        }            \n    });\n})(scope);\n</script>\n\n\n<!-- <script>\n(function(scope) {\n    var lastUrl = null;\n    \n    scope.$watch('msg', function(msg) {\n        if (msg && msg.payload && msg.payload.url && \n            msg.payload.url !== lastUrl &&\n            /^http?:\\/\\//.test(msg.payload.url)) {\n            \n            lastUrl = msg.payload.url;\n            \n            // Альтернатива 1: перенаправление в текущем окне\n            // window.location.href = msg.payload.url;\n            \n            // Альтернатива 2: открытие в новом окне по таймеру (может быть заблокировано)\n            setTimeout(function() {\n                var newWindow = window.open('', '_blank');\n                if (newWindow) {\n                    newWindow.location.href = msg.payload.url;\n                }\n            }, 100);\n        }\n    });\n})(scope);\n</script> -->",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
         "resendOnRefresh": false,
         "templateScope": "local",
         "className": "",
-        "x": 1060,
+        "x": 1180,
         "y": 380,
         "wires": [
             []
         ]
     },
     {
-        "id": "d151e03104f5aa56",
+        "id": "448bac8fa4d7fa11",
+        "type": "ui_template",
+        "z": "92226df4e340c706",
+        "group": "",
+        "name": "Control UI",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    md-input-container {\n        font-family:'Courier New', monospace;\n    }\n    nr-dashboard-button{\n        font-family:'Courier New', monospace;\n    }\n    md-list-item._md-button-wrap {\n        text-transform: uppercase;\n        width: 130px;\n        color: black;\n    }\n    .md-toolbar-tools{\n        margin-left: auto;\n        margin-right: auto;\n        font-family:'Courier New', monospace;\n        font-size: 23px;\n        /* padding: auto; */\n    }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 1140,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e08516445ada40fa",
         "type": "function",
         "z": "92226df4e340c706",
-        "name": "function 86",
-        "func": "var k = msg.payload[0]\nmsg.payload = k[1].event_id\nreturn msg;",
+        "name": "path_URL",
+        "func": "var start_datetime = new Date(flow.get(\"start_ts_input\"));\nvar end_datetime = new Date(flow.get(\"end_ts_input\"));\n\nfunction addHours(hours,  date = new Date()) {   \n  if (typeof hours !== 'number') { \n    throw new Error('Invalid \"hours\" argument') \n  } \n  if (!(date instanceof Date)) { \n    throw new Error('Invalid \"date\" argument') \n  } \n  date.setHours(date.getHours() + hours) \n  return date \n}\naddHours(-3, start_datetime);\naddHours(-3, end_datetime);\n\nvar start_query_time = start_datetime.toLocaleDateString(\"ru-RU\") + \" \" + start_datetime.toLocaleTimeString(\"ru-RU\") \nvar end_query_time = end_datetime.toLocaleDateString(\"ru-RU\") + \" \" + end_datetime.toLocaleTimeString(\"ru-RU\") \n\n// var start_query_time = \"'\" + start_datetime.toLocaleDateString(\"ru-RU\") + \" \" + start_datetime.toLocaleTimeString(\"ru-RU\") + \"'\"\n// var end_query_time = \"'\" + end_datetime.toLocaleDateString(\"ru-RU\") + \" \" + end_datetime.toLocaleTimeString(\"ru-RU\") + \"'\"\n\n// msg.path = \"/data/static/Отчет \" + getCorrectDatetime(new Date(addHours(-3, new Date(dateReportStart)))) + \" - \" + getCorrectDatetime(new Date(addHours(-3, new Date(dateReportEnd)))) + \".csv\"\nlet correctFileName = \"Отчет c \" + start_query_time + \" по \" + end_query_time +\".csv\";\nmsg.path = \"/data/static/reports/\" + correctFileName;\nlet file_name = \"http://192.168.1.116:1856/static/reports/\" + correctFileName;\nflow.set(\"file_name\", file_name);\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
+        "x": 600,
+        "y": 320,
+        "wires": [
+            [
+                "894581c1f90885f2"
+            ]
+        ]
+    },
+    {
+        "id": "8bbae74e2f7e574b",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "function 88",
+        "func": "let url = flow.get(\"file_name\");\nmsg.payload = {\n    url : url\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
         "y": 380,
         "wires": [
-            []
+            [
+                "6508cd6b136ab437"
+            ]
         ]
     },
     {
-        "id": "be30497b1fa9bca4",
-        "type": "ui_template",
+        "id": "6152c97bad6b2fb1",
+        "type": "switch",
+        "z": "92226df4e340c706",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 40,
+        "wires": [
+            [
+                "5440bb77222cdcb5"
+            ],
+            [
+                "a278828f455ed753"
+            ]
+        ]
+    },
+    {
+        "id": "5440bb77222cdcb5",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "setCTime",
+        "func": "let timeSetNow = msg.payload;\ntimeSetNow.setHours(3);\ntimeSetNow.setMinutes(0);\ntimeSetNow.setSeconds(0);\nmsg.payload = timeSetNow;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 20,
+        "wires": [
+            [
+                "af8f71bd43d513c2"
+            ]
+        ]
+    },
+    {
+        "id": "a278828f455ed753",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "setPoTime",
+        "func": "let timeSetNow = msg.payload;\ntimeSetNow.setHours(2);\ntimeSetNow.setMinutes(59);\ntimeSetNow.setSeconds(59);\ntimeSetNow.setDate(timeSetNow.getDate()+1)\nmsg.payload = timeSetNow;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 60,
+        "wires": [
+            [
+                "237362f3198ff57d"
+            ]
+        ]
+    },
+    {
+        "id": "eb8d3b5c77124e4a",
+        "type": "debug",
+        "z": "92226df4e340c706",
+        "name": "debug 394",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "95b6afc90bb72c30",
+        "type": "ui_ui_control",
+        "z": "92226df4e340c706",
+        "name": "",
+        "events": "all",
+        "x": 380,
+        "y": 80,
+        "wires": [
+            [
+                "79d010a509c919f5"
+            ]
+        ]
+    },
+    {
+        "id": "abc1fec045c3fcfb",
+        "type": "delay",
+        "z": "92226df4e340c706",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "0.5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 560,
+        "y": 140,
+        "wires": [
+            [
+                "6c19f7b2304b37bb"
+            ]
+        ]
+    },
+    {
+        "id": "efab2bb1e283440a",
+        "type": "ui_ui_control",
         "z": "92226df4e340c706",
         "d": true,
-        "group": "b5ccc75c0e8c4463",
-        "name": "List",
-        "order": 24,
-        "width": 6,
-        "height": 11,
-        "format": "<style>\n    th,\n    td {\n        font-size: 14px;\n        heigth: 48px;\n        font-weight: normal;\n    }\n</style>\n\n<table id=\"table\" style=\"border: 1px solid black; border-collapse: collapse;\">\n\n    <tbody style=\"\">\n        <tr ng-repeat=\"row in msg.payload\" style=\"height:36px;\"> \n            <td>{{row}}</td>\n        </tr>\n    </tbody>\n\n</table>",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 910,
-        "y": 800,
+        "name": "",
+        "events": "all",
+        "x": 600,
+        "y": 380,
+        "wires": [
+            [
+                "a642720c39d8993d"
+            ]
+        ]
+    },
+    {
+        "id": "da95699ad510c144",
+        "type": "excel",
+        "z": "92226df4e340c706",
+        "name": "",
+        "file": "/data/static/reports/report.xlsx",
+        "x": 710,
+        "y": 500,
+        "wires": [
+            [
+                "036f36507337eeb6"
+            ]
+        ]
+    },
+    {
+        "id": "347db286b0ce1e13",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "path_URL",
+        "func": "var start_datetime = new Date(flow.get(\"start_ts_input\"));\nvar end_datetime = new Date(flow.get(\"end_ts_input\"));\n\nfunction addHours(hours,  date = new Date()) {   \n  if (typeof hours !== 'number') { \n    throw new Error('Invalid \"hours\" argument') \n  } \n  if (!(date instanceof Date)) { \n    throw new Error('Invalid \"date\" argument') \n  } \n  date.setHours(date.getHours() + hours) \n  return date \n}\naddHours(-3, start_datetime);\naddHours(-3, end_datetime);\n\nvar start_query_time = start_datetime.toLocaleDateString(\"ru-RU\") + \" \" + start_datetime.toLocaleTimeString(\"ru-RU\") \nvar end_query_time = end_datetime.toLocaleDateString(\"ru-RU\") + \" \" + end_datetime.toLocaleTimeString(\"ru-RU\") \n\n// var start_query_time = \"'\" + start_datetime.toLocaleDateString(\"ru-RU\") + \" \" + start_datetime.toLocaleTimeString(\"ru-RU\") + \"'\"\n// var end_query_time = \"'\" + end_datetime.toLocaleDateString(\"ru-RU\") + \" \" + end_datetime.toLocaleTimeString(\"ru-RU\") + \"'\"\n\n// msg.path = \"/data/static/Отчет \" + getCorrectDatetime(new Date(addHours(-3, new Date(dateReportStart)))) + \" - \" + getCorrectDatetime(new Date(addHours(-3, new Date(dateReportEnd)))) + \".csv\"\nlet correctFileName = \"Отчет c \" + start_query_time + \" по \" + end_query_time +\".csv\";\nmsg.path = \"/data/static/reports/\" + correctFileName;\n\nlet file_name = \"http://192.168.1.116:1856/static/reports/\" + correctFileName;\nflow.set(\"file_name\", file_name);\nmsg.filename = msg.path\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 500,
         "wires": [
             []
         ]
     },
     {
-        "id": "5a97f5f938015f64",
-        "type": "ui_list",
+        "id": "036f36507337eeb6",
+        "type": "fs-copy-move",
         "z": "92226df4e340c706",
-        "d": true,
-        "group": "b5ccc75c0e8c4463",
+        "oper": "cp",
+        "srcPath": "/data/static/reports/",
+        "srcPathType": "str",
+        "srcFilename": "report.xlsx",
+        "srcFilenameType": "str",
+        "dstPath": "/data/static/reports/",
+        "dstPathType": "str",
+        "dstFilename": "report-copy.xlsx",
+        "dstFilenameType": "str",
+        "overwrite": true,
         "name": "",
-        "order": 25,
-        "width": 6,
-        "height": 2,
-        "lineType": "two",
-        "actionType": "none",
-        "allowHTML": false,
-        "outputs": 0,
+        "x": 840,
+        "y": 500,
+        "wires": [
+            [
+                "81047ca8789c2ec5"
+            ]
+        ]
+    },
+    {
+        "id": "cf91ee91d0f61e45",
+        "type": "json-xlsx",
+        "z": "92226df4e340c706",
+        "name": "",
+        "filename": "",
         "topic": "",
-        "x": 930,
-        "y": 740,
-        "wires": []
+        "sheetName": "ssss",
+        "description": "yaya",
+        "x": 670,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "921bd86b0f2e3079",
+        "type": "inject",
+        "z": "92226df4e340c706",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9a0405a1222a62d4",
+        "type": "fs-copy-move",
+        "z": "92226df4e340c706",
+        "oper": "mv",
+        "srcPath": "/data/static/reports/",
+        "srcPathType": "str",
+        "srcFilename": "report-copy.xlsx",
+        "srcFilenameType": "str",
+        "dstPath": "/data/static/reports/",
+        "dstPathType": "str",
+        "dstFilename": "destination",
+        "dstFilenameType": "msg",
+        "overwrite": true,
+        "name": "",
+        "x": 1040,
+        "y": 500,
+        "wires": [
+            [
+                "69bb46803e2ac180"
+            ]
+        ]
+    },
+    {
+        "id": "81047ca8789c2ec5",
+        "type": "function",
+        "z": "92226df4e340c706",
+        "name": "path_URL",
+        "func": "var start_datetime = new Date(flow.get(\"start_ts_input\"));\nvar end_datetime = new Date(flow.get(\"end_ts_input\"));\n\nfunction addHours(hours,  date = new Date()) {   \n  if (typeof hours !== 'number') { \n    throw new Error('Invalid \"hours\" argument') \n  } \n  if (!(date instanceof Date)) { \n    throw new Error('Invalid \"date\" argument') \n  } \n  date.setHours(date.getHours() + hours) \n  return date \n}\naddHours(-3, start_datetime);\naddHours(-3, end_datetime);\n\nvar start_query_time = start_datetime.toLocaleDateString(\"ru-RU\") + \" \" + start_datetime.toLocaleTimeString(\"ru-RU\") \nvar end_query_time = end_datetime.toLocaleDateString(\"ru-RU\") + \" \" + end_datetime.toLocaleTimeString(\"ru-RU\") \n\n// var start_query_time = \"'\" + start_datetime.toLocaleDateString(\"ru-RU\") + \" \" + start_datetime.toLocaleTimeString(\"ru-RU\") + \"'\"\n// var end_query_time = \"'\" + end_datetime.toLocaleDateString(\"ru-RU\") + \" \" + end_datetime.toLocaleTimeString(\"ru-RU\") + \"'\"\n\n// msg.path = \"/data/static/Отчет \" + getCorrectDatetime(new Date(addHours(-3, new Date(dateReportStart)))) + \" - \" + getCorrectDatetime(new Date(addHours(-3, new Date(dateReportEnd)))) + \".csv\"\nlet correctFileName = \"Отчет c \" + start_query_time + \" по \" + end_query_time +\".xlsx\";\nlet path = \"/data/static/reports/\" + correctFileName;\n\nlet file_name = \"http://192.168.1.116:1856/static/reports/\" + correctFileName;\nflow.set(\"file_name\", file_name);\nmsg.destination = path\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 460,
+        "wires": [
+            [
+                "9a0405a1222a62d4"
+            ]
+        ]
     },
     {
         "id": "cd2c6ef3c97cadae",
@@ -1843,10 +1564,10 @@
         "z": "cebe0263a986f9c3",
         "group": "b609199da19ad8a0",
         "name": "cam1",
-        "order": 5,
-        "width": 10,
+        "order": 7,
+        "width": 11,
         "height": 8,
-        "format": "<!-- \n<div style=\"text-align:  center; width:95%; height:100%;\nborder: 10px groove lightblue;\">\n    <p style=\"margin-top:114px; margin-bottom:114px;\">IP CAMERA Не подключена</p> -->\n<!-- <p style=\"margin-top:114px; margin-bottom:114px;\">IP CAMERA Не подключена</p> -->\n</div> <!-- border: 10px groove lightblue; -->\n<iframe style=\"text-align:  center; width:95%; height:100%;\" src=\"http://localhost:8889/mystream\" scrolling=\"no\"></iframe>\n<!-- <head>\n    <meta charset=\"utf-8\">\n    <title>Unreal Media Server WebRTC player</title>\n\n    <script src=\"/webrtcadapter.js\"></script>\n    <script src=\"/unrealwebrtcplayer.js\"></script>\n\n    <script type=\"text/javascript\">\n        var webrtcPlayer = null;\n    </script>\n</head> -->\n<!-- \n<body>\n    <!-- <div id=\"container\" align=\"center\">\n    <video style=\"background: black url(loader.gif) center no-repeat;\" id=\"remoteVideo\" class=\"ttx_ws1_1\" width=\"426\"\n      height=\"255\" autoplay muted controls></video>\n  </div> -->\n    <!-- <iframe id='fp_embed_player' src='http://localhost:8089/publish/mf' marginwidth='0' marginheight='0'\n        frameborder='0' width='100%' height='100%' scrolling='no' allowfullscreen='allowfullscreen'></iframe> -->\n\n     <!-- <script type=\"text/javascript\">\n    webrtcPlayer = new UnrealWebRTCPlayer(\"mf\", \"publish\", \"\", \"localhost\", \"8089\", false, true, \"tcp\");\n       webrtcPlayer.Play();\n  </script>\n</body> --> \n\n\n<!-- <head>\n    <meta charset=\"utf-8\">\n    <title>Unreal Media Server WebRTC player</title>\n  \n    <script src=\"http://www.umediaserver.net/umediaserver/webrtcadapter.js\"></script>\n    <script src=\"http://www.umediaserver.net/umediaserver/unrealwebrtcplayer.js\"></script>\n    \n    \n    <!-- <script type=\"text/javascript\">\n      var webrtcPlayer = null;\n    </script> -->\n<!--</head> -->\n<!-- \n<body>\n    <div id=\"container\" align=\"center\">\n        <video style=\"background-color:black\" id=\"remoteVideo\" width=\"426\" height=\"255\" autoplay playsinline controls muted></video>\n\n        <script type=\"text/javascript\">\n            webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \"mf\", \"\", \"localhost\", \"8089\", true, true, \"tcp\");\n            //webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \"livedemocam1\", \"\", \"unrealstreaming.net\", \"444\", true, true, \"tcp\");\n            //webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \".docs\", \"\", \"192.168.6.10\", \"5119\", true, true, \"tcp\");\n            webrtcPlayer.Play();\n        </script>\n\n    </div>\n</body> -->",
+        "format": "<!-- \n<div style=\"text-align:  center; width:95%; height:100%;\nborder: 10px groove lightblue;\">\n    <p style=\"margin-top:114px; margin-bottom:114px;\">IP CAMERA Не подключена</p> -->\n<!-- <p style=\"margin-top:114px; margin-bottom:114px;\">IP CAMERA Не подключена</p> -->\n <!-- </div> <p style=\"margin-top: auto; margin-bottom: auto; margin-left: auto; margin-right: auto;\">IP camera</p></div>border: 10px groove lightblue; -->\n<iframe style=\"text-align:  center; width:100%; height:100%;\" src=\"http://192.168.1.116:8889/cam_2ndFlow\" scrolling=\"no\"></iframe>\n<!-- <head>\n    <meta charset=\"utf-8\">\n    <title>Unreal Media Server WebRTC player</title>\n\n    <script src=\"/webrtcadapter.js\"></script>\n    <script src=\"/unrealwebrtcplayer.js\"></script>\n\n    <script type=\"text/javascript\">\n        var webrtcPlayer = null;\n    </script>\n</head> -->\n<!-- \n<body>\n    <!-- <div id=\"container\" align=\"center\">\n    <video style=\"background: black url(loader.gif) center no-repeat;\" id=\"remoteVideo\" class=\"ttx_ws1_1\" width=\"426\"\n      height=\"255\" autoplay muted controls></video>\n  </div> -->\n    <!-- <iframe id='fp_embed_player' src='http://localhost:8089/publish/mf' marginwidth='0' marginheight='0'\n        frameborder='0' width='100%' height='100%' scrolling='no' allowfullscreen='allowfullscreen'></iframe> -->\n\n     <!-- <script type=\"text/javascript\">\n    webrtcPlayer = new UnrealWebRTCPlayer(\"mf\", \"publish\", \"\", \"localhost\", \"8089\", false, true, \"tcp\");\n       webrtcPlayer.Play();\n  </script>\n</body> --> \n\n\n<!-- <head>\n    <meta charset=\"utf-8\">\n    <title>Unreal Media Server WebRTC player</title>\n  \n    <script src=\"http://www.umediaserver.net/umediaserver/webrtcadapter.js\"></script>\n    <script src=\"http://www.umediaserver.net/umediaserver/unrealwebrtcplayer.js\"></script>\n    \n    \n    <!-- <script type=\"text/javascript\">\n      var webrtcPlayer = null;\n    </script> -->\n<!--</head> -->\n<!-- \n<body>\n    <div id=\"container\" align=\"center\">\n        <video style=\"background-color:black\" id=\"remoteVideo\" width=\"426\" height=\"255\" autoplay playsinline controls muted></video>\n\n        <script type=\"text/javascript\">\n            webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \"mf\", \"\", \"localhost\", \"8089\", true, true, \"tcp\");\n            //webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \"livedemocam1\", \"\", \"unrealstreaming.net\", \"444\", true, true, \"tcp\");\n            //webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \".docs\", \"\", \"192.168.6.10\", \"5119\", true, true, \"tcp\");\n            webrtcPlayer.Play();\n        </script>\n\n    </div>\n</body> -->",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -1864,7 +1585,7 @@
         "z": "cebe0263a986f9c3",
         "group": "b609199da19ad8a0",
         "name": "spacer2",
-        "order": 8,
+        "order": 1,
         "width": 1,
         "height": 19,
         "format": "<div ng-bind-html=\"msg.payload\"></div>",
@@ -1880,34 +1601,12 @@
         ]
     },
     {
-        "id": "09367071c5c96d9f",
-        "type": "ui_template",
-        "z": "cebe0263a986f9c3",
-        "d": true,
-        "group": "b609199da19ad8a0",
-        "name": "CenterLine",
-        "order": 31,
-        "width": 2,
-        "height": 22,
-        "format": "<table id=\"table1\" height=\"105%\" style=\"border-left: 10px solid lightblue;border-right: 10px solid lightblue;\">\n    <tbody>\n        <tr>\n            <th style=\"font-size: 23px; text-align: left;  \">\n            </th>\n        </tr>\n    </tbody>\n</table>\n<!-- <div style=\"\"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\" </div> -->",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 490,
-        "y": 100,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "884063dac638f4d9",
         "type": "ui_template",
         "z": "cebe0263a986f9c3",
         "group": "b609199da19ad8a0",
         "name": "spacer4",
-        "order": 4,
+        "order": 5,
         "width": 1,
         "height": 18,
         "format": "<div ng-bind-html=\"msg.payload\"></div>",
@@ -1928,10 +1627,10 @@
         "z": "cebe0263a986f9c3",
         "group": "b609199da19ad8a0",
         "name": "cam2",
-        "order": 7,
-        "width": 10,
+        "order": 9,
+        "width": 11,
         "height": 8,
-        "format": "<!-- \n<div style=\"text-align:  center; width:95%; height:100%;\nborder: 10px groove lightblue;\">\n    <p style=\"margin-top:114px; margin-bottom:114px;\">IP CAMERA Не подключена</p> -->\n<!-- <p style=\"margin-top:114px; margin-bottom:114px;\">IP CAMERA Не подключена</p> -->\n</div> <!-- border: 10px groove lightblue; -->\n<iframe style=\"text-align:  center; width:95%; height:100%;\" src=\"http://localhost:8889/cam\" scrolling=\"no\"></iframe>\n<!-- <head>\n    <meta charset=\"utf-8\">\n    <title>Unreal Media Server WebRTC player</title>\n\n    <script src=\"/webrtcadapter.js\"></script>\n    <script src=\"/unrealwebrtcplayer.js\"></script>\n\n    <script type=\"text/javascript\">\n        var webrtcPlayer = null;\n    </script>\n</head> -->\n<!-- \n<body>\n    <!-- <div id=\"container\" align=\"center\">\n    <video style=\"background: black url(loader.gif) center no-repeat;\" id=\"remoteVideo\" class=\"ttx_ws1_1\" width=\"426\"\n      height=\"255\" autoplay muted controls></video>\n  </div> -->\n<!-- <iframe id='fp_embed_player' src='http://localhost:8089/publish/mf' marginwidth='0' marginheight='0'\n        frameborder='0' width='100%' height='100%' scrolling='no' allowfullscreen='allowfullscreen'></iframe> -->\n\n<!-- <script type=\"text/javascript\">\n    webrtcPlayer = new UnrealWebRTCPlayer(\"mf\", \"publish\", \"\", \"localhost\", \"8089\", false, true, \"tcp\");\n       webrtcPlayer.Play();\n  </script>\n</body> -->\n\n\n<!-- <head>\n    <meta charset=\"utf-8\">\n    <title>Unreal Media Server WebRTC player</title>\n  \n    <script src=\"http://www.umediaserver.net/umediaserver/webrtcadapter.js\"></script>\n    <script src=\"http://www.umediaserver.net/umediaserver/unrealwebrtcplayer.js\"></script>\n    \n    \n    <!-- <script type=\"text/javascript\">\n      var webrtcPlayer = null;\n    </script> -->\n<!--</head> -->\n<!-- \n<body>\n    <div id=\"container\" align=\"center\">\n        <video style=\"background-color:black\" id=\"remoteVideo\" width=\"426\" height=\"255\" autoplay playsinline controls muted></video>\n\n        <script type=\"text/javascript\">\n            webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \"mf\", \"\", \"localhost\", \"8089\", true, true, \"tcp\");\n            //webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \"livedemocam1\", \"\", \"unrealstreaming.net\", \"444\", true, true, \"tcp\");\n            //webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \".docs\", \"\", \"192.168.6.10\", \"5119\", true, true, \"tcp\");\n            webrtcPlayer.Play();\n        </script>\n\n    </div>\n</body> -->",
+        "format": "<!-- \n<div style=\"text-align:  center; width:95%; height:100%;\nborder: 10px groove lightblue;\">\n    <p style=\"margin-top:114px; margin-bottom:114px;\">IP CAMERA Не подключена</p> -->\n<!-- <p style=\"margin-top:114px; margin-bottom:114px;\">IP CAMERA Не подключена</p> -->\n</div> <!-- border: 10px groove lightblue; -->\n<iframe style=\"text-align:  center; width:100%; height:100%;\" src=\"http://192.168.1.116:8889/ladder_cam_2ndFlow/\" scrolling=\"no\"></iframe>\n<!-- <head>\n    <meta charset=\"utf-8\">\n    <title>Unreal Media Server WebRTC player</title>\n\n    <script src=\"/webrtcadapter.js\"></script>\n    <script src=\"/unrealwebrtcplayer.js\"></script>\n\n    <script type=\"text/javascript\">\n        var webrtcPlayer = null;\n    </script>\n</head> -->\n<!-- \n<body>\n    <!-- <div id=\"container\" align=\"center\">\n    <video style=\"background: black url(loader.gif) center no-repeat;\" id=\"remoteVideo\" class=\"ttx_ws1_1\" width=\"426\"\n      height=\"255\" autoplay muted controls></video>\n  </div> -->\n<!-- <iframe id='fp_embed_player' src='http://localhost:8089/publish/mf' marginwidth='0' marginheight='0'\n        frameborder='0' width='100%' height='100%' scrolling='no' allowfullscreen='allowfullscreen'></iframe> -->\n\n<!-- <script type=\"text/javascript\">\n    webrtcPlayer = new UnrealWebRTCPlayer(\"mf\", \"publish\", \"\", \"localhost\", \"8089\", false, true, \"tcp\");\n       webrtcPlayer.Play();\n  </script>\n</body> -->\n\n\n<!-- <head>\n    <meta charset=\"utf-8\">\n    <title>Unreal Media Server WebRTC player</title>\n  \n    <script src=\"http://www.umediaserver.net/umediaserver/webrtcadapter.js\"></script>\n    <script src=\"http://www.umediaserver.net/umediaserver/unrealwebrtcplayer.js\"></script>\n    \n    \n    <!-- <script type=\"text/javascript\">\n      var webrtcPlayer = null;\n    </script> -->\n<!--</head> -->\n<!-- \n<body>\n    <div id=\"container\" align=\"center\">\n        <video style=\"background-color:black\" id=\"remoteVideo\" width=\"426\" height=\"255\" autoplay playsinline controls muted></video>\n\n        <script type=\"text/javascript\">\n            webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \"mf\", \"\", \"localhost\", \"8089\", true, true, \"tcp\");\n            //webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \"livedemocam1\", \"\", \"unrealstreaming.net\", \"444\", true, true, \"tcp\");\n            //webrtcPlayer = new UnrealWebRTCPlayer(\"remoteVideo\", \".docs\", \"\", \"192.168.6.10\", \"5119\", true, true, \"tcp\");\n            webrtcPlayer.Play();\n        </script>\n\n    </div>\n</body> -->",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -1944,131 +1643,22 @@
         ]
     },
     {
-        "id": "e9c0c274c014643a",
-        "type": "ui_template",
-        "z": "cebe0263a986f9c3",
-        "d": true,
-        "group": "b609199da19ad8a0",
-        "name": "HorizontalLine",
-        "order": 78,
-        "width": 26,
-        "height": 1,
-        "format": "<table id=\"table1\" width=\"100%\" height=\"50%\"style=\"border-top:38px solid CadetBlue;\">\n    <tbody>\n        <tr>\n            <th style=\"font-size: 23px; text-align: left;  \">\n            </th>\n        </tr>\n    </tbody>\n</table>\n<!-- <div style=\"\"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\" </div> -->",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 500,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "e7eebefc06cede2f",
-        "type": "ui_template",
-        "z": "cebe0263a986f9c3",
-        "d": true,
-        "group": "b609199da19ad8a0",
-        "name": "CenterLine2",
-        "order": 54,
-        "width": 2,
-        "height": 10,
-        "format": "<table id=\"table1\" height=\"105%\" style=\"border-left: 10px solid CadetBlue;border-right: 10px solid CadetBlue;\">\n    <tbody>\n        <tr>\n            <th style=\"font-size: 23px; text-align: left;  \">\n            </th>\n        </tr>\n    </tbody>\n</table>\n<!-- <div style=\"\"> Подсчет количества животных при приемке на ООО \"МПК \"Атяшевский\" </div> -->",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 510,
-        "y": 200,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "a560087702331e34",
         "type": "ui_template",
         "z": "cebe0263a986f9c3",
         "group": "b609199da19ad8a0",
         "name": "Таблица подсчета в реальном времени",
-        "order": 16,
-        "width": 24,
+        "order": 33,
+        "width": 25,
         "height": 1,
-        "format": "<div style=\" font-size: 25px; text-align: center; padding-top: 5px; \"> Таблица подсчета в реальном времени </div>\n<!-- font-family:'Courier New', monospace; -->",
+        "format": "<div style=\"font-family:'Courier New', monospace; font-size: 25px; text-align: center; padding-top: 5px; \"> Таблица подсчета в реальном времени </div>\n<!-- font-family:'Courier New', monospace; -->",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 280,
-        "y": 440,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "5ae9e9840acfee70",
-        "type": "ui_template",
-        "z": "cebe0263a986f9c3",
-        "d": true,
-        "group": "b609199da19ad8a0",
-        "name": "Предыдущие записи",
-        "order": 18,
-        "width": 24,
-        "height": 1,
-        "format": "<div style=\" font-size: 25px; text-align: center; padding-top: 5px; \"> Предыдущие записи </div>\n<!-- font-family:'Courier New', monospace; -->",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 220,
-        "y": 480,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "6ba4140af142dc62",
-        "type": "ui_template",
-        "z": "cebe0263a986f9c3",
-        "group": "b609199da19ad8a0",
-        "name": "table1",
-        "order": 17,
-        "width": 24,
-        "height": 3,
-        "format": "<style>\n    th,\n    td {\n        font-size: 20px;\n        heigth: 48px;\n        font-weight: normal;\n    }\n</style>\n<!-- background-color: #d3d3d3; height:30px; --> <!-- font-family:'Courier New', monospace; -->\n<table id=\"table\" style=\" border: 1px solid gray; border-collapse: collapse;\">\n    <tr style=\"border: 3px solid gray; border-collapse: collapse; \">\n        <th style=\" border: 3px solid gray; border-collapse: collapse; height:30px; \"> \n            №</th>\n        <th style=\" border: 3px solid gray; border-collapse: collapse; height:30px; \"> \n            Номер машины</th>\n        <th style=\" border: 3px solid gray; border-collapse: collapse; height:30px; \"> \n            Место разгрузки</th>\n        <th style=\" border: 3px solid gray; border-collapse: collapse; height:30px; \"> \n            Начало разгрузки</th>\n        <th style=\" border: 3px solid gray; border-collapse: collapse; height:30px; \">\n            Конец разгрузки</th>\n        <th style=\" border: 3px solid gray; border-collapse: collapse;  height:30px; width: 250px;\">\n            Количество принятых животных</th>\n        <th style=\" border: 3px solid gray; border-collapse: collapse; height:30px; \"> \n            Санитарный брак</th>\n    </tr>\n\n    <tbody >\n        <tr ng-repeat=\"row in msg.payload\" style=\"height:48px; border: 3px solid gray; border-collapse: collapse;\">\n            <td ng-repeat=\"item in row\" style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px;\">\n                {{item}}</td>\n        </tr>\n    </tbody>\n\n</table>\n\n\n\n\n\n\n\n\n\n\n    <!-- <tr style=\"height:48px; border: 3px solid gray; border-collapse: collapse; \">\n            <td style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px; \">-</td>\n            <td style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px; \">-</td>\n            <td style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px; \">-</td>\n        </tr> -->",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 710,
-        "y": 680,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "400460a3f58075db",
-        "type": "ui_template",
-        "z": "cebe0263a986f9c3",
-        "d": true,
-        "group": "b609199da19ad8a0",
-        "name": "table2",
-        "order": 19,
-        "width": 24,
-        "height": 8,
-        "format": "\n<!-- background-color: #d3d3d3; height:30px; --> <!-- font-family:'Courier New', monospace; -->\n<table id=\"table2\" style=\" border: 1px solid gray; border-collapse: collapse;\">\n    <tr style=\"border: 3px solid gray; border-collapse: collapse; \">\n        <th style=\" border: 3px solid gray; border-collapse: collapse; height:30px; \"> \n            №</th>\n        <th style=\" border: 3px solid gray; border-collapse: collapse; height:30px; \"> \n            Номер машины</th>\n        <th style=\" border: 3px solid gray; border-collapse: collapse; height:30px; \"> \n            Место разгрузки</th>\n        <th style=\" border: 3px solid gray; border-collapse: collapse; height:30px; \"> \n            Начало разгрузки</th>\n        <th style=\" border: 3px solid gray; border-collapse: collapse; height:30px; \">\n            Конец разгрузки</th>\n        <th style=\" border: 3px solid gray; border-collapse: collapse;  height:30px; width: 250px;\">\n            Количество принятых животных</th>\n        <th style=\" border: 3px solid gray; border-collapse: collapse; height:30px; \"> \n            Санитарный брак</th>\n    </tr>\n\n    <tbody >\n        <tr ng-repeat=\"row in msg.payload\" style=\"height:48px; border: 3px solid gray; border-collapse: collapse;\">\n            <td ng-repeat=\"item in row\" style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px;\">\n                {{item}}</td>\n        </tr>\n    </tbody>\n\n</table>\n\n\n\n\n\n\n\n\n\n\n    <!-- <tr style=\"height:48px; border: 3px solid gray; border-collapse: collapse; \">\n            <td style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px; \">-</td>\n            <td style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px; \">-</td>\n            <td style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px; \">-</td>\n        </tr> -->",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 730,
-        "y": 740,
+        "x": 480,
+        "y": 160,
         "wires": [
             []
         ]
@@ -2079,10 +1669,10 @@
         "z": "cebe0263a986f9c3",
         "group": "b609199da19ad8a0",
         "name": "Подсчет количества",
-        "order": 1,
-        "width": 12,
+        "order": 2,
+        "width": 13,
         "height": 1,
-        "format": "<div style=\" font-size: 30px; text-align: center; padding-top: 5px; \"> Подсчет количества принятых животных</div>\n<!-- font-family:'Courier New', monospace; -->",
+        "format": "<div style=\"font-family:'Courier New', monospace; font-size: 25px; text-align: center; padding-top: 5px; \"> Подсчет количества принятых животных</div>\n<!-- font-family:'Courier New', monospace; -->",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -2100,10 +1690,10 @@
         "z": "cebe0263a986f9c3",
         "group": "b609199da19ad8a0",
         "name": "Контроль разгрузки",
-        "order": 3,
-        "width": 12,
+        "order": 4,
+        "width": 13,
         "height": 1,
-        "format": "<div style=\" font-size: 30px; text-align: center; padding-top: 5px; \"> Контроль разгрузки </div>\n<!-- font-family:'Courier New', monospace; -->",
+        "format": "<div style=\"font-family:'Courier New', monospace; font-size: 25px; text-align: center; padding-top: 5px; \"> Контроль разгрузки </div>\n<!-- font-family:'Courier New', monospace; -->",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -2116,33 +1706,13 @@
         ]
     },
     {
-        "id": "c2651d6f85630de7",
-        "type": "function",
-        "z": "cebe0263a986f9c3",
-        "name": "function 74",
-        "func": "var query =\"SELECT * FROM events ORDER BY event_id DESC OFFSET 1;\"\n// var query = \"SELECT event_id, platenumber, place, start_time, end_time, pigs_quantity, pigs_defect WHERE event_id NOT IN(SELECT * FROM(SELECT event_id FROM events ORDER BY event_id DESC LIMIT 1));\"\nmsg.payload = query\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 290,
-        "y": 740,
-        "wires": [
-            [
-                "6775977f63328d48"
-            ]
-        ]
-    },
-    {
         "id": "68ba83dee933f0b5",
         "type": "ui_button",
         "z": "cebe0263a986f9c3",
         "d": true,
         "name": "",
         "group": "b609199da19ad8a0",
-        "order": 26,
+        "order": 43,
         "width": 4,
         "height": 1,
         "passthru": false,
@@ -2157,7 +1727,7 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 100,
-        "y": 680,
+        "y": 300,
         "wires": [
             [
                 "60c2d2288ec6c75c"
@@ -2165,46 +1735,22 @@
         ]
     },
     {
-        "id": "6846d602d411c6fc",
-        "type": "postgres",
-        "z": "cebe0263a986f9c3",
-        "postgresdb": "184e08d38ff3c438",
-        "name": "",
-        "output": true,
-        "perrow": false,
-        "rowspermsg": "1",
-        "return_on_error": true,
-        "limit_queries": "0",
-        "limit_by": "payload",
-        "limit_value": "1",
-        "limit_drop_intermediate": false,
-        "limit_drop_if_in_queue": false,
-        "outputs": true,
-        "x": 420,
-        "y": 680,
-        "wires": [
-            [
-                "f75c74d2a5c10bdc"
-            ]
-        ]
-    },
-    {
         "id": "60c2d2288ec6c75c",
         "type": "function",
         "z": "cebe0263a986f9c3",
-        "name": "function 75",
-        "func": "// var query =\"SELECT * FROM events ORDER BY event_id DESC LIMIT 1;\"\nvar query = \"SELECT event_id, platenumber, place, start_time, end_time, pigs_quantity, pigs_defect FROM events ORDER BY event_id DESC LIMIT 1;\"\nmsg.payload = query\nreturn msg;",
+        "name": "query",
+        "func": "// var query =\"SELECT * FROM events ORDER BY event_id DESC LIMIT 1;\"\n// var query = \"SELECT event_id, truck_plate, place, start_time, end_time, pigs_quantity, pigs_defect, trailer_plate, truck_id FROM events ORDER BY event_id DESC LIMIT 1;\"\nvar query = \"SELECT event_id, truck_plate, place, start_time, end_time, pigs_quantity, trailer_plate, truck_id FROM events ORDER BY event_id DESC LIMIT 1;\"\nmsg.payload = query\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 270,
-        "y": 680,
+        "x": 250,
+        "y": 300,
         "wires": [
             [
-                "6846d602d411c6fc"
+                "cff5327cf0420b99"
             ]
         ]
     },
@@ -2215,98 +1761,34 @@
         "name": "debug 393",
         "active": true,
         "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
         "statusType": "auto",
-        "x": 710,
-        "y": 580,
+        "x": 650,
+        "y": 360,
         "wires": []
     },
     {
         "id": "f75c74d2a5c10bdc",
         "type": "function",
         "z": "cebe0263a986f9c3",
-        "name": "function 76",
-        "func": "var data = msg.payload\n\nvar event_id = [];\nvar start_time = [];\nvar end_time = [];\nvar pigs_quantity = [];\nvar pigs_defect = [];\nvar platenumber = [];\nvar place = [];\n\nfunction addHours(hours, date = new Date()) {\n    if (typeof hours !== 'number') {\n        throw new Error('Invalid \"hours\" argument')\n    }\n    if (!(date instanceof Date)) {\n        throw new Error('Invalid \"date\" argument')\n    }\n    date.setHours(date.getHours() + hours)\n    return date\n}\n\nvar lgth_data = data.length\nfor(var i = 0; i < lgth_data;i++){\n    \n    if (data[i]['end_time'] == null){ \n        event_id.push(data[i]['event_id']);\n        start_time.push(new Date(addHours(3, data[i]['start_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));\n        end_time.push(\"Идет подсчет...\")\n        pigs_quantity.push(data[i]['pigs_quantity']);\n        pigs_defect.push(data[i]['pigs_defect']);\n        platenumber.push(data[i]['platenumber']);\n        place.push(data[i]['place']);\n    }\n    else { \n        event_id.push(data[i]['event_id']);\n        start_time.push(new Date(addHours(3, data[i]['start_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));\n        end_time.push(new Date(addHours(3, data[i]['end_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));}\n        pigs_quantity.push(data[i]['pigs_quantity']);\n        pigs_defect.push(data[i]['pigs_defect']);\n        platenumber.push(data[i]['platenumber']);\n        place.push(data[i]['place']);   \n}\n\nvar table1_data = []\nfor(var i = 0; i < lgth_data;i++){\n    var tab = []\n    for (var j = 0; j < 1; j++) {\n        tab.push(event_id[i].toString(), platenumber[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString(), pigs_defect[i].toString())\n    }\n    table1_data.push(tab)\n}\n\n\n// var table2_data = []\n// for(var i = 0; i < lgth_data;i++){\n//     var tab = []\n//     for (var j = 0; j < 1; j++) {\n//         tab.push(start_time[i].toString(), end_time[i].toString(), platenumber[i].toString())\n//     }\n//     table2_data.push(tab)\n// }\n\n// var start_time = data.start_time\n// var end_time = data.end_time\n// var pigs_quantity = data.pigs_quantity\n\n\nmsg.payload = table1_data\n\nreturn msg;",
+        "name": "setCorrectData",
+        "func": "var data = msg.payload\n\nvar event_id = [];\nvar start_time = [];\nvar end_time = [];\nvar pigs_quantity = [];\n// var pigs_defect = [];\nvar truck_plate = [];\nvar trailer_plate = [];\nvar truck_id = [];\nvar place = [];\n\nfunction addHours(hours, date = new Date()) {\n    if (typeof hours !== 'number') {\n        throw new Error('Invalid \"hours\" argument')\n    }\n    if (!(date instanceof Date)) {\n        throw new Error('Invalid \"date\" argument')\n    }\n    date.setHours(date.getHours() + hours)\n    return date\n}\n\nvar lgth_data = data.length\nfor(var i = 0; i < lgth_data;i++){\n    event_id.push(data[i]['event_id']);\n    start_time.push(new Date(addHours(3, data[i]['start_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));\n    if (data[i]['end_time'] == null) { end_time.push(\"Идет подсчет...\") }\n    else { end_time.push(new Date(addHours(3, data[i]['end_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16)); }\n    pigs_quantity.push(data[i]['pigs_quantity']);\n    // pigs_defect.push(data[i]['pigs_defect']);\n    if (data[i]['truck_plate'] == null) { truck_plate.push(\"Вычисление...\") }\n    else { truck_plate.push(data[i]['truck_plate']);}\n    place.push(data[i]['place']);\n    if (data[i]['trailer_plate'] == null) { trailer_plate.push(\"Вычисление...\") }\n    else { trailer_plate.push(data[i]['trailer_plate']); }\n    if (data[i]['truck_id'] == null) { truck_id.push(\"Вычисление...\") }\n    else { truck_id.push(data[i]['truck_id']); }    \n}\n\nvar table1_data = [];\nfor(var i = 0; i < lgth_data;i++){\n    var tab = [];\n    for (var j = 0; j < 1; j++) {\n        tab.push(event_id[i].toString(), truck_id[i].toString(), truck_plate[i].toString(), trailer_plate[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString())\n        //Pigs_defect tab.push(event_id[i].toString(), truck_plate[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString(), pigs_defect[i].toString(), trailer_plate[i].toString(), truck_id[i].toString())\n        // tab.push(event_id[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString(), pigs_defect[i].toString())\n    }\n    table1_data.push(tab)\n}\n\n\n// var table2_data = []\n// for(var i = 0; i < lgth_data;i++){\n//     var tab = []\n//     for (var j = 0; j < 1; j++) {\n//         tab.push(start_time[i].toString(), end_time[i].toString(), platenumber[i].toString())\n//     }\n//     table2_data.push(tab)\n// }\n\n// var start_time = data.start_time\n// var end_time = data.end_time\n// var pigs_quantity = data.pigs_quantity\n\n\nmsg.payload = table1_data\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
-        "y": 680,
+        "x": 580,
+        "y": 300,
         "wires": [
             [
-                "6ba4140af142dc62"
+                "af203523bc9fce36"
             ]
-        ]
-    },
-    {
-        "id": "17254e8c91efc6d6",
-        "type": "ui_button",
-        "z": "cebe0263a986f9c3",
-        "d": true,
-        "name": "",
-        "group": "b609199da19ad8a0",
-        "order": 29,
-        "width": 4,
-        "height": 1,
-        "passthru": false,
-        "label": "Сформировать2",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 110,
-        "y": 740,
-        "wires": [
-            [
-                "c2651d6f85630de7"
-            ]
-        ]
-    },
-    {
-        "id": "48270a06d1c185ab",
-        "type": "function",
-        "z": "cebe0263a986f9c3",
-        "name": "function 77",
-        "func": "var arr = msg.payload[0]\n\nmsg.payload = arr\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 990,
-        "y": 680,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "afe89160ec75fb0d",
-        "type": "function",
-        "z": "cebe0263a986f9c3",
-        "name": "function 78",
-        "func": "var arr = msg.payload[1]\n\nmsg.payload = arr\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 810,
-        "y": 640,
-        "wires": [
-            []
         ]
     },
     {
@@ -2321,8 +1803,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 670,
-        "y": 380,
+        "x": 990,
+        "y": 300,
         "wires": [
             []
         ]
@@ -2339,8 +1821,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
-        "y": 880,
+        "x": 290,
+        "y": 400,
         "wires": [
             [
                 "8b188dc8e00b5fbd"
@@ -2351,7 +1833,7 @@
         "id": "8b188dc8e00b5fbd",
         "type": "postgres",
         "z": "cebe0263a986f9c3",
-        "postgresdb": "184e08d38ff3c438",
+        "postgresdb": "d45898b2c897236c",
         "name": "",
         "output": true,
         "perrow": false,
@@ -2363,8 +1845,8 @@
         "limit_drop_intermediate": false,
         "limit_drop_if_in_queue": false,
         "outputs": true,
-        "x": 480,
-        "y": 880,
+        "x": 440,
+        "y": 400,
         "wires": [
             []
         ]
@@ -2390,56 +1872,11 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 160,
-        "y": 880,
+        "x": 120,
+        "y": 400,
         "wires": [
             [
                 "fcab92f3ca3d0281"
-            ]
-        ]
-    },
-    {
-        "id": "6775977f63328d48",
-        "type": "postgres",
-        "z": "cebe0263a986f9c3",
-        "postgresdb": "184e08d38ff3c438",
-        "name": "",
-        "output": true,
-        "perrow": false,
-        "rowspermsg": "1",
-        "return_on_error": true,
-        "limit_queries": "0",
-        "limit_by": "payload",
-        "limit_value": "1",
-        "limit_drop_intermediate": false,
-        "limit_drop_if_in_queue": false,
-        "outputs": true,
-        "x": 440,
-        "y": 740,
-        "wires": [
-            [
-                "469a7b856cc0dad5",
-                "a2bfd0a692f5ed74"
-            ]
-        ]
-    },
-    {
-        "id": "469a7b856cc0dad5",
-        "type": "function",
-        "z": "cebe0263a986f9c3",
-        "name": "function 81",
-        "func": "var data = msg.payload\n\nvar event_id = [];\nvar start_time = [];\nvar end_time = [];\nvar pigs_quantity = [];\nvar pigs_defect = [];\nvar platenumber = [];\nvar place = [];\n\nfunction addHours(hours, date = new Date()) {\n    if (typeof hours !== 'number') {\n        throw new Error('Invalid \"hours\" argument')\n    }\n    if (!(date instanceof Date)) {\n        throw new Error('Invalid \"date\" argument')\n    }\n    date.setHours(date.getHours() + hours)\n    return date\n}\n\nvar lgth_data = data.length\nfor(var i = 0; i < lgth_data;i++){\n    event_id.push(data[i]['event_id']);\n    start_time.push(new Date(addHours(3, data[i]['start_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));\n    end_time.push(new Date(addHours(3, data[i]['end_time'])).toISOString().replace('T', ' ').replace(/\\..*$/, '').slice(0, 16));\n    pigs_quantity.push(data[i]['pigs_quantity']);\n    pigs_defect.push(data[i]['pigs_defect']);\n    platenumber.push(data[i]['platenumber']);\n    place.push(data[i]['place']);   \n}\n\nvar table1_data = []\nfor(var i = 0; i < lgth_data;i++){\n    var tab = []\n    for (var j = 0; j < 1; j++) {\n        tab.push(event_id[i].toString(), platenumber[i].toString(), place[i].toString(), start_time[i].toString(), end_time[i].toString(), pigs_quantity[i].toString(), pigs_defect[i].toString())\n    }\n    table1_data.push(tab)\n}\n\n\nvar table2_data = []\nfor(var i = 0; i < lgth_data;i++){\n    var tab = []\n    for (var j = 0; j < 1; j++) {\n        tab.push(start_time[i].toString(), end_time[i].toString(), platenumber[i].toString())\n    }\n    table2_data.push(tab)\n}\n\n// var start_time = data.start_time\n// var end_time = data.end_time\n// var pigs_quantity = data.pigs_quantity\n\n\nmsg.payload = table1_data\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 590,
-        "y": 740,
-        "wires": [
-            [
-                "400460a3f58075db"
             ]
         ]
     },
@@ -2465,7 +1902,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 110,
-        "y": 640,
+        "y": 260,
         "wires": [
             [
                 "60c2d2288ec6c75c"
@@ -2484,8 +1921,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
-        "y": 960,
+        "x": 290,
+        "y": 480,
         "wires": [
             [
                 "4dbcf73a55092ff5"
@@ -2496,7 +1933,7 @@
         "id": "4dbcf73a55092ff5",
         "type": "postgres",
         "z": "cebe0263a986f9c3",
-        "postgresdb": "184e08d38ff3c438",
+        "postgresdb": "d45898b2c897236c",
         "name": "",
         "output": true,
         "perrow": false,
@@ -2508,8 +1945,8 @@
         "limit_drop_intermediate": false,
         "limit_drop_if_in_queue": false,
         "outputs": true,
-        "x": 480,
-        "y": 960,
+        "x": 440,
+        "y": 480,
         "wires": [
             []
         ]
@@ -2535,8 +1972,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 160,
-        "y": 960,
+        "x": 120,
+        "y": 480,
         "wires": [
             [
                 "dd27f90a7a45007c"
@@ -2549,8 +1986,8 @@
         "z": "cebe0263a986f9c3",
         "name": "Генерация данных в БД без end_time  NULL",
         "info": "Генерация данных в БД без end_time  NULL",
-        "x": 230,
-        "y": 840,
+        "x": 190,
+        "y": 360,
         "wires": []
     },
     {
@@ -2559,8 +1996,126 @@
         "z": "cebe0263a986f9c3",
         "name": "Генерация данных в БД c end_time NULL",
         "info": "Генерация данных в БД c end_time NULL",
-        "x": 220,
-        "y": 920,
+        "x": 180,
+        "y": 440,
         "wires": []
+    },
+    {
+        "id": "af203523bc9fce36",
+        "type": "ui_template",
+        "z": "cebe0263a986f9c3",
+        "group": "b609199da19ad8a0",
+        "name": "ReportTable",
+        "order": 36,
+        "width": 25,
+        "height": 3,
+        "format": "\n<style>\n    #table2, #table2 td{\n        font-family:'Courier New', monospace;\n        height: 40px;\n        font-size: 16px;\n        padding-left: 10px;\n        border: 1px solid black;\n        border-collapse: collapse;\n    }\n    .scroll-table-body {\n        font-family:'Courier New', monospace;\n        height: 50px; \n        overflow-x: auto;\n        overflow-y: auto;\n        table-layout: fixed;\n        /* margin-top: 0px;\n        margin-bottom: 20px;\n        border-bottom: 1px solid #eee; --> */\n    }\n    ::-webkit-scrollbar {\n        display: none;\n        /* width: 11px; */\n    }\n    ::-webkit-scrollbar-track {\n        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n    }\n    ::-webkit-scrollbar-thumb {\n        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n    }\n    .scroll-table-head table {\n        font-family:'Courier New', monospace;\n        font-size: 18px;\n        width:100%;\n        table-layout: fixed;\n        border: none;\n    }\n    .scroll-table thead th {\n        font-family:'Courier New', monospace;\n        font-weight: bold;  \n        text-align: left;\n        border: none;\n        padding: 10px 15px;\n        background: #d8d8d8;\n        font-size: 18px;\n        border-left: 1px solid #ddd;\n        border-right: 1px solid #ddd;\n    }\n    .scroll-table tbody td {\n        font-family:'Courier New', monospace;\n        width:101%;\n        text-align: left;\n        border-left: 1px solid #ddd;\n        border-right: 1px solid #ddd;\n        padding: 10px 15px;\n        font-size: 14px;\n        vertical-align: top;\n        \n    }\n    th, td{      \n        font-size: 16px;\n        heigth: 48px;\n        /* width: 170px; */\n        font-weight: normal;\n    }\n</style>\n\n<div class=\"scroll-table-head\">\n    <table id=\"table\" style=\"border: 1px solid black; border-collapse: collapse;\">\n        <thead>\n            <tr style=\"border: 1px solid black; border-collapse: collapse;\">\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Номер разгрузки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    ID метки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Госномер т/с</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Номер прицепа</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Место разгрузки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Дата/время начала приемки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Дата/время окончания приемки</th>\n                <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 163px;\">\n                    Количество принятых животных</th>\n                <!-- <th style=\"background-color: #d3d3d3; border: 1px solid black; border-bottom: 0px; border-collapse: collapse; height:48px; width: 170px;\">\n                    Cанитарный брак</th> -->\n\n            </tr>\n        </thead>\n    </table>\n    <div class=\"scroll-table-body\"> \n        <table id=\"table2\" style=\"border: 1px solid black; border-collapse: collapse;\">\n            <!-- <tbody style=\"\">\n                <tr ng-repeat=\"row in msg.payload[0]\" style=\"height:48px; border: 1px solid black; border-collapse: collapse;\">\n                    <td ng-repeat=\"item in row\" style=\"border: 1px solid black; border-collapse: collapse; padding-left: 10px;\">{{item}}</td>\n                </tr>\n            </tbody> -->\n            <!-- <tbody>\n                <tr ng-repeat=\"row in msg.payload\" style=\"height:48px; border: 3px solid gray; border-collapse: collapse;\">\n                    <td ng-repeat=\"item in row\" style=\"border: 3px solid gray; border-collapse: collapse; padding-left: 10px;\">\n                        {{item}}</td>\n                </tr>\n            </tbody> -->\n            <tbody></tbody>\n        </table>\n        <script>\n            (function(scope) {\n                scope.$watch('msg.payload', function(newVal){\n                    if (newVal && Array.isArray(newVal)) {\n                        createTableFromArray(newVal);\n                    }\n                });\n                function createTableFromArray(data) {\n                    const tableBody = document.getElementById(\"table2\").getElementsByTagName('tbody')[0];\n                    \n                    // Очищаем таблицу перед добавлением новых данных (если нужно)\n                    tableBody.innerHTML = \"\";\n                    \n                    // Проходим по каждому элементу массива и создаем строки таблицы\n                    data.forEach(item => {\n                        const newRow = tableBody.insertRow();\n                        \n                        const cell1 = newRow.insertCell(0);\n                        const cell2 = newRow.insertCell(1);\n                        const cell3 = newRow.insertCell(2);\n                        const cell4 = newRow.insertCell(3);\n                        const cell5 = newRow.insertCell(4);\n                        const cell6 = newRow.insertCell(5);\n                        const cell7 = newRow.insertCell(6);\n                        const cell8 = newRow.insertCell(7);\n                        // const cell9 = newRow.insertCell(8);\n                        cell1.textContent = item[0];\n                        cell2.textContent = item[1];\n                        cell3.textContent = item[2];\n                        cell4.textContent = item[3];\n                        cell5.textContent = item[4];\n                        cell6.textContent = item[5];\n                        cell7.textContent = item[6];\n                        cell8.textContent = item[7];\n                        // cell9.textContent = item[8];\n                        // cell1.textContent = item.event_id;\n                        // cell2.textContent = item.platenumber;\n                        // cell3.textContent = item.place;\n                        // cell4.textContent = item.start_time;\n                        // cell5.textContent = item.end_time;\n                        // cell6.textContent = item.pigs_quantity;\n                        // cell7.textContent = item.pigs_defect;\n                    });\n                }\n            })(scope);\n        \n        \n            // Функция для создания таблицы из массива данных\n            // function createTableFromArray(data) {\n            //     const tableBody = document.getElementById(\"dynamicTable\").getElementsByTagName('tbody')[0];\n        \n            //     // Очищаем таблицу перед добавлением новых данных (если нужно)\n            //     tableBody.innerHTML = \"\";\n        \n            //     // Проходим по каждому элементу массива и создаем строки таблицы\n            //     data.forEach(item => {\n            //         const newRow = tableBody.insertRow();\n        \n            //         const cell1 = newRow.insertCell(0);\n            //         const cell2 = newRow.insertCell(1);\n            //         const cell3 = newRow.insertCell(2);\n            //         const cell4 = newRow.insertCell(3);\n            //         const cell5 = newRow.insertCell(4);\n            //         const cell6 = newRow.insertCell(5);\n            //         const cell7 = newRow.insertCell(6);\n        \n            //         cell1.textContent = item.event_id;\n            //         cell2.textContent = item.platenumber;\n            //         cell3.textContent = item.place;\n            //         cell4.textContent = item.start_time;\n            //         cell5.textContent = item.end_time;\n            //         cell6.textContent = item.pigs_quantity;\n            //         cell7.textContent = item.pigs_defect;\n            //     });\n            // }\n        \n            // // Вызываем функцию для создания таблицы\n            // createTableFromArray({{msg.payload[0]}});\n        </script>\n    </div>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 750,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8046cc79b3ae9e02",
+        "type": "inject",
+        "z": "cebe0263a986f9c3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 540,
+        "wires": [
+            [
+                "5504c4e1d532a9b6"
+            ]
+        ]
+    },
+    {
+        "id": "5504c4e1d532a9b6",
+        "type": "function",
+        "z": "cebe0263a986f9c3",
+        "name": "function 89",
+        "func": "var query = \"SELECT * from trucks;\"\nmsg.payload = query\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 540,
+        "wires": [
+            [
+                "37d86573e32ea325"
+            ]
+        ]
+    },
+    {
+        "id": "37d86573e32ea325",
+        "type": "postgres",
+        "z": "cebe0263a986f9c3",
+        "postgresdb": "d45898b2c897236c",
+        "name": "",
+        "output": true,
+        "perrow": false,
+        "rowspermsg": "1",
+        "return_on_error": false,
+        "limit_queries": "0",
+        "limit_by": "payload",
+        "limit_value": "1",
+        "limit_drop_intermediate": false,
+        "limit_drop_if_in_queue": false,
+        "outputs": true,
+        "x": 760,
+        "y": 560,
+        "wires": [
+            [
+                "a2bfd0a692f5ed74"
+            ]
+        ]
+    },
+    {
+        "id": "cff5327cf0420b99",
+        "type": "postgres",
+        "z": "cebe0263a986f9c3",
+        "postgresdb": "d45898b2c897236c",
+        "name": "",
+        "output": true,
+        "perrow": false,
+        "rowspermsg": "1",
+        "return_on_error": false,
+        "limit_queries": "0",
+        "limit_by": "payload",
+        "limit_value": "1",
+        "limit_drop_intermediate": false,
+        "limit_drop_if_in_queue": false,
+        "outputs": true,
+        "x": 400,
+        "y": 300,
+        "wires": [
+            [
+                "f75c74d2a5c10bdc"
+            ]
+        ]
     }
 ]
