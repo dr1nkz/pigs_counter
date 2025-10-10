@@ -148,6 +148,51 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str,
             connection.close()
 
 
+def set_event_video_url(start_time: str, video_url: str):
+    """
+    Update event data
+
+    :start_time: float - start time of event
+    :video_url: str - video_url
+    """
+
+    try:
+        # Установить соединение
+        connection = psycopg2.connect(
+            host=DB_HOST,
+            port=PORT,
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
+        )
+
+        cursor = connection.cursor()
+        # Вставка данных
+        event_id = 0
+
+        # Формируем SQL
+        query = f"""
+        UPDATE events e
+        SET video_url = %s
+        WHERE e.start_time = %s;
+        """
+
+        # Выполняем запрос
+        cursor.execute(query, (video_url, start_time))
+
+        # Сохранить изменения и закрыть соединение
+        connection.commit()
+        cursor.close()
+        # print(f"Данные события {event_id} успешно обновлены")
+
+    except Exception as e:
+        print(f"Ошибка подключения: {e}")
+
+    finally:
+        if 'connection' in locals() and connection:
+            connection.close()
+
+
 def delete_event_data(start_time: str):
     """
     Delete event data
