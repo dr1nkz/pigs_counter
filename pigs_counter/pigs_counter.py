@@ -309,10 +309,17 @@ def count_pigs(address):
                     1) / len(after_event_delay_rfid)
                 after_event_delay_rfid_is_full = len(
                     after_event_delay_rfid) == after_event_delay_rfid.maxlen
+                db_truck_id = get_truck_id_by_start_time(start_time_str)
+                scanned_truck_id = str(
+                    payload, encoding="utf-8") if payload is not None else None
 
             if (start_flag is True and
-                    ((empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full) or
-                     (payload is not None and get_truck_id_by_start_time(start_time_str) != str(payload, encoding='utf-8')))):
+                    not (payload is not None and db_truck_id == scanned_truck_id) and
+                    (
+                        (empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full) or
+                        (payload is not None and db_truck_id != scanned_truck_id)
+                    )
+                ):
                 # and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
                 #      or (rfid_is_scanned and empty_rate_rfid >= 0.9 and after_event_delay_rfid_is_full))):  # по мметке если метка считана
                 print(f'Общее количество поросят: {result_counter}')
