@@ -240,8 +240,9 @@ def count_pigs(address):
 
                 count_true = count_states(pigs_states, True)
                 count_false = count_states(pigs_states, False)
-                result_counter = count_true - count_false
-                result_counter = result_counter if result_counter >= 0 else 0
+                # result_counter = count_true - count_false
+                # result_counter = result_counter if result_counter >= 0 else 0
+                result_counter = count_true
                 # result_counter = int(np.average(pigs_counter))
                 if (rfid_received_message and
                         get_truck_id_by_start_time(start_time_str) == RFID_STUB):
