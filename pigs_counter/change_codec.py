@@ -3,7 +3,7 @@ import time
 import subprocess
 
 env = os.environ.copy()
-env["CUDA_VISIBLE_DEVICES"] = "1"
+env["CUDA_VISIBLE_DEVICES"] = "0"
 
 
 def get_file_size(filepath):
