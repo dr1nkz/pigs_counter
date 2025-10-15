@@ -10,11 +10,11 @@ from utils import print_log
 
 # Параметры подключения
 load_dotenv()
-DB_HOST = os.getenv('DB_HOST')      # Имя сервиса PostgreSQL
-PORT = 5432                         # Порт PostgreSQL
-DB_NAME = "postgres_db"             # Имя базы данных
-DB_USER = "postgres_user"           # Пользователь PostgreSQL
-DB_PASSWORD = "postgres_password"   # Пароль PostgreSQL
+DB_HOST = os.getenv('DB_HOST', 'localhost')
+PORT = 5432
+DB_NAME = "postgres_db"
+DB_USER = "postgres_user"
+DB_PASSWORD = "postgres_password"
 
 
 def insert_event_data(truck_id: str, place: str, start_time: str, pigs_quantity: int, pigs_defect: int):
