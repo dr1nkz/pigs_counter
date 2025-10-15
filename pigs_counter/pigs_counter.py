@@ -315,7 +315,7 @@ def count_pigs(address):
                     payload, encoding="utf-8") if payload is not None else None
 
             if (start_flag is True and
-                    not (payload is not None and db_truck_id == scanned_truck_id) and
+                    # not (payload is not None and db_truck_id == scanned_truck_id) and
                     (
                         (empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full) or
                         (payload is not None and db_truck_id != scanned_truck_id)
