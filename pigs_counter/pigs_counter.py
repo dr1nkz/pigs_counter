@@ -78,7 +78,10 @@ def count_pigs(address):
 
         out = None
         byte_track = sv.ByteTrack(frame_rate=fps,
-                                  track_activation_threshold=0.25)
+                                  track_activation_threshold=0.25,
+                                  lost_track_buffer=2*fps,
+                                  minimum_matching_threshold=0.6,
+                                  minimum_consecutive_frames=1)
         coordinates = defaultdict(lambda: deque(maxlen=2))
         pigs_states = defaultdict(list)
         global rfid_received_message, payload
@@ -318,8 +321,9 @@ def count_pigs(address):
                     # not (payload is not None and db_truck_id == scanned_truck_id) and
                     (
                         (empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full) or
-                        (payload is not None and db_truck_id != scanned_truck_id)
-                    )
+                                (payload is not None and db_truck_id !=
+                                 scanned_truck_id)
+                        )
                 ):
                 # and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
                 #      or (rfid_is_scanned and empty_rate_rfid >= 0.9 and after_event_delay_rfid_is_full))):  # по мметке если метка считана
