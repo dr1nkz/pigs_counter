@@ -4,6 +4,10 @@ import shutil
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
+
+from db_utils import update_video_url_to_archive
+
+
 load_dotenv()
 LIFETIME = int(os.getenv('LIFETIME'))
 LIFETIME_TEMP = LIFETIME  # int(os.getenv('LIFETIME_TEMP'))
@@ -87,6 +91,8 @@ def move_old_files():
                     shutil.move(folder_path, DESTINATION_DIR)
             except ValueError:
                 continue
+
+            update_video_url_to_archive(folder)
 
 
 if __name__ == '__main__':

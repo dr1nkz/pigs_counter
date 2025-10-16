@@ -10,7 +10,8 @@ from utils import print_log
 
 # Параметры подключения
 load_dotenv()
-DB_HOST = os.getenv('DB_HOST', 'localhost')
+# DB_HOST = os.getenv('DB_HOST', 'localhost')
+DB_HOST = '192.168.1.116'
 PORT = 5432
 DB_NAME = "postgres_db"
 DB_USER = "postgres_user"
@@ -179,6 +180,51 @@ def set_event_video_url(start_time: str, video_url: str):
 
         # Выполняем запрос
         cursor.execute(query, (video_url, start_time))
+
+        # Сохранить изменения и закрыть соединение
+        connection.commit()
+        cursor.close()
+        # print(f"Данные события {event_id} успешно обновлены")
+
+    except Exception as e:
+        print(f"Ошибка подключения: {e}")
+
+    finally:
+        if 'connection' in locals() and connection:
+            connection.close()
+
+
+def update_video_url_to_archive(date: str):
+    """
+    Update video url to archive
+
+    :date: str - video_url
+    """
+
+    try:
+        # Установить соединение
+        connection = psycopg2.connect(
+            host=DB_HOST,
+            port=PORT,
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
+        )
+
+        cursor = connection.cursor()
+        # Вставка данных
+        old_prefix = f"http://192.168.1.116/files/data/{date}/"
+        new_prefix = f"http://192.168.1.116/files/archive/{date}/"
+
+        # Формируем SQL
+        query = f"""
+            UPDATE events
+            SET video_url = REPLACE(video_url, %s, %s)
+            WHERE video_url LIKE %s;
+        """
+
+        # Выполняем запрос
+        cursor.execute(query, (old_prefix, new_prefix, f"%{old_prefix}%"))
 
         # Сохранить изменения и закрыть соединение
         connection.commit()
