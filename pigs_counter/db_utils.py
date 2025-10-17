@@ -10,8 +10,8 @@ from utils import print_log
 
 # Параметры подключения
 load_dotenv()
-# DB_HOST = os.getenv('DB_HOST', 'localhost')
-DB_HOST = '192.168.1.116'
+DB_HOST = os.getenv('DB_HOST', 'localhost')
+# DB_HOST = '192.168.1.116'
 PORT = 5432
 DB_NAME = "postgres_db"
 DB_USER = "postgres_user"

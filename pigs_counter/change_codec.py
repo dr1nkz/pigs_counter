@@ -21,14 +21,6 @@ def change_codec(filepath):
     # For video
     new_filename = os.path.join(
         os.path.dirname(filepath), filename)
-    # For url
-    start_time_datetime = os.path.splitext(filename)[0].split('-', 1)[0]
-    start_time_datetime = datetime.strptime(
-        start_time_datetime, '%d.%m.%Y %H.%M.%S')
-    start_time = start_time_datetime.strftime('%Y-%m-%d %H:%M:%S')
-    start_time_dmy = start_time_datetime.strftime(r'%d.%m.%Y')
-    filename_url = urllib.parse.quote(filename)
-    video_url = f"http://192.168.1.116/files/data/{start_time_dmy}/{filename_url}"
     try:
         # command = ["ffmpeg", "-i", filepath, new_filename]
         command = ['ffmpeg', '-hwaccel', 'cuda', '-i', filepath, '-c:v', 'h264_nvenc',
@@ -37,6 +29,14 @@ def change_codec(filepath):
         os.remove(filepath)  # Удаляем старый файл после успешной конвертации
         print(
             f"Файл {filepath} успешно конвертирован и сохранен как {new_filename}")
+        # For url
+        start_time_datetime = os.path.splitext(filename)[0].split('-', 1)[0]
+        start_time_datetime = datetime.strptime(
+            start_time_datetime, '%d.%m.%Y %H.%M.%S')
+        start_time = start_time_datetime.strftime('%Y-%m-%d %H:%M:%S')
+        start_time_dmy = start_time_datetime.strftime(r'%d.%m.%Y')
+        filename_url = urllib.parse.quote(filename)
+        video_url = f"http://192.168.1.116/files/data/{start_time_dmy}/{filename_url}"
         set_event_video_url(start_time, video_url)
     except subprocess.CalledProcessError as e:
         print(f"Ошибка при обработке {filepath}: {e}")
