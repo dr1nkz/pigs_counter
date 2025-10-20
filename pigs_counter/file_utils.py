@@ -89,10 +89,9 @@ def move_old_files():
                 if folder_date < threshold_date:
                     print(f"Перемещение {folder_path} в {DESTINATION_DIR}")
                     shutil.move(folder_path, DESTINATION_DIR)
+                    update_video_url_to_archive(folder)
             except ValueError:
                 continue
-
-            update_video_url_to_archive(folder)
 
 
 if __name__ == '__main__':
