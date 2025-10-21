@@ -80,7 +80,7 @@ def count_pigs(address):
         byte_track = sv.ByteTrack(frame_rate=fps,
                                   track_activation_threshold=0.25,
                                   lost_track_buffer=2*fps,
-                                  minimum_matching_threshold=0.6,
+                                  minimum_matching_threshold=0.5,
                                   minimum_consecutive_frames=1)
         coordinates = defaultdict(lambda: deque(maxlen=2))
         pigs_states = defaultdict(list)
