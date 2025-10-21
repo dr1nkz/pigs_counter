@@ -316,6 +316,8 @@ def count_pigs(address):
                 db_truck_id = get_truck_id_by_start_time(start_time_str)
                 scanned_truck_id = str(
                     payload, encoding="utf-8") if payload is not None else None
+            else:
+                time.sleep(0.1)
 
             if (start_flag is True and
                     # not (payload is not None and db_truck_id == scanned_truck_id) and
