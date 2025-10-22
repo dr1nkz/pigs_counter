@@ -44,6 +44,7 @@ LINE_COORDINATES = ast.literal_eval(os.getenv('LINE_COORDINATES'))
 ALLOWED_ZONE = np.array(ast.literal_eval(os.getenv('ALLOWED_ZONE')))
 MQTT_TOPIC = os.getenv('MQTT_TOPIC', 'python/mqtt')
 BROKER_HOST = os.getenv('BROKER_HOST', 'nanomq')
+DIFF_LIMIT = 3
 RFID_STUB = 'Считывание...'
 payload = None
 rfid_received_message = False
@@ -101,6 +102,7 @@ def count_pigs(address):
         after_event_delay_rfid = deque(maxlen=consecutive_end_rfid)
         after_event_delay_rfid.append(0)
         last_rfid_check = time.time()
+        rfid_diff_counter = 0
 
         while True:
             frame = cam.get_frame()
@@ -262,6 +264,7 @@ def count_pigs(address):
                     else:
                         after_event_delay_rfid.append(1)
                     rfid_received_message = False  # сброс
+                    payload = None
                     last_rfid_check = now
 
                 # Visual
@@ -319,56 +322,80 @@ def count_pigs(address):
             else:
                 time.sleep(0.1)
 
-            if (start_flag is True and
-                    # not (payload is not None and db_truck_id == scanned_truck_id) and
-                    (
-                        (empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full) or
-                                (payload is not None and db_truck_id !=
-                                 scanned_truck_id)
-                        )
-                ):
-                # and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
-                #      or (rfid_is_scanned and empty_rate_rfid >= 0.9 and after_event_delay_rfid_is_full))):  # по мметке если метка считана
-                print(f'Общее количество поросят: {result_counter}')
-                print_log(f'Общее количество поросят: {result_counter}')
-                end_time = datetime.now()
-                end_time_str = end_time.strftime(r'%Y-%m-%d %H:%M:%S')
-                end_time_hms = end_time.strftime(r'%H.%M.%S')
-                filepath_end = (
-                    f'{directory}/.{start_time_dmy} {start_time_hms}-{end_time_hms}.mp4')
-
-                filename_end = os.path.basename(filepath_end).lstrip(".")
-                filename_end = urllib.parse.quote(filename_end)
-                video_url = f"http://192.168.1.116/files/data/{start_time_dmy}/{filename_end}"
-                if result_counter == 0:
-                    delete_event_data(start_time_str)
+            # if (
+            #     start_flag is True and
+            #     not (payload is not None and db_truck_id == scanned_truck_id) and
+            #     (
+            #         (empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full) or
+            #         (payload is not None and db_truck_id != scanned_truck_id)
+            #     )
+            # ):
+            if start_flag:
+                finish_event = False
+                # no ladder
+                if empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full:
+                    # same rfid
+                    if payload is not None and db_truck_id == scanned_truck_id:
+                        finish_event = False
+                    # no rfid
+                    elif payload is None:
+                        finish_event = True
+                    # different rfid DIFF_LIMIT times
+                    elif db_truck_id != scanned_truck_id:
+                        diff_counter += 1
+                        if diff_counter >= DIFF_LIMIT:
+                            finish_event = True
+                    else:
+                        diff_counter = 0
+                # ladder present
                 else:
-                    # if rfid_received_message:
-                    #     update_event_data(
-                    #         result_counter, 0, start_time_str, end_time_str, str(payload, encoding='utf-8'))
-                    # else:
-                    update_event_data(
-                        result_counter, 0, start_time_str, end_time_str)
-                    send_mqtt_message(result_counter, start_time_str,
-                                      end_time_str, get_truck_id_by_start_time(start_time_str))
-                # Release videowriter
-                out.release()
-                out = None
-                event_id = get_event_id_by_start_time(start_time_str)
-                if os.path.isfile(filepath):
-                    os.rename(filepath, filepath_end)
-                # Reset variables
-                pigs_counter = [0] * len(LINE_COORDINATES)
-                byte_track.reset()
-                coordinates.clear()
-                pigs_states.clear()
-                after_event_delay_ladder.clear()
-                after_event_delay_ladder.append(0)
-                after_event_delay_rfid.clear()
-                after_event_delay_rfid.append(0)
-                start_flag = False
-                rfid_received_message = False
-                payload = None
+                    diff_counter = 0
+                    finish_event = False
+
+                if finish_event:
+                    # and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
+                    #      or (rfid_is_scanned and empty_rate_rfid >= 0.9 and after_event_delay_rfid_is_full))):  # по мметке если метка считана
+                    print(f'Общее количество поросят: {result_counter}')
+                    print_log(f'Общее количество поросят: {result_counter}')
+                    end_time = datetime.now()
+                    end_time_str = end_time.strftime(r'%Y-%m-%d %H:%M:%S')
+                    end_time_hms = end_time.strftime(r'%H.%M.%S')
+                    filepath_end = (
+                        f'{directory}/.{start_time_dmy} {start_time_hms}-{end_time_hms}.mp4')
+
+                    filename_end = os.path.basename(filepath_end).lstrip(".")
+                    filename_end = urllib.parse.quote(filename_end)
+                    video_url = f"http://192.168.1.116/files/data/{start_time_dmy}/{filename_end}"
+                    if result_counter == 0:
+                        delete_event_data(start_time_str)
+                    else:
+                        # if rfid_received_message:
+                        #     update_event_data(
+                        #         result_counter, 0, start_time_str, end_time_str, str(payload, encoding='utf-8'))
+                        # else:
+                        update_event_data(
+                            result_counter, 0, start_time_str, end_time_str)
+                        send_mqtt_message(result_counter, start_time_str,
+                                          end_time_str, get_truck_id_by_start_time(start_time_str))
+                    # Release videowriter
+                    out.release()
+                    out = None
+                    event_id = get_event_id_by_start_time(start_time_str)
+                    if os.path.isfile(filepath):
+                        os.rename(filepath, filepath_end)
+                    # Reset variables
+                    pigs_counter = [0] * len(LINE_COORDINATES)
+                    byte_track.reset()
+                    coordinates.clear()
+                    pigs_states.clear()
+                    after_event_delay_ladder.clear()
+                    after_event_delay_ladder.append(0)
+                    after_event_delay_rfid.clear()
+                    after_event_delay_rfid.append(0)
+                    start_flag = False
+                    rfid_received_message = False
+                    payload = None
+                    diff_counter = 0
             else:
                 font = cv2.FONT_HERSHEY_SIMPLEX  # font
                 fontScale = 1  # fontScale
