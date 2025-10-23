@@ -332,25 +332,23 @@ def count_pigs(address):
             # ):
             if start_flag:
                 finish_event = False
-                # no ladder
-                if empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full:
-                    # same rfid
-                    if payload is not None and db_truck_id == scanned_truck_id:
-                        finish_event = False
-                    # no rfid
-                    elif payload is None:
-                        finish_event = True
-                    # different rfid DIFF_LIMIT times
-                    elif db_truck_id != scanned_truck_id:
-                        diff_counter += 1
-                        if diff_counter >= DIFF_LIMIT:
-                            finish_event = True
-                    else:
-                        diff_counter = 0
-                # ladder present
-                else:
+                # same rfid
+                if payload is not None and db_truck_id == scanned_truck_id:
                     diff_counter = 0
                     finish_event = False
+                # new rfid
+                elif payload is not None and db_truck_id != scanned_truck_id:
+                    diff_counter += 1
+                    if diff_counter >= DIFF_LIMIT:
+                        finish_event = True
+                else:
+                    diff_counter = 0
+                # no ladder
+                if empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full:
+                    if not (payload is not None and db_truck_id == scanned_truck_id):
+                        finish_event = True
+                else:
+                    diff_counter = 0
 
                 if finish_event:
                     # and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
