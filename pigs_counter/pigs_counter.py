@@ -334,21 +334,21 @@ def count_pigs(address):
                 finish_event = False
                 # same rfid
                 if db_truck_id == scanned_truck_id:
-                    diff_counter = 0
+                    rfid_diff_counter = 0
                     finish_event = False
                 # new rfid
                 elif db_truck_id != scanned_truck_id:
-                    diff_counter += 1
-                    if diff_counter >= DIFF_LIMIT:
+                    rfid_diff_counter += 1
+                    if rfid_diff_counter >= DIFF_LIMIT:
                         finish_event = True
                 else:
-                    diff_counter = 0
+                    rfid_diff_counter = 0
                 # no ladder
                 if empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full:
                     if not db_truck_id == scanned_truck_id:
                         finish_event = True
                 else:
-                    diff_counter = 0
+                    rfid_diff_counter = 0
 
                 if finish_event:
                     # and ((not rfid_is_scanned and empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full)  # по трапу если метка не считана
@@ -393,7 +393,7 @@ def count_pigs(address):
                     start_flag = False
                     rfid_received_message = False
                     payload = None
-                    diff_counter = 0
+                    rfid_diff_counter = 0
             else:
                 font = cv2.FONT_HERSHEY_SIMPLEX  # font
                 fontScale = 1  # fontScale
