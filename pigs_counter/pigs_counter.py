@@ -48,6 +48,7 @@ DIFF_LIMIT = 3
 RFID_STUB = 'Считывание...'
 payload = None
 rfid_received_message = False
+last_scanned = None
 
 
 def count_pigs(address):
@@ -85,7 +86,7 @@ def count_pigs(address):
                                   minimum_consecutive_frames=1)
         coordinates = defaultdict(lambda: deque(maxlen=2))
         pigs_states = defaultdict(list)
-        global rfid_received_message, payload
+        global rfid_received_message, payload, last_scanned
 
         # Counter of all pigs crossed the line
         pigs_counter = [0] * len(LINE_COORDINATES)
@@ -317,8 +318,7 @@ def count_pigs(address):
                 after_event_delay_rfid_is_full = len(
                     after_event_delay_rfid) == after_event_delay_rfid.maxlen
                 db_truck_id = get_truck_id_by_start_time(start_time_str)
-                scanned_truck_id = str(
-                    payload, encoding="utf-8") if payload is not None else None
+                scanned_truck_id = last_scanned
             else:
                 time.sleep(0.1)
 
@@ -394,6 +394,7 @@ def count_pigs(address):
                     rfid_received_message = False
                     payload = None
                     rfid_diff_counter = 0
+                    last_scanned = None
             else:
                 font = cv2.FONT_HERSHEY_SIMPLEX  # font
                 fontScale = 1  # fontScale
@@ -438,9 +439,13 @@ def on_message(client, userdata, msg):
     """
     if (msg.topic == MQTT_TOPIC):
         # print(msg.payload)
-        global rfid_received_message, payload
+        global rfid_received_message, payload, last_scanned
         rfid_received_message = True
         payload = msg.payload
+        try:
+            last_scanned = str(msg.payload, encoding='utf-8')
+        except Exception:
+            last_scanned = None
 
 
 if __name__ == '__main__':
