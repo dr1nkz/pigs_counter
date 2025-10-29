@@ -11,7 +11,6 @@ from utils import print_log
 # Параметры подключения
 load_dotenv()
 DB_HOST = os.getenv('DB_HOST', 'localhost')
-# DB_HOST = '192.168.1.116'
 PORT = 5432
 DB_NAME = "postgres_db"
 DB_USER = "postgres_user"
@@ -22,12 +21,12 @@ def insert_event_data(truck_id: str, place: str, start_time: str, pigs_quantity:
     """
     Insert event data
 
-    :event_id: str - id of event
-    :place: str - place where pigs unloaded
-    :start_time: float - start time of event
-    :end_time: float - end time of event
-    :pigs_quantity: int - quantity of pigs
-    :pigs_defect: int - quantity of defect pigs
+    :param event_id: str - id of event
+    :param place: str - place where pigs unloaded
+    :param start_time: float - start time of event
+    :param end_time: float - end time of event
+    :param pigs_quantity: int - quantity of pigs
+    :param pigs_defect: int - quantity of defect pigs
     """
 
     try:
@@ -69,13 +68,13 @@ def update_event_data(pigs_quantity: int, pigs_defect: int, start_time: str,
     """
     Update event data
 
-    :event_id: str - id of event
-    :place: str - place where pigs unloaded
-    :start_time: float - start time of event
-    :end_time: float - end time of event
-    :pigs_quantity: int - quantity of pigs
-    :pigs_defect: int - quantity of defect pigs
-    :truck_id: str - truck_id
+    :param event_id: str - id of event
+    :param place: str - place where pigs unloaded
+    :param start_time: float - start time of event
+    :param end_time: float - end time of event
+    :param pigs_quantity: int - quantity of pigs
+    :param pigs_defect: int - quantity of defect pigs
+    :param truck_id: str - truck_id
     """
 
     try:
@@ -153,8 +152,8 @@ def set_event_video_url(start_time: str, video_url: str):
     """
     Update event data
 
-    :start_time: float - start time of event
-    :video_url: str - video_url
+    :param start_time: float - start time of event
+    :param video_url: str - video_url
     """
 
     try:
@@ -198,7 +197,7 @@ def update_video_url_to_archive(date: str):
     """
     Update video url to archive
 
-    :date: str - video_url
+    :param date: str - video_url
     """
 
     try:
@@ -243,7 +242,7 @@ def delete_event_data(start_time: str):
     """
     Delete event data
 
-    :start_time: float - start time of event
+    :param start_time: float - start time of event
     """
 
     try:
@@ -282,7 +281,7 @@ def get_event_id_by_start_time(start_time: str):
     """
     Update event data
 
-    :start_time: float - start time of event
+    :param start_time: float - start time of event
     """
 
     try:
@@ -366,6 +365,47 @@ def get_truck_id_by_start_time(start_time: str):
     except Exception as e:
         print(f"Ошибка подключения {e}")
         return None
+
+    finally:
+        if 'connection' in locals() and connection:
+            connection.close()
+
+
+def check_truck_id_exists(truck_id: str) -> bool:
+    """
+    Check truck_id exists in trucks table
+
+    :param truck_id: str — идентификатор грузовика
+    :return: bool — True, если truck_id есть в таблице trucks, иначе False
+    """
+    try:
+        # Установить соединение
+        connection = psycopg2.connect(
+            host=DB_HOST,
+            port=PORT,
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
+        )
+
+        cursor = connection.cursor()
+
+        # Запрос для проверки существования truck_id
+        query = """
+            SELECT 1 FROM trucks WHERE truck_id = %s LIMIT 1;
+        """
+        cursor.execute(query, (truck_id,))
+        result = cursor.fetchone()
+
+        cursor.close()
+        connection.close()
+
+        # Если результат есть — truck_id существует
+        return result is not None
+
+    except Exception as e:
+        print(f"Ошибка при проверке truck_id: {e}")
+        return False
 
     finally:
         if 'connection' in locals() and connection:

@@ -19,7 +19,8 @@ from db_utils import (
     update_event_data,
     delete_event_data,
     get_event_id_by_start_time,
-    get_truck_id_by_start_time
+    get_truck_id_by_start_time,
+    check_truck_id_exists
 )
 from utils import (
     is_cross_of_line,
@@ -441,11 +442,16 @@ def on_message(client, userdata, msg):
         # print(msg.payload)
         global rfid_received_message, payload, last_scanned
         rfid_received_message = True
-        payload = msg.payload
         try:
-            last_scanned = str(msg.payload, encoding='utf-8')
+            payload_temp = str(msg.payload, encoding='utf-8')
+            if check_truck_id_exists(payload_temp):
+                payload = payload_temp
+            else:
+                payload = None
         except Exception:
-            last_scanned = None
+            payload = None
+
+        last_scanned = payload
 
 
 if __name__ == '__main__':
