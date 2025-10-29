@@ -253,8 +253,8 @@ def count_pigs(address):
                 # result_counter = int(np.average(pigs_counter))
                 if (rfid_received_message and
                         get_truck_id_by_start_time(start_time_str) == RFID_STUB):
-                    update_event_data(result_counter, 0, start_time_str, truck_id=str(
-                        payload, encoding='utf-8'))
+                    update_event_data(result_counter, 0,
+                                      start_time_str, truck_id=payload)
                 else:
                     update_event_data(result_counter, 0, start_time_str)
                 # update_event_data(result_counter, 0, start_time_str)
