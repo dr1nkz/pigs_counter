@@ -345,8 +345,8 @@ def count_pigs(address):
                     rfid_diff_counter = 0
                 # no ladder
                 if empty_rate_ladder >= 0.9 and after_event_delay_ladder_is_full:
-                    if not db_truck_id == scanned_truck_id:
-                        finish_event = True
+                    # if not db_truck_id == scanned_truck_id:
+                    finish_event = True
                 else:
                     rfid_diff_counter = 0
 
