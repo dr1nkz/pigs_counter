@@ -87,6 +87,7 @@ def count_pigs(address):
                                   minimum_consecutive_frames=1)
         coordinates = defaultdict(lambda: deque(maxlen=2))
         pigs_states = defaultdict(list)
+        first_frame_left = defaultdict()
         global rfid_received_message, payload, last_scanned
 
         # Counter of all pigs crossed the line
@@ -225,6 +226,8 @@ def count_pigs(address):
                         if pigs_states.get(tracker_id) is None:
                             pigs_states[tracker_id] = [
                                 None] * len(LINE_COORDINATES)
+                            first_frame_left[tracker_id] = is_cross_of_line(
+                                coordinates[tracker_id][0], line_coordinate)
                         for id, line_coordinate in enumerate(LINE_COORDINATES):
                             previous_cross = is_cross_of_line(
                                 coordinates[tracker_id][0], line_coordinate)
@@ -238,18 +241,17 @@ def count_pigs(address):
                             elif pigs_states.get(tracker_id)[id] == 'undefined':
                                 if previous_cross and current_cross:
                                     pigs_states[tracker_id][id] = True
-                                    # if count_states_single_state(pigs_states[tracker_id], True) == len(LINE_COORDINATES) - 1:
-                                    pigs_counter[id] += 1
                                 elif not previous_cross and not current_cross:
-                                    pigs_states[tracker_id][id] = False
-                                    # if count_states_single_state(pigs_states[tracker_id], False) == len(LINE_COORDINATES) - 1:
-                                    pigs_counter[id] -= 1
+                                    if first_frame_left.get(tracker_id):
+                                        pigs_states[tracker_id][id] = False
+                                    else:
+                                        pigs_states[tracker_id][id] = 'undefined'
 
                 count_true = count_states(pigs_states, True)
                 count_false = count_states(pigs_states, False)
                 # result_counter = count_true - count_false
                 # result_counter = result_counter if result_counter >= 0 else 0
-                result_counter = count_true
+                result_counter = count_true - count_false
                 # result_counter = int(np.average(pigs_counter))
                 if (rfid_received_message and
                         get_truck_id_by_start_time(start_time_str) == RFID_STUB):
