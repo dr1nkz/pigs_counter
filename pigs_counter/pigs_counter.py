@@ -227,7 +227,7 @@ def count_pigs(address):
                             pigs_states[tracker_id] = [
                                 None] * len(LINE_COORDINATES)
                             first_frame_left[tracker_id] = is_cross_of_line(
-                                coordinates[tracker_id][0], line_coordinate)
+                                coordinates[tracker_id][0], LINE_COORDINATES[0])
                         for id, line_coordinate in enumerate(LINE_COORDINATES):
                             previous_cross = is_cross_of_line(
                                 coordinates[tracker_id][0], line_coordinate)
@@ -240,7 +240,10 @@ def count_pigs(address):
                                 pigs_states[tracker_id][id] = 'undefined'
                             elif pigs_states.get(tracker_id)[id] == 'undefined':
                                 if previous_cross and current_cross:
-                                    pigs_states[tracker_id][id] = True
+                                    if first_frame_left.get(tracker_id):
+                                        pigs_states[tracker_id][id] = 'undefined'
+                                    else:
+                                        pigs_states[tracker_id][id] = True
                                 elif not previous_cross and not current_cross:
                                     if first_frame_left.get(tracker_id):
                                         pigs_states[tracker_id][id] = False
