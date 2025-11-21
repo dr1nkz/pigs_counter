@@ -13,7 +13,8 @@ import numpy as np
 import torch
 import paho.mqtt.client as mqtt
 
-from detector import YOLOv8, Detections
+from detector import YOLOv8
+from detector_rfdetr import RFDETR
 from db_utils import (
     insert_event_data,
     update_event_data,
@@ -27,6 +28,7 @@ from utils import (
     print_log,
     count_states,
     count_states_single_state,
+    Detections
 )
 from mqtt_notificator import send_mqtt_message
 from camera_thread import CameraThread
@@ -56,7 +58,7 @@ def count_pigs(address):
     """
     Запуск модели
     """
-    pigs_detector = YOLOv8(path=MODEL_PATH,
+    pigs_detector = RFDETR(path=MODEL_PATH,
                            conf_thres=0.3,
                            iou_thres=0.5)
     ladder_detector = YOLOv8(path=LADDER_MODEL_PATH,

@@ -117,6 +117,25 @@ def xywh2xyxy(x):
     return y
 
 
+def sigmoid(x):
+    """
+    Вычисление сигмоиду
+    """
+    return 1.0 / (1.0 + np.exp(-x))
+
+
+def box_cxcywh_to_xyxy(boxes):
+    """
+    Конвертация формата рамок из cxcywh в xyxy
+    """
+    cx, cy, w, h = boxes[:, 0], boxes[:, 1], boxes[:, 2], boxes[:, 3]
+    x1 = cx - w / 2
+    y1 = cy - h / 2
+    x2 = cx + w / 2
+    y2 = cy + h / 2
+    return np.stack([x1, y1, x2, y2], axis=1)
+
+
 def is_cross_of_line(point, line_coordinates):
     """
     Проверяет, находится ли точка слева от линии.
