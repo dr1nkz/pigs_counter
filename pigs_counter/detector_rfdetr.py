@@ -1,16 +1,13 @@
-import time
 import cv2
 import numpy as np
 import onnxruntime
-from PIL import Image
 
 from utils import nms, get_labelmap, sigmoid, box_cxcywh_to_xyxy
 
 
 class RFDETR:
     """
-    Класс, эквивалентный YOLOv8 в твоём проекте,
-    но использующий модель RF-DETR.
+    Модель RFDETR, преобразованная в onnx формат
     """
 
     MEANS = np.array([0.485, 0.456, 0.406], dtype=np.float32)
